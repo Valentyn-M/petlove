@@ -6,6 +6,10 @@ import { lazy } from 'react';
 export const svgIcon = '/svgSprite.svg';
 
 const HomePage = lazy(() => import('@/pages/HomePage/HomePage'));
+const NewsPage = lazy(() => import('@/pages/NewsPage/NewsPage'));
+const FindPetPage = lazy(() => import('@/pages/FindPetPage/FindPetPage'));
+const OurFriendsPage = lazy(() => import('@/pages/OurFriendsPage/OurFriendsPage'));
+
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage/NotFoundPage'));
 
 function App() {
@@ -14,6 +18,9 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/find-pet" element={<FindPetPage />} />
+        <Route path="/our-friends" element={<OurFriendsPage />} />
 
         {/* TODO NotFoundPage */}
         <Route path="*" element={<NotFoundPage />} />
