@@ -19,7 +19,11 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Додаємо це: */
+    // "types": ["node"] підтягує типи з @types/node і дає TypeScript'у розуміння таких речей: import.meta.url, fileURLToPath(), path.resolve()
+    "types": ["node"]
   },
   "include": ["vite.config.ts"]
 }

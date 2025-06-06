@@ -1,0 +1,15 @@
+#root {
+  height: 100%;
+}
+
+.container {
+  max-width: rem(1280);
+  padding-left: rem(32);
+  padding-right: rem(32);
+  margin: 0 auto;
+
+  @media (max-width: em($mobile)) {
+    padding-left: rem(20);
+    padding-right: rem(20);
+  }
+}

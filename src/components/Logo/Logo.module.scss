@@ -1,0 +1,13 @@
+.logoLink {
+  font-weight: 700;
+  font-size: rem(28);
+  letter-spacing: -0.04em;
+  display: flex;
+  align-items: flex-end;
+}
+
+.iconHeart {
+  fill: $brandColor;
+  width: rem(23);
+  height: rem(23);
+}
