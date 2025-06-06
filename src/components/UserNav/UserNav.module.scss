@@ -1,0 +1,39 @@
+.userNav {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: rem(8);
+}
+
+.iconUserWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem(13);
+  border-radius: 50%;
+  background-color: $beigeColor;
+
+  &.outline {
+  }
+}
+
+.iconUser {
+  width: rem(24);
+  height: rem(24);
+  fill: $brandColor;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: rem(20);
+  letter-spacing: -0.03em;
+
+  &.light {
+    color: $whiteColor;
+  }
+}

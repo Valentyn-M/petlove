@@ -14,6 +14,7 @@ const AppBar = ({}: AppBarProps) => {
         <Logo />
         <Nav />
         <div className={s.authBlock}>
+          {/* TODO Рендеримо тільки один */}
           <AuthNav />
           <UserNav />
         </div>

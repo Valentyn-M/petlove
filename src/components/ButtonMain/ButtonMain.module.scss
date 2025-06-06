@@ -1,0 +1,40 @@
+.button {
+  border-radius: rem(30);
+  padding: rem(15) rem(35);
+  background-color: $brandColor;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: $whiteColor;
+  transition: all 0.3s ease 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $brandColorDark;
+    }
+  }
+}
+
+.button.outline {
+  border: rem(1) solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $beigeColor;
+      color: $brandColor;
+    }
+  }
+}
+
+.button.light {
+  background-color: $beigeColor;
+  color: $brandColor;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $beigeColorDark;
+    }
+  }
+}

@@ -1,28 +1,20 @@
-import { NavLink, NavLinkProps } from 'react-router-dom';
 import s from './Nav.module.scss';
-import clsx from 'clsx';
+import LinkNav from '@/components/LinkNav/LinkNav';
 
 export interface NavProps {}
 
 const Nav = ({}: NavProps) => {
-  const buildLinkClass: NavLinkProps['className'] = ({ isActive }) => clsx(s.link, { [s.active]: isActive });
   return (
     <nav>
       <ul className={s.navList}>
         <li>
-          <NavLink to="/news" className={buildLinkClass}>
-            News
-          </NavLink>
+          <LinkNav to="/news">News</LinkNav>
         </li>
         <li>
-          <NavLink to="/find-pet" className={buildLinkClass}>
-            Find pet
-          </NavLink>
+          <LinkNav to="/find-pet">Find pet</LinkNav>
         </li>
         <li>
-          <NavLink to="/our-friends" className={buildLinkClass}>
-            Our friends
-          </NavLink>
+          <LinkNav to="/our-friends">Our friends</LinkNav>
         </li>
       </ul>
     </nav>

@@ -16,7 +16,7 @@
 body {
   font-family: $fontFamily;
   font-weight: 500;
-  font-size: $fontSize;
+  font-size: rem($fontSize);
   color: $mainColor;
   background-color: $bgColor;
   overflow-wrap: break-word;
