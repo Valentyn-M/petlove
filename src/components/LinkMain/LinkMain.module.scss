@@ -14,17 +14,38 @@
       background-color: $brandColorDark;
     }
   }
+  &:focus {
+    background-color: $brandColorDark;
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    font-size: 14px;
+    line-height: 1.28571;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .link.outline {
   border: 1px solid rgba(255, 255, 255, 0.4);
   background-color: transparent;
+  padding-top: 14px;
+  padding-bottom: 14px;
 
   @media (any-hover: hover) {
     &:hover {
       background-color: $beigeColor;
       color: $brandColor;
     }
+  }
+  &:focus {
+    background-color: $beigeColor;
+    color: $brandColor;
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    padding-top: 11px;
+    padding-bottom: 11px;
   }
 }
 
@@ -37,5 +58,8 @@
     &:hover {
       background-color: $beigeColorDark;
     }
+  }
+  &:focus {
+    background-color: $beigeColorDark;
   }
 }

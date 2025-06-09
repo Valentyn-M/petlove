@@ -1,24 +1,22 @@
 .menuMobileWrap {
   position: fixed;
-  top: rem(97);
+  top: 0;
   right: 0;
-  height: calc(100% - rem(97));
-  min-width: rem(300);
+  height: 100svh;
   max-width: 100%;
   overflow: auto;
-  background-color: var(--main-light);
-  padding: rem(40) rem(15) rem(24);
+  background-color: $brandColor;
   transform: translate(100%, 0%);
   transition: transform 0.3s ease 0s;
   z-index: 2;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  @include adaptiveValue('padding-left', 40, 20, $tablet, $mobileSmall);
+  @include adaptiveValue('padding-right', 40, 20, $tablet, $mobileSmall);
+  @include adaptiveValue('width', 374, 218, $tablet, $mobileSmall);
 
-  @media (max-width: rem(680)) {
-    top: rem(73);
-    height: calc(100% - rem(73));
-  }
-
-  @media (max-width: rem(380)) {
-    width: 100%;
+  &.menuMobileLight {
+    background-color: $whiteColor;
   }
 
   &.open {
@@ -28,28 +26,29 @@
   .menuMobile {
     display: flex;
     flex-direction: column;
-    gap: rem(40);
+    justify-content: center;
+    gap: 40px;
+
+    @media (min-height: rem(400)) {
+      height: 100%;
+    }
   }
 }
 
-.overlay {
-  position: fixed;
-  top: rem(97);
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(25, 26, 21, 0.6);
-  z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease 0s;
+// .overlay {
+//   position: fixed;
+//   top: rem(97);
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(25, 26, 21, 0.6);
+//   z-index: 1;
+//   opacity: 0;
+//   visibility: hidden;
+//   transition: all 0.3s ease 0s;
 
-  @media (max-width: rem(680)) {
-    top: rem(73);
-  }
-
-  &.active {
-    opacity: 1;
-    visibility: visible;
-  }
-}
+//   &.active {
+//     opacity: 1;
+//     visibility: visible;
+//   }
+// }

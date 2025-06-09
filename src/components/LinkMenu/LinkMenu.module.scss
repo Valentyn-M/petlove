@@ -1,7 +1,7 @@
 .link {
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
-  padding: 15px 20px;
+  padding: 14px 20px;
   line-height: 1.25;
   letter-spacing: -0.03em;
   transition: all 0.3s ease 0s;
@@ -10,6 +10,19 @@
     &:hover {
       border-color: $brandColor;
     }
+  }
+  &:focus {
+    border-color: $brandColor;
+  }
+
+  @media (max-width: rem($tablet)) {
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    font-size: 14px;
+    line-height: 1.28571;
   }
 }
 
@@ -24,8 +37,10 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: $beigeColor;
-      color: $brandColor;
+      border-color: $whiteColor;
     }
+  }
+  &:focus {
+    border-color: $whiteColor;
   }
 }

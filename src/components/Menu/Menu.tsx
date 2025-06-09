@@ -2,26 +2,30 @@ import { useHomePage } from '@/hooks/useHomePage';
 import s from './Menu.module.scss';
 import LinkMenu from '@/components/LinkMenu/LinkMenu';
 
-export interface MenuProps {}
+export interface MenuProps {
+  isMenuMobileActive?: boolean;
+}
 
-const Menu = ({}: MenuProps) => {
+const Menu = ({ isMenuMobileActive }: MenuProps) => {
   const isHome = useHomePage();
 
+  const isOutlineType = isMenuMobileActive ? !isHome : isHome;
+
   return (
-    <nav>
-      <ul className={s.navList}>
-        <li>
-          <LinkMenu to="/news" outline={isHome}>
+    <nav className={s.menu}>
+      <ul className={s.list}>
+        <li className={s.item}>
+          <LinkMenu to="/news" outline={isOutlineType}>
             News
           </LinkMenu>
         </li>
-        <li>
-          <LinkMenu to="/find-pet" outline={isHome}>
+        <li className={s.item}>
+          <LinkMenu to="/find-pet" outline={isOutlineType}>
             Find pet
           </LinkMenu>
         </li>
-        <li>
-          <LinkMenu to="/our-friends" outline={isHome}>
+        <li className={s.item}>
+          <LinkMenu to="/our-friends" outline={isOutlineType}>
             Our friends
           </LinkMenu>
         </li>

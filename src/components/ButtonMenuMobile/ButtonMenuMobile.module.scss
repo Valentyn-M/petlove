@@ -1,12 +1,13 @@
 // Меню бургер
 .btnBurger {
   display: block;
-  z-index: 2;
+  z-index: 3;
   position: relative;
   height: 21px;
   width: 27px;
   flex-shrink: 0;
   cursor: pointer;
+  background-color: transparent;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   span {
@@ -58,4 +59,12 @@
 
 .btnBurger.home span {
   background-color: $whiteColor;
+}
+
+.btnBurger.active span {
+  background-color: $whiteColor;
+}
+
+.btnBurger.home.active span {
+  background-color: $mainColor;
 }
