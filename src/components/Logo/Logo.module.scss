@@ -4,10 +4,22 @@
   letter-spacing: -0.04em;
   display: flex;
   align-items: flex-end;
+
+  &.home {
+    color: $whiteColor;
+  }
+
+  @media (max-width: rem($tablet)) {
+    flex-grow: 1;
+  }
 }
 
 .iconHeart {
   fill: $brandColor;
   width: rem(23);
   height: rem(23);
+
+  .home & {
+    fill: $whiteColor;
+  }
 }

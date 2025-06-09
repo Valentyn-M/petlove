@@ -7,14 +7,14 @@ export interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <>
+    <div className="wrapper">
       <header>
         <AppBar />
       </header>
       <main>
         <Suspense fallback={null}>{children}</Suspense>
       </main>
-    </>
+    </div>
   );
 };
 

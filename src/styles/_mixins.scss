@@ -1,0 +1,88 @@
+@use 'sass:math';
+@use './settings' as settings;
+
+$remBase: 16;
+
+// Функція для перетворення px → rem
+@function rem($size) {
+  @return (math.div($size, $remBase) * 1rem);
+}
+
+// Функція для перетворення px → em (з урахуванням поточного розміру шрифту)
+@function em($size, $curentSize: $remBase) {
+  @return (math.div($size, $curentSize) * 1em);
+}
+
+// Функція для обчислення відсотків
+@function lh($lineHeigh, $fontSize) {
+  @return (math.div($lineHeigh, $fontSize) * 100%);
+}
+
+// Адаптивна властивість
+@mixin adaptiveValue(
+  $property,
+  $startValue,
+  $endValue,
+  $startMediaWidth: settings.$containerWidth,
+  $endMediaWidth: settings.$minMaxWidthType,
+  $type: settings.$adaptiveType,
+  $keepSize: 0,
+  $important: false
+) {
+  $addValue: $startValue - $endValue;
+  $importantSuffix: if($important == true, ' !important', '');
+
+  @if $type==1 {
+    & {
+      #{$property}: rem($startValue);
+    }
+    @media (max-width: rem($startMediaWidth)) {
+      & {
+        #{$property}: calc(
+            #{$endValue + px} + #{$addValue} * ((100vw - #{$endMediaWidth + px}) / #{$startMediaWidth - $endMediaWidth})
+          )
+          #{$importantSuffix};
+      }
+    }
+    @if $keepSize==0 {
+      @media (max-width: rem($endMediaWidth)) {
+        & {
+          #{$property}: rem($endValue) #{$importantSuffix};
+        }
+      }
+    }
+  } @else if $type==2 {
+    & {
+      #{$property}: rem($startValue);
+    }
+    $addValue: $endValue - $startValue;
+    @media (min-width: rem($startMediaWidth)) {
+      & {
+        #{$property}: calc(
+            #{$startValue + px} + #{$addValue} *
+              ((100vw - #{$startMediaWidth + px}) / #{$endMediaWidth - $startMediaWidth})
+          )
+          #{$importantSuffix};
+      }
+    }
+    @if $keepSize==0 {
+      @media (min-width: rem($endMediaWidth)) {
+        & {
+          #{$property}: rem($endValue) #{$importantSuffix};
+        }
+      }
+    }
+  } @else if $type==3 {
+    & {
+      #{$property}: calc(
+          #{$endValue + px} + #{$addValue} * ((100vw - #{settings.$minWidth + px}) / #{settings.$maxWidth - $minWidth})
+        )
+        #{$importantSuffix};
+    }
+    @media (max-width: rem(settings.$minWidth)) {
+      & {
+        #{$property}: rem($endValue) #{$importantSuffix};
+      }
+    }
+  }
+}

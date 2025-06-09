@@ -1,14 +1,12 @@
 import { NavLink, NavLinkProps } from 'react-router-dom';
-import s from './LinkNav.module.scss';
+import s from './LinkMenu.module.scss';
 import clsx from 'clsx';
 
-export interface LinkNavProps extends NavLinkProps {
+export interface LinkMenuProps extends NavLinkProps {
   outline?: boolean;
 }
-// extends NavLinkProps — додає підтримку всіх стандартних атрибутів лінку
-// to вже є в NavLinkProps
 
-const LinkNav = ({ to, outline, className, children, ...rest }: LinkNavProps) => {
+const LinkMenu = ({ to, outline, className, children, ...rest }: LinkMenuProps) => {
   const buildClassName: NavLinkProps['className'] = ({ isActive }) =>
     clsx(s.link, outline && s.outline, { [s.active]: isActive }, className);
 
@@ -19,4 +17,4 @@ const LinkNav = ({ to, outline, className, children, ...rest }: LinkNavProps) =>
   );
 };
 
-export default LinkNav;
+export default LinkMenu;

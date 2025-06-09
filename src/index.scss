@@ -16,11 +16,11 @@
 body {
   font-family: $fontFamily;
   font-weight: 500;
-  font-size: rem($fontSize);
+  font-size: #{$fontSize}px;
   color: $mainColor;
   background-color: $bgColor;
   overflow-wrap: break-word;
-  min-width: rem(320);
+  min-width: #{$minWidth}px;
 
   &.lock {
     overflow: hidden;

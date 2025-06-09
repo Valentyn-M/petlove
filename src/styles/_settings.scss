@@ -33,15 +33,25 @@ $containerWidth: $maxWidthContainer + $containerPadding;
 
 // Брейк-поїнти
 $pc: $containerWidth;
-$tablet: 768;
-$tabletPlus: 768.02;
-$mobile: 375;
-$mobilePlus: 375.02;
+$tablet: 992;
+$tabletPlus: 992.02;
+$mobile: 768;
+$mobilePlus: 768.02;
+$mobileMedium: 600;
+$mobileMediumPlus: 600.02;
+$mobileSmall: 375;
+$mobileSmallPlus: 375.02;
 
 // Тип адаптива:
 // 1 - Тільки зменшення - КЛАСИКА (від максимального значення до мінімального значення). Ви можете вказати цегляні (приклад: @include adaptiveValue("column-gap", 15, 5); или @include adaptiveValue("column-gap", 15, 5, 992, 480);)
 // 2 - Лише для збільшення - MOBILE FIRST (від початкового значення до максимального значення. Breikpoints можна вказати (приклад: @include adaptiveValue("column-gap", 17, 30, 2, 992, 1920); або @include adaptiveValue("column-gap", 17, 30, 2, 992, 1920, 1);)
 // 3 - Безмежне збільшення та зменшення - місце гуми. Те саме, що і перший тип, але не має максимального обмеження (обмежуючий контейнер)
-$responsiveType: 1;
+$adaptiveType: 1;
+
+// Остаточний viewport залежно від типу адаптива
+$minMaxWidthType: $minWidth;
+@if $adaptiveType == 2 {
+  $minMaxWidthType: $maxWidth;
+}
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

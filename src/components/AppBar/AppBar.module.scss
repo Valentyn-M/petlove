@@ -1,0 +1,24 @@
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  @include adaptiveValue('gap', 16, 12, $tablet, $mobileSmall);
+
+  &.home {
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    background-color: $brandColor;
+    @include adaptiveValue('padding-left', 64, 32, $pc, $mobile);
+    @include adaptiveValue('padding-right', 64, 32, $pc, $mobile);
+  }
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-top', 16, 18, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 16, 18, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-left', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-right', 32, 20, $mobile, $mobileSmall);
+  }
+}
