@@ -1,9 +1,13 @@
 .logoLink {
   font-weight: 700;
-  font-size: rem(28);
   letter-spacing: -0.04em;
   display: flex;
   align-items: flex-end;
+  font-size: 28px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('font-size', 28, 20, $mobileMedium, $mobileSmall);
+  }
 
   &.home {
     color: $whiteColor;

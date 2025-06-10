@@ -1,5 +1,6 @@
 module.exports = {
   plugins: {
+    autoprefixer: {},
     'postcss-pxtorem': {
       rootValue: 16, // 1rem = 16px
       unitPrecision: 5,

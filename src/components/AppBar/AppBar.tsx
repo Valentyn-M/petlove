@@ -31,13 +31,20 @@ const AppBar = ({}: AppBarProps) => {
   // Закриття мобільного меню по кліку за його межами
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as Node;
+      const target = e.target as HTMLElement;
 
-      const clickedInsideMenu = menuRef.current?.contains(target);
-      const clickedInsideWrap = menuWrapRef.current?.contains(target);
       const clickedButton = btnRef.current?.contains(target);
+      const clickedWrap = menuWrapRef.current?.contains(target);
+      const clickedMenu = menuRef.current?.contains(target);
 
-      if (isMobileMenuActive && !clickedButton && (clickedInsideMenu || !clickedInsideWrap)) {
+      const isLink = target.closest('a'); // шукаємо <a>
+
+      if (
+        isMobileMenuActive &&
+        !clickedButton &&
+        ((!clickedWrap && !clickedMenu) || // клік поза меню і поза обгорткою
+          (clickedMenu && isLink)) // або клік по <a> всередині меню
+      ) {
         setIsMobileMenuActive(false);
       }
     };

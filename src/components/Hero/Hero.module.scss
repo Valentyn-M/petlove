@@ -1,0 +1,76 @@
+.textBlock {
+  padding: 32px 64px;
+  padding-top: 112px;
+  background-color: $brandColor;
+  display: grid;
+  grid-template-columns: 1fr 255px;
+  align-items: end;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  @include adaptiveValue('gap', 73, 32, $pc, $mobile);
+  @include adaptiveValue('padding-bottom', 64, 44, $pc, $mobile);
+
+  @media (max-width: rem($tablet)) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('border-bottom-left-radius', 60, 30, $mobile, $mobileSmall);
+    @include adaptiveValue('border-bottom-right-radius', 60, 30, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-right', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-left', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 44, 50, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-top', 112, 60, $mobile, $mobileSmall);
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 90px;
+  line-height: 0.96667;
+  letter-spacing: -0.03em;
+  color: $whiteColor;
+  @include adaptiveValue('font-size', 90, 80, $pc, $mobile);
+
+  span {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('font-size', 80, 50, $mobile, $mobileSmall);
+  }
+}
+
+.text {
+  font-size: 18px;
+  line-height: 1.22222;
+  letter-spacing: -0.02em;
+  color: $whiteColor;
+
+  @media (max-width: rem($tablet)) {
+    width: 255px;
+    justify-self: flex-end;
+  }
+
+  @media (max-width: rem($mobile)) {
+    line-height: 1.28571;
+    @include adaptiveValue('font-size', 18, 14, $mobile, $mobileSmall);
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    width: 100%;
+  }
+}
+
+.imgBlock {
+  border-radius: 60px;
+  overflow: hidden;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('border-radius', 60, 30, $mobile, $mobileSmall);
+  }
+
+  img {
+    width: 100%;
+  }
+}
