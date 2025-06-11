@@ -14,9 +14,12 @@ const OurFriendsPage = lazy(() => import('@/pages/OurFriendsPage/OurFriendsPage'
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage/RegistrationPage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage/LoginPage'));
 
+const ProfilePage = lazy(() => import('@/pages/ProfilePage/ProfilePage'));
+
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage/NotFoundPage'));
 
 function App() {
+  // To detect if this is Home page
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -33,6 +36,9 @@ function App() {
           {/* TODO only for unregistered users */}
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
+
+          {/* TODO only for registered users */}
+          <Route path="/profile" element={<ProfilePage />} />
 
           {/* TODO NotFoundPage */}
           <Route path="*" element={<NotFoundPage />} />

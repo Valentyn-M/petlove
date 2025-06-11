@@ -1,5 +1,6 @@
 .list {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
 
@@ -11,4 +12,9 @@
       text-align: center;
     }
   }
+}
+
+.link.registration {
+  padding-left: 20px;
+  padding-right: 20px;
 }

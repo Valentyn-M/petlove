@@ -1,0 +1,18 @@
+.petBlock {
+  border-radius: 60px;
+  overflow: hidden;
+  position: relative;
+
+  @media (max-width: rem($mobileMedium)) {
+    border-radius: 30px;
+  }
+}
+
+.image {
+  width: 100%;
+
+  @media (min-width: rem($tabletAfter)) {
+    height: 100%;
+    object-fit: cover;
+  }
+}

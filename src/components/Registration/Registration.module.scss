@@ -1,0 +1,14 @@
+.registration {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+
+  @media (max-width: rem($tablet)) {
+    grid-template-columns: 1fr;
+    @include adaptiveValue('gap', 32, 16, $tablet, $mobileMedium);
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('gap', 16, 10, $mobileMedium, $mobileSmall);
+  }
+}

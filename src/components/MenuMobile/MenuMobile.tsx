@@ -4,6 +4,8 @@ import Menu from '@/components/Menu/Menu';
 import AuthNav from '@/components/AuthNav/AuthNav';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useHomePage } from '@/hooks/useHomePage';
+import { breakpoints } from '@/styles/breakpoints';
+import ButtonMain from '@/components/ButtonMain/ButtonMain';
 
 export interface MenuMobileProps {
   isActive?: boolean;
@@ -12,7 +14,7 @@ export interface MenuMobileProps {
 }
 
 const MenuMobile: React.FC<MenuMobileProps> = ({ isActive, wrapRef, menuRef }) => {
-  const isMobileMedium = useMediaQuery('(max-width: 37.5rem)'); // 600px
+  const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
 
   const isHome = useHomePage();
 
@@ -23,7 +25,13 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ isActive, wrapRef, menuRef }) =
       <div ref={wrapRef} className={clsx(s.menuMobileWrap, isActive && s.open, isMenuLight && s.menuMobileLight)}>
         <div ref={menuRef} className={s.menuMobile}>
           <Menu isMenuMobileActive={isActive} />
-          {isMobileMedium && <AuthNav isMenuMobileActive={isActive} />}
+          {/* TODO Рендеримо тільки один */}
+          {isMobile && <AuthNav isMenuMobileActive={isActive} />}
+          {/* {isMobile && (
+            <ButtonMain light={true} outline={isHome}>
+              Log out
+            </ButtonMain>
+          )} */}
         </div>
       </div>
       {/* <div className={clsx(s.overlay, isActive && s.active)} /> */}

@@ -1,0 +1,66 @@
+.petBlockInfo {
+  width: 294px;
+  padding: 16px;
+  display: flex;
+  gap: 8px;
+  background-color: $whiteColor;
+  border-radius: 20px;
+  position: absolute;
+  left: 10.304054%; /* 61/592 */
+  bottom: 14.831804%; /* 97/654 */
+
+  @media (max-width: rem($tablet)) {
+    left: 32px;
+    bottom: 32px;
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  @media (max-width: rem(425)) {
+    display: none;
+  }
+}
+
+.imgBlock {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: $beigeColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: $brandColor;
+}
+
+.birthday {
+  font-size: 12px;
+  line-height: 1.16667;
+  letter-spacing: -0.02em;
+
+  span {
+    color: rgba(38, 38, 38, 0.5);
+  }
+}
+
+.body {
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.8);
+}

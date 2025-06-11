@@ -9,6 +9,7 @@ import Menu from '@/components/Menu/Menu';
 import { useEffect, useRef, useState } from 'react';
 import MenuMobile from '@/components/MenuMobile/MenuMobile';
 import ButtonMenuMobile from '@/components/ButtonMenuMobile/ButtonMenuMobile';
+import { breakpoints } from '@/styles/breakpoints';
 
 export interface AppBarProps {}
 
@@ -21,8 +22,8 @@ const AppBar = ({}: AppBarProps) => {
     setIsMobileMenuActive((prev) => !prev);
   };
 
-  const isTablet = useMediaQuery('(max-width: 62rem)'); // 992px
-  const isMobileMedium = useMediaQuery('(max-width: 37.5rem)'); // 600px
+  const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`); // 992px
+  const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`); // 768px
 
   const btnRef = useRef<HTMLButtonElement>(null);
   const menuWrapRef = useRef<HTMLDivElement>(null!);
@@ -59,7 +60,7 @@ const AppBar = ({}: AppBarProps) => {
       {!isTablet && <Menu />}
 
       {/* TODO Рендеримо тільки один */}
-      {!isMobileMedium && <AuthNav />}
+      {!isMobile && <AuthNav />}
       {/* <UserNav /> */}
 
       {isTablet && (

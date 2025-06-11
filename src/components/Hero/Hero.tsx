@@ -5,6 +5,7 @@ import imageTablet1x from '../../assets/images/hero/image_tablet.jpg';
 import imageTablet2x from '../../assets/images/hero/image_tablet@2x.jpg';
 import imagePc1x from '../../assets/images/hero/image_pc.jpg';
 import imagePc2x from '../../assets/images/hero/image_pc@2x.jpg';
+import { breakpoints } from '@/styles/breakpoints';
 
 export interface HeroProps {}
 
@@ -25,10 +26,15 @@ const Hero = ({}: HeroProps) => {
 
       <div className={s.imgBlock}>
         <picture>
-          {/* TODO перевестив се в rem */}
-          <source srcSet={`${imagePc1x} 1x, ${imagePc2x} 2x`} media="(min-width: 992px)" />
-          <source srcSet={`${imageTablet1x} 1x, ${imageTablet2x} 2x`} media="(min-width: 600px)" />
-          <source srcSet={`${imageMobile1x} 1x, ${imageMobile2x} 2x`} media="(max-width: 599.98px)" />
+          <source srcSet={`${imagePc1x} 1x, ${imagePc2x} 2x`} media={`(min-width: ${breakpoints.tabletAfter})`} />
+          <source
+            srcSet={`${imageTablet1x} 1x, ${imageTablet2x} 2x`}
+            media={`(min-width: ${breakpoints.mobileMediumAfter})`}
+          />
+          <source
+            srcSet={`${imageMobile1x} 1x, ${imageMobile2x} 2x`}
+            media={`(max-width: ${breakpoints.mobileMedium})`}
+          />
           <img src={imageMobile1x} alt="Woman with a dog" width="335" height="402" loading="lazy" />
         </picture>
       </div>

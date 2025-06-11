@@ -1,6 +1,7 @@
 import { useHomePage } from '@/hooks/useHomePage';
 import s from './AuthNav.module.scss';
 import LinkMain from '@/components/LinkMain/LinkMain';
+import clsx from 'clsx';
 
 export interface AuthNavProps {
   isMenuMobileActive?: boolean;
@@ -20,7 +21,7 @@ const AuthNav = ({ isMenuMobileActive }: AuthNavProps) => {
           </LinkMain>
         </li>
         <li>
-          <LinkMain to="/registration" light={true} className={s.link}>
+          <LinkMain to="/registration" light={true} className={clsx(s.link, s.registration)}>
             Registration
           </LinkMain>
         </li>

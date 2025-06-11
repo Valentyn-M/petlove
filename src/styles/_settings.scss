@@ -13,6 +13,8 @@ $brandColorDark: #f9b020;
 $beigeColor: #fff4df;
 $beigeColorDark: #fbe7c1;
 $whiteColor: #fff;
+$errorColor: #ef2447;
+$correctColor: #08aa83;
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Налаштування адаптивної сітки
@@ -33,14 +35,21 @@ $containerWidth: $maxWidthContainer + $containerPadding;
 
 // Брейк-поїнти
 $pc: $containerWidth;
+
+$tabletAfter: 992.02;
 $tablet: 992;
-$tabletPlus: 992.02;
+$tabletBefore: 991.98;
+
+$mobileAfter: 768.02;
 $mobile: 768;
-$mobilePlus: 768.02;
+$mobileBefore: 767.98;
+
+$mobileMediumAfter: 600.02;
 $mobileMedium: 600;
-$mobileMediumPlus: 600.02;
+$mobileMediumBefore: 599.98;
+
+$mobileSmallAfter: 375.02;
 $mobileSmall: 375;
-$mobileSmallPlus: 375.02;
 
 // Тип адаптива:
 // 1 - Тільки зменшення - КЛАСИКА (від максимального значення до мінімального значення). Ви можете вказати цегляні (приклад: @include adaptiveValue("column-gap", 15, 5); или @include adaptiveValue("column-gap", 15, 5, 992, 480);)

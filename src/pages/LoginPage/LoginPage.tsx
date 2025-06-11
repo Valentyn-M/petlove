@@ -1,10 +1,15 @@
+import Login from '@/components/Login/Login';
+import { Meta, Title } from 'react-head';
+
 export interface LoginPageProps {}
 
 const LoginPage = ({}: LoginPageProps) => {
   return (
-    <div>
-      <h1>LoginPage</h1>
-    </div>
+    <>
+      <Title>Login</Title>
+      <Meta name="description" content="Welcome! Please enter your credentials to login to the platform." />
+      <Login />
+    </>
   );
 };
 
