@@ -1,8 +1,11 @@
 import Layout from '@/components/Layout/Layout';
 import './App.scss';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import { HomePageContext } from '@/context/HomePageContext';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { selectIsRefreshing, selectIsToken, selectUserEmail } from '@/store/auth/selectors';
+import { refreshUser } from '@/store/auth/operations';
 
 export const svgIcon = '/svgSprite.svg';
 
@@ -23,8 +26,21 @@ function App() {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  return (
+  const dispatch = useAppDispatch();
+  const token = useAppSelector(selectIsToken);
+  const email = useAppSelector(selectUserEmail);
+  const isRefreshing = useAppSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    if (token && !email) {
+      dispatch(refreshUser());
+    }
+  }, [token, email, dispatch]);
+
+  return isRefreshing ? (
     // TODO Add main loader before Layout
+    <h2>Loading...</h2>
+  ) : (
     <HomePageContext.Provider value={isHome}>
       <Layout>
         <Routes>
