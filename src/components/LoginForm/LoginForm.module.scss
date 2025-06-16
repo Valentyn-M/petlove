@@ -138,12 +138,16 @@
 }
 
 .iconCross {
+  fill: $errorColor;
+
   .label.error & {
     display: block;
   }
 }
 
 .iconCheck {
+  fill: $correctColor;
+
   .label.correct & {
     display: block;
   }

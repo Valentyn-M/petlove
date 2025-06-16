@@ -8,6 +8,7 @@ import { selectIsRefreshing, selectIsToken, selectUserEmail } from '@/store/auth
 import { refreshUser } from '@/store/auth/operations';
 import { setAuthHeader } from '@/store/utils';
 import PrivateRoute from '@/components/PrivateRoute';
+import RestrictedRoute from '@/components/RestrictedRoute';
 
 export const svgIcon = '/svgSprite.svg';
 
@@ -52,19 +53,15 @@ function App() {
           <Route path="/find-pet" element={<FindPetPage />} />
           <Route path="/our-friends" element={<OurFriendsPage />} />
 
-          {/* TODO only for unregistered users */}
-          <Route path="/registration" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
-
-          {/* TODO only for registered users */}
+          {/* Only for Unregistered users */}
           <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <ProfilePage />
-              </PrivateRoute>
-            }
+            path="/registration"
+            element={<RestrictedRoute component={<RegistrationPage />} redirectTo="/profile" />}
           />
+          <Route path="/login" element={<RestrictedRoute component={<LoginPage />} redirectTo="/profile" />} />
+
+          {/* Only for Registered users */}
+          <Route path="/profile" element={<PrivateRoute component={<ProfilePage />} redirectTo="/login" />} />
 
           {/* TODO NotFoundPage */}
           <Route path="*" element={<NotFoundPage />} />

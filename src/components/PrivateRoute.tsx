@@ -2,14 +2,21 @@ import { selectIsLoggedIn } from '@/store/auth/selectors';
 import { useAppSelector } from '@/store/hooks';
 import { Navigate } from 'react-router-dom';
 
-interface Props {
-  children: React.ReactNode;
+interface PrivateRouteProps {
+  component: React.ReactNode;
+  redirectTo: string;
 }
 
-const PrivateRoute: React.FC<Props> = ({ children }) => {
+/**
+ * Приватний маршрут:
+ * - Якщо користувач увійшов у систему, рендеримо Component
+ * - Інакше рендеримо <Navigate> до redirectTo
+ */
+
+const PrivateRoute = ({ component, redirectTo = '/' }: PrivateRouteProps) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
-  return isLoggedIn ? children : <Navigate to="/" replace />;
+  return isLoggedIn ? component : <Navigate to={redirectTo} />;
 };
 
 export default PrivateRoute;

@@ -5,8 +5,6 @@ import imageTablet1x from '../../assets/images/registration/image_tablet.png';
 import imageTablet2x from '../../assets/images/registration/image_tablet@2x.png';
 import imagePc1x from '../../assets/images/registration/image_pc.png';
 import imagePc2x from '../../assets/images/registration/image_pc@2x.png';
-import imageIcon1x from '../../assets/images/registration/icon.png';
-import imageIcon2x from '../../assets/images/registration/icon@2x.png';
 import RegistrationForm from '@/components/RegistrationForm/RegistrationForm';
 import PetBlock from '@/components/PetBlock/PetBlock';
 
@@ -25,8 +23,6 @@ const Registration = ({}: RegistrationProps) => {
         imgAlt={'Cat'}
         imgWidth="334"
         imgHeight="280"
-        imageIcon1x={imageIcon1x}
-        imageIcon2x={imageIcon2x}
         petName={'Jack'}
         petBirthday={'18.10.2021'}
         petAbout={

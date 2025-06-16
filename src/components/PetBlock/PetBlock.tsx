@@ -12,11 +12,10 @@ export interface PetBlockProps {
   imgAlt: string;
   imgWidth: string;
   imgHeight: string;
-  imageIcon1x: string;
-  imageIcon2x: string;
   petName: string;
   petBirthday: string;
   petAbout: string;
+  petType: string;
 }
 
 const PetBlock = ({
@@ -29,11 +28,10 @@ const PetBlock = ({
   imgAlt,
   imgWidth,
   imgHeight,
-  imageIcon1x,
-  imageIcon2x,
   petName,
   petBirthday,
   petAbout,
+  petType,
 }: PetBlockProps) => {
   return (
     <div className={s.petBlock}>
@@ -49,13 +47,7 @@ const PetBlock = ({
         />
         <img className={s.image} src={imageMobile1x} alt={imgAlt} width={imgWidth} height={imgHeight} loading="lazy" />
       </picture>
-      <PetBlockInfo
-        imageIcon1x={imageIcon1x}
-        imageIcon2x={imageIcon2x}
-        petName={petName}
-        petBirthday={petBirthday}
-        petAbout={petAbout}
-      />
+      <PetBlockInfo petName={petName} petBirthday={petBirthday} petAbout={petAbout} petType={petType} />
     </div>
   );
 };

@@ -13,6 +13,9 @@
     &:hover {
       background-color: $brandColorDark;
     }
+    &:focus {
+      background-color: $brandColorDark;
+    }
   }
 
   &.disabled {
@@ -37,6 +40,10 @@
       background-color: $beigeColor;
       color: $brandColor;
     }
+    &:focus {
+      background-color: $beigeColor;
+      color: $brandColor;
+    }
   }
 }
 
@@ -47,7 +54,27 @@
 
   @media (any-hover: hover) {
     &:hover {
+      background-color: $brandColor;
       background-color: $beigeColorDark;
+    }
+    &:focus {
+      background-color: $beigeColorDark;
+    }
+  }
+}
+
+.button.grey {
+  background: rgba(38, 38, 38, 0.05);
+  color: $mainColor;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $brandColorDark;
+      color: $whiteColor;
+    }
+    &:focus {
+      background-color: $brandColorDark;
+      color: $whiteColor;
     }
   }
 }

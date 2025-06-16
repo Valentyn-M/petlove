@@ -6,7 +6,6 @@ import imageTablet2x from '../../assets/images/login/image_tablet@2x.png';
 import imagePc1x from '../../assets/images/login/image_pc.png';
 import imagePc2x from '../../assets/images/login/image_pc@2x.png';
 import imageIcon1x from '../../assets/images/login/icon.png';
-import imageIcon2x from '../../assets/images/login/icon@2x.png';
 import PetBlock from '@/components/PetBlock/PetBlock';
 import LoginForm from '@/components/LoginForm/LoginForm';
 
@@ -25,13 +24,12 @@ const Login = ({}: LoginProps) => {
         imgAlt={'Dog'}
         imgWidth="335"
         imgHeight="280"
-        imageIcon1x={imageIcon1x}
-        imageIcon2x={imageIcon2x}
         petName={'Rich'}
         petBirthday={'21.09.2020'}
         petAbout={
           'Rich would be the perfect addition to an active family that loves to play and go on walks. I bet he would love having a doggy playmate too!'
         }
+        petType={'dog'}
       />
       <LoginForm />
     </section>

@@ -82,10 +82,10 @@ const LoginForm = ({}: LoginFormProps) => {
                     autoComplete="off"
                   />
                   <svg className={clsx(s.fieldIcon, s.iconCross)}>
-                    <use href={`${svgIcon}#icon-cross-color`} />
+                    <use href={`${svgIcon}#icon-cross`} />
                   </svg>
                   <svg className={clsx(s.fieldIcon, s.iconCheck)}>
-                    <use href={`${svgIcon}#icon-check-color`} />
+                    <use href={`${svgIcon}#icon-check`} />
                   </svg>
                 </div>
                 <ErrorMessage className={s.fieldError} name="email" component="span" />
@@ -121,10 +121,10 @@ const LoginForm = ({}: LoginFormProps) => {
                     )}
                   </button>
                   <svg className={clsx(s.fieldIcon, s.iconCross)}>
-                    <use href={`${svgIcon}#icon-cross-color`} />
+                    <use href={`${svgIcon}#icon-cross`} />
                   </svg>
                   <svg className={clsx(s.fieldIcon, s.iconCheck)}>
-                    <use href={`${svgIcon}#icon-check-color`} />
+                    <use href={`${svgIcon}#icon-check`} />
                   </svg>
                 </div>
                 <ErrorMessage className={s.fieldError} name="password" component="span" />

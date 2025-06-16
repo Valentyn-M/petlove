@@ -72,11 +72,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children }
           >
             <button onClick={onClose} type="button" className={s.closeBtn} aria-label="Close modal">
               <svg className={s.iconClose}>
-                <use href={`${svgIcon}#icon-close`} />
+                <use href={`${svgIcon}#icon-cross`} />
               </svg>
             </button>
 
-            <div className={s.modalContent}>{children}</div>
+            {children}
           </motion.div>
         </motion.div>
       )}

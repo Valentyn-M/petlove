@@ -1,0 +1,31 @@
+.iconPet {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: $beigeColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.small {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: $beigeColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.iconImg {
+  width: 44px;
+  height: 44px;
+
+  .small & {
+    width: 32px;
+    height: 32px;
+  }
+}
