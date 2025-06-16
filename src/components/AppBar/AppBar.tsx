@@ -10,11 +10,14 @@ import { useEffect, useRef, useState } from 'react';
 import MenuMobile from '@/components/MenuMobile/MenuMobile';
 import ButtonMenuMobile from '@/components/ButtonMenuMobile/ButtonMenuMobile';
 import { breakpoints } from '@/styles/breakpoints';
+import { useAppSelector } from '@/store/hooks';
+import { selectIsLoggedIn } from '@/store/auth/selectors';
 
 export interface AppBarProps {}
 
 const AppBar = ({}: AppBarProps) => {
   const isHome = useHomePage();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
@@ -59,9 +62,7 @@ const AppBar = ({}: AppBarProps) => {
       <Logo />
       {!isTablet && <Menu />}
 
-      {/* TODO Рендеримо тільки один */}
-      {!isMobile && <AuthNav />}
-      {/* <UserNav /> */}
+      {!isLoggedIn ? !isMobile && <AuthNav /> : <UserNav />}
 
       {isTablet && (
         <ButtonMenuMobile ref={btnRef} isActive={isMobileMenuActive} handleActivate={handleActivateMobileMenu} />

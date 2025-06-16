@@ -10,6 +10,7 @@ import {
 import { clearAuthHeader, handleThunkError, setAuthHeader } from '@/store/utils';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+// REGISTER
 /*
  * POST @ /users/signup
  * body: { name, email, password }
@@ -30,6 +31,7 @@ export const registerUser = createAsyncThunk<RegisterResponse, RegisterCredentia
 
 // ==========================================================================================================================
 
+// LOGIN
 /*
  * POST @ /users/signin
  * body: { email, password }
@@ -50,6 +52,7 @@ export const loginUser = createAsyncThunk<LoginResponse, LoginCredentials, { rej
 
 // ==========================================================================================================================
 
+// LOGOUT
 /*
  * POST @ /users/signout
  * headers: Authorization: Bearer token
@@ -66,6 +69,7 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkAPI
 
 // ==========================================================================================================================
 
+// REFRESH
 /*
  * GET @ /users/current
  * headers: Authorization: Bearer token
@@ -81,6 +85,7 @@ export const refreshUser = createAsyncThunk<RefreshUserResponse>('auth/refreshUs
 
 // ==========================================================================================================================
 
+// GET FULL USER INFO
 /*
  * GET @ /users/current/full
  * headers: Authorization: Bearer token

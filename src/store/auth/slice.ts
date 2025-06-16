@@ -1,5 +1,5 @@
 import { getFullUserInfo, loginUser, logoutUser, refreshUser, registerUser } from '@/store/auth/operations';
-import { GetFullUserInfoResponse, Notice, Pets, RefreshUserResponse, User } from '@/store/types';
+import { GetFullUserInfoResponse, Notice, Pets, User } from '@/store/types';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 // interface User is moved to the type file "types.ts"
@@ -80,6 +80,7 @@ const slice = createSlice({
         state.isRefreshing = false;
       })
       // ==========================================================================================================================
+      // ==========================================================================================================================
       // Status Pending
       .addMatcher(
         isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending, getFullUserInfo.pending),
@@ -106,6 +107,7 @@ export const authReducer = slice.reducer;
 // Helpers
 // ==========================================
 
+// "GetFullUserInfoResponse" has all possible fields
 function setUserDataFromPayload(state: AuthState, payload: Partial<GetFullUserInfoResponse>) {
   state.user.name = payload.name ?? null;
   state.user.email = payload.email ?? null;

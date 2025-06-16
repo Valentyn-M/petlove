@@ -1,0 +1,51 @@
+// React Modal Styles
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(25, 26, 21, 0.6);
+  z-index: 1000;
+
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // transform: translate(-50%, -50%); - Прописано у самій модалці
+    // Пояснення:
+    // framer-motion не читає transform: translate(-50%, -50%) з CSS.
+    // Він повністю перезаписує transform, тому треба явно вказати x і y.
+    // Використання x: '-50%' і y: '-50%' повторює translate(-50%, -50%).
+    background: var(--main-light);
+    border-radius: rem(30);
+    padding: rem(64);
+    width: 90%;
+    max-width: rem(565);
+    max-height: 95vh;
+    overflow-y: auto;
+    z-index: 1001;
+
+    @media (max-width: rem(648)) {
+      padding: rem(40);
+    }
+
+    @media (max-width: rem(480)) {
+      padding: rem(40) rem(24);
+    }
+
+    .closeBtn {
+      position: absolute;
+      top: rem(20);
+      right: rem(20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .iconClose {
+        width: rem(32);
+        height: rem(32);
+      }
+    }
+  }
+}

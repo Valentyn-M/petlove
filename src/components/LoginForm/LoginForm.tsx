@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import s from './LoginForm.module.scss';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +7,10 @@ import { useState } from 'react';
 import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
 import TitleMain from '@/components/TitleMain/TitleMain';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { loginUser } from '@/store/auth/operations';
+import { useSnackbar } from 'notistack';
+import { selectIsLoading } from '@/store/auth/selectors';
 
 export interface LoginFormProps {}
 
@@ -16,6 +20,13 @@ interface FormValues {
 }
 
 const LoginForm = ({}: LoginFormProps) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const isLoading = useAppSelector(selectIsLoading);
+
+  const { enqueueSnackbar } = useSnackbar();
+
   const initialValues: FormValues = {
     email: '',
     password: '',
@@ -36,8 +47,15 @@ const LoginForm = ({}: LoginFormProps) => {
   });
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>): void => {
-    console.log(values);
-    actions.resetForm();
+    dispatch(loginUser(values))
+      .unwrap()
+      .then(() => {
+        actions.resetForm();
+        navigate('/profile');
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
+      });
   };
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -112,9 +130,8 @@ const LoginForm = ({}: LoginFormProps) => {
                 <ErrorMessage className={s.fieldError} name="password" component="span" />
               </label>
 
-              <ButtonMain className={s.btn} type="submit">
-                Login
-                {/* {loading ? 'Loading...' : 'Login'} */}
+              <ButtonMain className={s.btn} disabled={isLoading} type="submit">
+                {isLoading ? 'Loading...' : 'Login'}
               </ButtonMain>
             </Form>
           )}

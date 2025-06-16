@@ -14,6 +14,18 @@
       background-color: $brandColorDark;
     }
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    font-size: 14px;
+    line-height: 1.28571;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .button.outline {

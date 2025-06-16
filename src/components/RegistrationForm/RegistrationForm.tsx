@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import s from './RegistrationForm.module.scss';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +7,10 @@ import { useState } from 'react';
 import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
 import TitleMain from '@/components/TitleMain/TitleMain';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { selectIsLoading } from '@/store/auth/selectors';
+import { useSnackbar } from 'notistack';
+import { registerUser } from '@/store/auth/operations';
 
 export interface RegistrationFormProps {}
 
@@ -18,6 +22,13 @@ interface FormValues {
 }
 
 const RegistrationForm = ({}: RegistrationFormProps) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const isLoading = useAppSelector(selectIsLoading);
+
+  const { enqueueSnackbar } = useSnackbar();
+
   const initialValues: FormValues = {
     name: '',
     email: '',
@@ -44,8 +55,16 @@ const RegistrationForm = ({}: RegistrationFormProps) => {
   });
 
   const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>): void => {
-    console.log(values);
-    actions.resetForm();
+    const { passwordConfirm: _ignore, ...formData } = values;
+    dispatch(registerUser(formData))
+      .unwrap()
+      .then(() => {
+        actions.resetForm();
+        navigate('/profile');
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
+      });
   };
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -182,9 +201,8 @@ const RegistrationForm = ({}: RegistrationFormProps) => {
                 <ErrorMessage className={s.fieldError} name="passwordConfirm" component="span" />
               </label>
 
-              <ButtonMain className={s.btn} type="submit">
-                Registration
-                {/* {loading ? 'Loading...' : 'Registration'} */}
+              <ButtonMain className={s.btn} disabled={isLoading} type="submit">
+                {isLoading ? 'Loading...' : 'Registration'}
               </ButtonMain>
             </Form>
           )}

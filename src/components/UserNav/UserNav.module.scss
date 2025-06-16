@@ -3,37 +3,3 @@
   align-items: center;
   gap: 8px;
 }
-
-.user {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.iconUserWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 13px;
-  border-radius: 50%;
-  background-color: $beigeColor;
-
-  &.outline {
-  }
-}
-
-.iconUser {
-  width: 24px;
-  height: 24px;
-  fill: $brandColor;
-}
-
-.userName {
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: -0.03em;
-
-  .light & {
-    color: $whiteColor;
-  }
-}

@@ -1,0 +1,47 @@
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userAvatarWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+  border-radius: 50%;
+  background-color: $beigeColor;
+
+  @media (max-width: rem(600)) {
+    padding: 10px;
+  }
+}
+
+.iconUser {
+  width: 24px;
+  height: 24px;
+  fill: $brandColor;
+
+  @media (max-width: rem(600)) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.userAvatar {
+  @media (max-width: rem(600)) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  max-width: 180px;
+
+  .light & {
+    color: $whiteColor;
+  }
+}

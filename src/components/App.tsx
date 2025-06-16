@@ -6,6 +6,8 @@ import { HomePageContext } from '@/context/HomePageContext';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectIsRefreshing, selectIsToken, selectUserEmail } from '@/store/auth/selectors';
 import { refreshUser } from '@/store/auth/operations';
+import { setAuthHeader } from '@/store/utils';
+import PrivateRoute from '@/components/PrivateRoute';
 
 export const svgIcon = '/svgSprite.svg';
 
@@ -33,6 +35,7 @@ function App() {
 
   useEffect(() => {
     if (token && !email) {
+      setAuthHeader(token);
       dispatch(refreshUser());
     }
   }, [token, email, dispatch]);
@@ -54,7 +57,14 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           {/* TODO only for registered users */}
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
 
           {/* TODO NotFoundPage */}
           <Route path="*" element={<NotFoundPage />} />
