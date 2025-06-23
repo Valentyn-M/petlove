@@ -58,7 +58,7 @@ const AppBar = ({}: AppBarProps) => {
   }, [isMobileMenuActive]);
 
   return (
-    <div className={clsx(s.appBar, isHome && s.home)}>
+    <div className={clsx(s.appBar, isHome && s.home, 'container')}>
       <Logo />
       {!isTablet && <Menu />}
 

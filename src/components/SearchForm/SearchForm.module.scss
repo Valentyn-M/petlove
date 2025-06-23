@@ -1,0 +1,78 @@
+.searchForm {
+  position: relative;
+  height: 52px;
+  width: 100%;
+
+  @media (min-width: rem($mobileMediumAfter)) {
+    max-width: 230px;
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('height', 52, 42, $mobileMedium, $mobileSmall);
+  }
+}
+
+.field {
+  height: 100%;
+  width: 100%;
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  border-radius: 30px;
+  padding-left: 14px;
+  padding-right: 58px;
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: $mainColor;
+  outline: none;
+  transition: all 0.3s ease 0s;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-left', 14, 12, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-right', 58, 56, $mobileMedium, $mobileSmall);
+  }
+
+  &::placeholder {
+    color: rgba(38, 38, 38, 0.5);
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $brandColor;
+  }
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('right', 14, 12, $mobileMedium, $mobileSmall);
+  }
+
+  &.reset {
+    right: 36px;
+    display: none;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('right', 36, 34, $mobileMedium, $mobileSmall);
+    }
+
+    &.visible {
+      display: flex;
+    }
+  }
+}
+
+.fieldIcon {
+  width: 18px;
+  height: 18px;
+  fill: $mainColor;
+}

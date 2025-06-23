@@ -5,8 +5,8 @@ import { useState } from 'react';
 import ModalChildLogout from '@/components/ModalChildLogout/ModalChildLogout';
 
 export interface LogOutBtnProps {
-  light: boolean;
-  outline: boolean;
+  light?: boolean;
+  outline?: boolean;
 }
 
 const LogOutBtn = ({ light, outline }: LogOutBtnProps) => {

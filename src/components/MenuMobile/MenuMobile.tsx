@@ -5,9 +5,9 @@ import AuthNav from '@/components/AuthNav/AuthNav';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useHomePage } from '@/hooks/useHomePage';
 import { breakpoints } from '@/styles/breakpoints';
-import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import { useAppSelector } from '@/store/hooks';
 import { selectIsLoggedIn } from '@/store/auth/selectors';
+import LogOutBtn from '@/components/LogOutBtn/LogOutBtn';
 
 export interface MenuMobileProps {
   isActive?: boolean;
@@ -28,7 +28,8 @@ const MenuMobile: React.FC<MenuMobileProps> = ({ isActive, wrapRef, menuRef }) =
           <Menu isMenuMobileActive={isActive} />
           {!isLoggedIn
             ? isMobile && <AuthNav isMenuMobileActive={isActive} />
-            : isMobile && <ButtonMain light={!isHome}>Log out</ButtonMain>}
+            : // : isMobile && <ButtonMain light={!isHome}>Log out</ButtonMain>
+              isMobile && <LogOutBtn light={!isHome} outline={!isHome} />}
         </div>
       </div>
       {/* <div className={clsx(s.overlay, isActive && s.active)} /> */}

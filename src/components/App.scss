@@ -5,12 +5,30 @@
 .wrapper {
   max-width: #{$maxWidthContainer}px;
   margin: 0 auto;
-  padding: 16px 32px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 
   @media (max-width: rem($mobile)) {
-    @include adaptiveValue('padding-top', 16, 10, $mobile, $mobileSmall);
-    @include adaptiveValue('padding-bottom', 16, 10, $mobile, $mobileSmall);
-    @include adaptiveValue('padding-left', 32, 20, $mobile, $mobileSmall);
-    @include adaptiveValue('padding-right', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-top', 32, 24, $mobile, $mobileSmall);
+    @include adaptiveValue('gap', 32, 20, $mobile, $mobileSmall);
   }
+
+  &.home {
+    gap: 0;
+
+    @media (max-width: rem($mobile)) {
+      @include adaptiveValue('padding-top', 16, 10, $mobile, $mobileSmall);
+      @include adaptiveValue('padding-bottom', 16, 10, $mobile, $mobileSmall);
+    }
+  }
+}
+
+.container {
+  padding-left: 32px;
+  padding-right: 32px;
+  @include adaptiveValue('padding-left', 32, 0, $pc, $mobile);
+  @include adaptiveValue('padding-right', 32, 0, $pc, $mobile);
 }

@@ -1,4 +1,6 @@
 import AppBar from '@/components/AppBar/AppBar';
+import { useHomePage } from '@/hooks/useHomePage';
+import clsx from 'clsx';
 import { Suspense } from 'react';
 
 export interface LayoutProps {
@@ -6,8 +8,10 @@ export interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const isHome = useHomePage();
+
   return (
-    <div className="wrapper">
+    <div className={clsx('wrapper', isHome && 'home')}>
       <header>
         <AppBar />
       </header>

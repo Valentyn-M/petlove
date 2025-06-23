@@ -2,10 +2,8 @@
   font-weight: 700;
   font-size: 54px;
   letter-spacing: -0.04em;
-  margin-bottom: 16px;
 
   @media (max-width: rem($mobile)) {
     @include adaptiveValue('font-size', 54, 28, $mobile, $mobileSmall);
-    @include adaptiveValue('margin-bottom', 16, 12, $mobile, $mobileSmall);
   }
 }

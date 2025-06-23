@@ -18,6 +18,14 @@
   }
 }
 
+.title {
+  margin-bottom: 16px;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('margin-bottom', 16, 12, $mobile, $mobileSmall);
+  }
+}
+
 .loginForm {
   width: 100%;
   max-width: 424px;
@@ -73,7 +81,7 @@
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  color: rgba(38, 38, 38, 0.8);
+  color: $mainColor;
   outline: none;
   transition: all 0.3s ease 0s;
 

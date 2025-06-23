@@ -32,7 +32,7 @@ const LoginForm = ({}: LoginFormProps) => {
     password: '',
   };
 
-  const registerSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     email: Yup.string()
       .matches(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Email must be valid')
       .required('Email is required'),
@@ -63,9 +63,9 @@ const LoginForm = ({}: LoginFormProps) => {
   return (
     <div className={s.loginBlock}>
       <div className={s.loginForm}>
-        <TitleMain value={'Log in'} />
+        <TitleMain className={s.title}>Log in</TitleMain>
         <p className={s.text}>Welcome! Please enter your credentials to login to the platform:</p>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={registerSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
           {({ errors, touched }) => (
             <Form className={s.form}>
               <label

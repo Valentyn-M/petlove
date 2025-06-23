@@ -36,7 +36,7 @@ const RegistrationForm = ({}: RegistrationFormProps) => {
     passwordConfirm: '',
   };
 
-  const registerSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     name: Yup.string().min(3, 'Too short!').max(20, 'Too long!').required('Required'),
     email: Yup.string()
       .matches(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Email must be valid')
@@ -73,9 +73,9 @@ const RegistrationForm = ({}: RegistrationFormProps) => {
   return (
     <div className={s.registrationBlock}>
       <div className={s.registrationForm}>
-        <TitleMain value={'Registration'} />
+        <TitleMain className={s.title}>Registration</TitleMain>
         <p className={s.text}>Thank you for your interest in our platform.</p>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={registerSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
           {({ errors, touched }) => (
             <Form className={s.form}>
               <label
