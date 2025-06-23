@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import s from './SearchForm.module.scss';
 import clsx from 'clsx';
 import { svgIcon } from '@/components/App';
@@ -10,20 +10,26 @@ export interface SearchFormProps {}
 
 const SearchForm = ({}: SearchFormProps) => {
   const searchValue = useAppSelector(selectValue);
+  const [fieldValue, setFieldValue] = useState<string>(searchValue);
   const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setValue(e.target.value));
+    setFieldValue(e.target.value);
   };
 
   const handleClick = (): void => {
+    setFieldValue('');
     dispatch(resetValue());
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(searchValue);
+    dispatch(setValue(fieldValue));
   };
+
+  useEffect(() => {
+    setFieldValue(searchValue);
+  }, [searchValue]);
 
   return (
     <form className={s.searchForm} onSubmit={handleSubmit}>
@@ -33,10 +39,10 @@ const SearchForm = ({}: SearchFormProps) => {
         name="search"
         aria-label="Search"
         placeholder="Search"
-        value={searchValue}
+        value={fieldValue}
         onChange={handleChange}
       />
-      <button type="button" onClick={handleClick} className={clsx(s.btn, s.reset, searchValue && s.visible)}>
+      <button type="button" onClick={handleClick} className={clsx(s.btn, s.reset, fieldValue && s.visible)}>
         <svg className={clsx(s.fieldIcon, s.iconCross)}>
           <use href={`${svgIcon}#icon-cross`} />
         </svg>

@@ -1,3 +1,5 @@
+// Users Slice
+
 export interface User {
   name: string | null;
   email: string | null;
@@ -94,6 +96,30 @@ export interface GetFullUserInfoResponse {
   pets: Pets[];
   createdAt: string;
   updatedAt: string;
+}
+
+// ==========================================================================================================================
+
+// News Slice
+export interface NewsItem {
+  _id: string;
+  imgUrl: string;
+  title: string;
+  text: string;
+  date: string;
+  url: string;
+  id: string;
+}
+
+export interface NewsResponse {
+  page: number;
+  perPage: number;
+  totalPages: number;
+  results: NewsItem[];
+}
+
+export interface FetchNewsParams {
+  searchValue?: string;
 }
 
 // ==========================================================================================================================

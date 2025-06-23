@@ -1,0 +1,23 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  @include adaptiveValue('column-gap', 35, 24, $pc, $mobile);
+  @include adaptiveValue('row-gap', 40, 32, $pc, $mobile);
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('row-gap', 32, 24, $mobile, $mobileSmall);
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: rem(480)) {
+    grid-template-columns: 1fr;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 60px;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('margin-bottom', 60, 44, $mobileMedium, $mobileSmall);
+    }
+  }
+}
