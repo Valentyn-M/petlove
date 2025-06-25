@@ -1,0 +1,95 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/src/assets/images/loader-main/image_mobile.jpg') center/cover no-repeat;
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    background-image: url('/src/assets/images/loader-main/image_mobile@2x.jpg');
+  }
+
+  @media (min-width: rem($mobileMediumAfter)) {
+    background: url('/src/assets/images/loader-main/image_tablet.jpg') center/cover no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+      background-image: url('/src/assets/images/loader-main/image_tablet@2x.jpg');
+    }
+    font-size: 100px;
+  }
+
+  @media (min-width: rem($mobileAfter)) {
+    background: url('/src/assets/images/loader-main/image_pc.jpg') center/cover no-repeat;
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+      background-image: url('/src/assets/images/loader-main/image_pc@2x.jpg');
+    }
+  }
+}
+
+.indicator {
+  position: relative;
+  width: 270px;
+  height: 270px;
+
+  @media (min-width: rem($mobileMediumAfter)) {
+    width: 396px;
+    height: 396px;
+  }
+}
+
+.ellipse {
+  width: 100%;
+  height: 100%;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: $whiteColor;
+  font-size: 50px;
+
+  @media (min-width: rem($mobileMediumAfter)) {
+    font-size: 80px;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: $whiteColor;
+  font-size: 50px;
+
+  @media (min-width: rem($mobileMediumAfter)) {
+    font-size: 100px;
+  }
+}
+
+.iconHeart {
+  width: 44px;
+  height: 44px;
+  fill: $brandColor;
+
+  @media (min-width: rem($mobileMediumAfter)) {
+    width: 82px;
+    height: 82px;
+  }
+}

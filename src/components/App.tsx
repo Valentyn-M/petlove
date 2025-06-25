@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout/Layout';
 import './App.scss';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { lazy, useEffect } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import { HomePageContext } from '@/context/HomePageContext';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectIsRefreshing, selectIsToken, selectUserEmail } from '@/store/auth/selectors';
@@ -12,7 +12,11 @@ import RestrictedRoute from '@/components/RestrictedRoute';
 
 export const svgIcon = '/svgSprite.svg';
 
-const HomePage = lazy(() => import('@/pages/HomePage/HomePage'));
+// Eager
+import HomePage from '@/pages/HomePage/HomePage';
+import LoaderMain from '@/components/LoaderMain/LoaderMain';
+
+// Lazy
 const NewsPage = lazy(() => import('@/pages/NewsPage/NewsPage'));
 const FindPetPage = lazy(() => import('@/pages/FindPetPage/FindPetPage'));
 const OurFriendsPage = lazy(() => import('@/pages/OurFriendsPage/OurFriendsPage'));
@@ -41,9 +45,20 @@ function App() {
     }
   }, [token, email, dispatch]);
 
-  return isRefreshing ? (
-    // TODO Add main loader before Layout
-    <h2>Loading...</h2>
+  // Loader
+  const loaderDuration: number = 2200;
+  const [isLoaderReady, setIsLoaderReady] = useState(false);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoaderReady(true);
+    }, loaderDuration);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const showApp = isLoaderReady && !isRefreshing;
+
+  return !showApp ? (
+    <LoaderMain duration={loaderDuration} />
   ) : (
     <HomePageContext.Provider value={isHome}>
       <Layout>

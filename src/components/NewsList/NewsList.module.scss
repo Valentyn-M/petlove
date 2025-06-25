@@ -5,8 +5,8 @@
   @include adaptiveValue('row-gap', 40, 32, $pc, $mobile);
 
   @media (max-width: rem($mobile)) {
-    @include adaptiveValue('row-gap', 32, 24, $mobile, $mobileSmall);
     grid-template-columns: 1fr 1fr;
+    @include adaptiveValue('row-gap', 32, 24, $mobile, $mobileSmall);
   }
 
   @media (max-width: rem(480)) {

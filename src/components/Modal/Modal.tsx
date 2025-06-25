@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { svgIcon } from '@/components/App';
 import s from './Modal.module.scss';
 import { useEffect } from 'react';
+import { FocusTrap } from 'focus-trap-react';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -41,44 +42,46 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children }
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          className={s.overlay}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.3 } }}
-          exit={{ opacity: 0, transition: { duration: 0.2 } }}
-          onClick={onClose}
-        >
+        <FocusTrap active={isOpen}>
           <motion.div
-            className={s.modal}
-            initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              x: '-50%',
-              y: '-50%',
-              transition: { duration: 0.3 },
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.95,
-              x: '-50%',
-              y: '-50%',
-              transition: { duration: 0.1 },
-            }}
-            onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-label={contentLabel}
+            className={s.overlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.3 } }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            onClick={onClose}
           >
-            <button onClick={onClose} type="button" className={s.closeBtn} aria-label="Close modal">
-              <svg className={s.iconClose}>
-                <use href={`${svgIcon}#icon-cross`} />
-              </svg>
-            </button>
+            <motion.div
+              className={s.modal}
+              initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                x: '-50%',
+                y: '-50%',
+                transition: { duration: 0.3 },
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.95,
+                x: '-50%',
+                y: '-50%',
+                transition: { duration: 0.1 },
+              }}
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-label={contentLabel}
+            >
+              <button onClick={onClose} type="button" className={s.closeBtn} aria-label="Close modal">
+                <svg className={s.iconClose}>
+                  <use href={`${svgIcon}#icon-cross`} />
+                </svg>
+              </button>
 
-            {children}
+              {children}
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </FocusTrap>
       )}
     </AnimatePresence>,
     modalRoot

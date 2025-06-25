@@ -16,7 +16,7 @@ const NewsItem = ({ newsData }: NewsItemProps) => {
   return (
     <article className={s.article}>
       <div className={s.imageWrap}>
-        <img className={s.image} src={imgUrl} alt={title} width="361" height="226" />
+        <img className={s.image} src={imgUrl} alt={title} width="361" height="226" loading="lazy" />
       </div>
       <h3 className={s.title}>{title}</h3>
       <p className={s.text}>{text}</p>
