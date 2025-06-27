@@ -15,7 +15,7 @@ export interface PetBlockProps {
   petName: string;
   petBirthday: string;
   petAbout: string;
-  petType: string;
+  petType?: string;
 }
 
 const PetBlock = ({

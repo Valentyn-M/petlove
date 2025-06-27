@@ -1,0 +1,116 @@
+.article {
+  border-radius: 15px;
+  background-color: $whiteColor;
+  height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  position: relative;
+  @include adaptiveValue('padding-left', 20, 16, $pc, $tablet);
+  @include adaptiveValue('padding-right', 20, 16, $pc, $tablet);
+  @include adaptiveValue('gap', 20, 16, $pc, $tablet);
+
+  @media (max-width: rem($tablet)) {
+    @include adaptiveValue('padding-left', 20, 16, $tablet, $mobile);
+    @include adaptiveValue('padding-right', 20, 16, $tablet, $mobile);
+    @include adaptiveValue('gap', 20, 16, $tablet, $mobile);
+  }
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-left', 20, 16, $mobile, $mobileMedium);
+    @include adaptiveValue('padding-right', 20, 16, $mobile, $mobileMedium);
+    @include adaptiveValue('gap', 20, 16, $mobile, $mobileMedium);
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('padding-left', 20, 16, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-right', 20, 16, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('gap', 20, 16, $mobileMedium, $mobileSmall);
+  }
+}
+
+.imageWrap {
+  flex-shrink: 0;
+
+  @include adaptiveValue('width', 90, 70, $pc, $tablet);
+  @include adaptiveValue('height', 90, 70, $pc, $tablet);
+
+  @media (max-width: rem($tablet)) {
+    width: 90px;
+    height: 90px;
+  }
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('width', 90, 60, $mobile, $mobileMedium);
+    @include adaptiveValue('height', 90, 60, $mobile, $mobileMedium);
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('width', 90, 70, $mobileSmall);
+    @include adaptiveValue('height', 90, 70, $mobileSmall);
+  }
+}
+
+.houres {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border-radius: 30px;
+  padding: 8px;
+  background: $beigeColor;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  color: $brandColor;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.33333;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('font-size', 14, 12, $mobileMedium, $mobileSmall);
+    }
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.25;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('font-size', 20, 16, $mobileMedium, $mobileSmall);
+    }
+  }
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact {
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+}
+
+.label {
+  color: rgba(38, 38, 38, 0.5);
+}
+
+.link {
+  @media (any-hover: hover) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &:focus {
+    text-decoration: underline;
+  }
+}

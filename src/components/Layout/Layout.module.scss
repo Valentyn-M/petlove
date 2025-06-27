@@ -1,0 +1,37 @@
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  background-color: $bgColor;
+
+  &.home {
+    background-color: $whiteColor;
+  }
+}
+
+.container {
+  max-width: #{$maxWidthContainer}px;
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-left', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-right', 32, 20, $mobile, $mobileSmall);
+  }
+}
+
+.header {
+  padding-top: 32px;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-top', 32, 24, $mobile, $mobileSmall);
+  }
+
+  &.home {
+    margin-top: 16px;
+
+    @media (max-width: rem($mobile)) {
+      @include adaptiveValue('padding-top', 16, 10, $mobile, $mobileSmall);
+    }
+  }
+}

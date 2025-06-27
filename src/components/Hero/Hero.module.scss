@@ -1,3 +1,11 @@
+.hero {
+  padding-bottom: 16px;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-bottom', 16, 10, $mobile, $mobileSmall);
+  }
+}
+
 .textBlock {
   padding: 32px 64px;
   padding-top: 112px;

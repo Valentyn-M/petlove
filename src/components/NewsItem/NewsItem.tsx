@@ -1,6 +1,5 @@
 import { NewsItem } from '@/store/types';
 import s from './NewsItem.module.scss';
-import { Link } from 'react-router-dom';
 
 export interface NewsItemProps {
   newsData: NewsItem;

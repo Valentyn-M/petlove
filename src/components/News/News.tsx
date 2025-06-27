@@ -34,7 +34,7 @@ const News = ({}: NewsProps) => {
   }, [searchValue, currentPage, dispatch]);
 
   return (
-    <section className={clsx(s.news, 'container')}>
+    <section className={clsx(s.news, 'extra-container')}>
       <div className={s.header}>
         <TitleMain>News</TitleMain>
         <SearchForm />

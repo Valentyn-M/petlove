@@ -23,6 +23,11 @@
   width: rem(23);
   height: rem(23);
 
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('width', 23, 17, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('height', 23, 17, $mobileMedium, $mobileSmall);
+  }
+
   .home & {
     fill: $whiteColor;
   }

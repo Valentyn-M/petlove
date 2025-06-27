@@ -1,4 +1,5 @@
 import { authReducer } from '@/store/auth/slice';
+import { friendsReducer } from '@/store/friends/slice';
 import { newsReducer } from '@/store/news/slice';
 import { searchReducer } from '@/store/search/slice';
 import { configureStore } from '@reduxjs/toolkit';
@@ -23,6 +24,7 @@ export const store = configureStore({
     auth: persistedReducer,
     search: searchReducer,
     news: newsReducer,
+    friends: friendsReducer,
   },
 
   // 4

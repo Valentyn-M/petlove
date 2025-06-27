@@ -3,10 +3,10 @@ import s from './LoaderMain.module.scss';
 import { svgIcon } from '@/components/App';
 
 export interface LoaderMainProps {
-  duration: number;
+  loaderDuration: number;
 }
 
-const LoaderMain = ({ duration }: LoaderMainProps) => {
+const LoaderMain = ({ loaderDuration }: LoaderMainProps) => {
   const [progress, setProgress] = useState(0);
   const [showLogo, setShowLogo] = useState(false);
 
@@ -14,11 +14,12 @@ const LoaderMain = ({ duration }: LoaderMainProps) => {
   useEffect(() => {
     let start: number | null = null;
     let animationFrameId: number;
+    const progressDuration = loaderDuration - 200;
 
     const animate = (timestamp: number) => {
       start ??= timestamp;
       const elapsed = timestamp - start;
-      const percentage = Math.min((elapsed / duration) * 100, 100);
+      const percentage = Math.min((elapsed / progressDuration) * 100, 100);
 
       setProgress(percentage);
 
@@ -32,7 +33,7 @@ const LoaderMain = ({ duration }: LoaderMainProps) => {
     animationFrameId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [duration]);
+  }, [loaderDuration]);
 
   return (
     <div className={s.loader}>

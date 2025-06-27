@@ -19,7 +19,7 @@ import LoaderMain from '@/components/LoaderMain/LoaderMain';
 // Lazy
 const NewsPage = lazy(() => import('@/pages/NewsPage/NewsPage'));
 const FindPetPage = lazy(() => import('@/pages/FindPetPage/FindPetPage'));
-const OurFriendsPage = lazy(() => import('@/pages/OurFriendsPage/OurFriendsPage'));
+const OurFriendsPage = lazy(() => import('@/pages/FriendsPage/FriendsPage'));
 
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage/RegistrationPage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage/LoginPage'));
@@ -58,7 +58,7 @@ function App() {
   const showApp = isLoaderReady && !isRefreshing;
 
   return !showApp ? (
-    <LoaderMain duration={loaderDuration} />
+    <LoaderMain loaderDuration={loaderDuration} />
   ) : (
     <HomePageContext.Provider value={isHome}>
       <Layout>

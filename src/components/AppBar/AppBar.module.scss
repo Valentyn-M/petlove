@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  position: relative;
+  z-index: 1;
   @include adaptiveValue('gap', 16, 12, $tablet, $mobileSmall);
 
   &.home {

@@ -1,4 +1,6 @@
 .login {
+  padding-top: 32px;
+  padding-bottom: 32px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
@@ -6,6 +8,11 @@
   @media (max-width: rem($tablet)) {
     grid-template-columns: 1fr;
     @include adaptiveValue('gap', 32, 16, $tablet, $mobileMedium);
+  }
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-top', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 32, 20, $mobile, $mobileSmall);
   }
 
   @media (max-width: rem($mobileMedium)) {
