@@ -18,7 +18,7 @@ import LoaderMain from '@/components/LoaderMain/LoaderMain';
 
 // Lazy
 const NewsPage = lazy(() => import('@/pages/NewsPage/NewsPage'));
-const FindPetPage = lazy(() => import('@/pages/FindPetPage/FindPetPage'));
+const NoticesPage = lazy(() => import('@/pages/NoticesPage/NoticesPage'));
 const OurFriendsPage = lazy(() => import('@/pages/FriendsPage/FriendsPage'));
 
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage/RegistrationPage'));
@@ -65,7 +65,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/find-pet" element={<FindPetPage />} />
+          <Route path="/find-pet" element={<NoticesPage />} />
           <Route path="/our-friends" element={<OurFriendsPage />} />
 
           {/* Only for Unregistered users */}

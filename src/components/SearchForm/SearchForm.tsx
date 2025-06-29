@@ -31,6 +31,13 @@ const SearchForm = ({}: SearchFormProps) => {
     setFieldValue(searchValue);
   }, [searchValue]);
 
+  // Clean Search
+  useEffect(() => {
+    return () => {
+      dispatch(resetValue());
+    };
+  }, [dispatch]);
+
   return (
     <form className={s.searchForm} onSubmit={handleSubmit}>
       <input

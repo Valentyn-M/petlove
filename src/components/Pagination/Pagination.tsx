@@ -2,20 +2,16 @@ import ButtonPagination from '@/components/ButtonPagination/ButtonPagination';
 import s from './Pagination.module.scss';
 import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { selectNewsCurrentPage, selectNewsTotalPages } from '@/store/news/selectors';
 import { getPaginationRange } from '@/utils/getPaginationRange';
-import { setCurrentPage } from '@/store/news/slice';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-export interface PaginationProps {}
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
 
-const Pagination = ({}: PaginationProps) => {
-  const dispatch = useAppDispatch();
-
-  const totalPages = useAppSelector(selectNewsTotalPages);
-  const currentPage = useAppSelector(selectNewsCurrentPage);
-
+const Pagination = ({ totalPages, currentPage, onPageChange }: PaginationProps) => {
   const firstPage = 1;
   const previousPage = currentPage - 1;
   const nextPage = currentPage + 1;
@@ -31,7 +27,7 @@ const Pagination = ({}: PaginationProps) => {
   }
 
   const handleClick = (page: number): void => {
-    dispatch(setCurrentPage(page));
+    onPageChange(page);
   };
 
   return (

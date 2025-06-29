@@ -7,7 +7,7 @@ export interface NewsState {
   totalPages: number;
   items: NewsItem[];
   loading: boolean;
-  error: boolean;
+  error: string | null;
 }
 
 const initialState: NewsState = {
@@ -15,7 +15,7 @@ const initialState: NewsState = {
   totalPages: 0,
   items: [],
   loading: false,
-  error: false,
+  error: null,
 };
 
 const slice = createSlice({
@@ -30,18 +30,18 @@ const slice = createSlice({
     builder
       .addCase(fetchNews.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(fetchNews.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = false;
+        state.error = null;
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;
         state.currentPage = action.payload.page;
       })
-      .addCase(fetchNews.rejected, (state) => {
+      .addCase(fetchNews.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
       });
   },
 });
