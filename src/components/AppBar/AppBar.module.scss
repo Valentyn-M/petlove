@@ -12,8 +12,13 @@
     border-top-right-radius: 60px;
     background-color: $brandColor;
     padding-top: 16px;
-    @include adaptiveValue('padding-left', 64, 32, $pc, $mobile);
-    @include adaptiveValue('padding-right', 64, 32, $pc, $mobile);
+    padding-left: 64px;
+    padding-right: 64px;
+
+    @media (max-width: rem($tablet)) {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
 
     @media (max-width: rem($mobile)) {
       @include adaptiveValue('padding-top', 16, 18, $mobile, $mobileSmall);

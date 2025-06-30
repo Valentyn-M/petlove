@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import s from './NoticesList.module.scss';
 
 export interface NoticesListProps {}
 
 const NoticesList = ({}: NoticesListProps) => {
-  return <div>NoticesList</div>;
+  return <div className={clsx(s.noticesList, 'extra-container')}>NoticesList</div>;
 };
 
 export default NoticesList;

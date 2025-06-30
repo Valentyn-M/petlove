@@ -3,12 +3,16 @@
   height: 52px;
   width: 100%;
 
-  @media (min-width: rem($mobileMediumAfter)) {
-    max-width: 230px;
+  &.smallLight {
+    height: 48px;
   }
 
   @media (max-width: rem($mobileMedium)) {
     @include adaptiveValue('height', 52, 42, $mobileMedium, $mobileSmall);
+
+    &.smallLight {
+      @include adaptiveValue('height', 48, 42, $mobileMedium, $mobileSmall);
+    }
   }
 }
 
@@ -29,7 +33,13 @@
   outline: none;
   transition: all 0.3s ease 0s;
 
+  .smallLight & {
+    border: none;
+    background-color: $whiteColor;
+  }
+
   @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
     @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-left', 14, 12, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-right', 58, 56, $mobileMedium, $mobileSmall);
@@ -37,6 +47,10 @@
 
   &::placeholder {
     color: rgba(38, 38, 38, 0.5);
+
+    .smallLight & {
+      color: $mainColor;
+    }
   }
 
   &:hover,

@@ -1,0 +1,17 @@
+.notices {
+  padding-bottom: 80px;
+  @include adaptiveValue('padding-top', 96, 85, $pc, $mobile);
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-top', 85, 50, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 80, 50, $mobile, $mobileSmall);
+  }
+}
+
+.title {
+  @include adaptiveValue('margin-bottom', 40, 44, $pc, $mobile);
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('margin-bottom', 44, 40, $mobile, $mobileSmall);
+  }
+}

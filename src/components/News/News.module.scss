@@ -24,3 +24,9 @@
     align-items: flex-start;
   }
 }
+
+.search {
+  @media (min-width: rem($mobileMediumAfter)) {
+    max-width: 230px;
+  }
+}

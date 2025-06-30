@@ -5,6 +5,9 @@
 .extra-container {
   padding-left: 32px;
   padding-right: 32px;
-  @include adaptiveValue('padding-left', 32, 0, $pc, $mobile);
-  @include adaptiveValue('padding-right', 32, 0, $pc, $mobile);
+
+  @media (max-width: rem($tablet)) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

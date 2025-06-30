@@ -1,0 +1,53 @@
+.noticesFilters {
+  border-radius: 30px;
+  background: $beigeColor;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  @include adaptiveValue('padding-left', 40, 32, $pc, $tablet);
+  @include adaptiveValue('padding-right', 40, 32, $pc, $tablet);
+  @include adaptiveValue('margin-bottom', 40, 32, $pc, $tablet);
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('padding-left', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-right', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-top', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 32, 20, $mobile, $mobileSmall);
+    @include adaptiveValue('margin-bottom', 32, 40, $mobile, $mobileSmall);
+  }
+}
+
+.devider {
+  border-top: 1px solid rgba(38, 38, 38, 0.1);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('gap', 16, 12, $mobileMedium, $mobileSmall);
+  }
+}
+
+.fieldsWrap {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('gap', 16, 8, $mobileMedium, $mobileSmall);
+  }
+
+  @media (max-width: rem($mobileMediumBefore)) {
+    width: 100%;
+  }
+}
+
+.search {
+  @media (min-width: rem($mobileMediumAfter)) {
+    max-width: 265px;
+  }
+}

@@ -75,4 +75,6 @@ const slice = createSlice({
   },
 });
 
+export const { setCategoriesItem, setSexItem, setSpeciesItem, resetFiltersItems } = slice.actions;
+
 export const noticesFiltersReducer = slice.reducer;

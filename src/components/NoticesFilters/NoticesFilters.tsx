@@ -1,7 +1,7 @@
-import { FormEvent, useState } from 'react';
+import { useEffect } from 'react';
 import s from './NoticesFilters.module.scss';
 import SearchForm from '@/components/SearchForm/SearchForm';
-import { useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   selectNoticesFiltersCatecoreyItem,
   selectNoticesFiltersCatecoriesList,
@@ -10,30 +10,80 @@ import {
   selectNoticesFiltersSpeciesItem,
   selectNoticesFiltersSpeciesList,
 } from '@/store/noticesFilters/selectors';
+import { SelectChangeEvent } from '@mui/material';
+import { fetchCategories, fetchSex, fetchSpecies } from '@/store/noticesFilters/oprations';
+import { setCategoriesItem, setSexItem, setSpeciesItem } from '@/store/noticesFilters/noticesFilters';
+import NoticesFiltersField from '@/components/NoticesFiltersField/NoticesFiltersField';
 
 export interface NoticesFiltersProps {}
 
 const NoticesFilters = ({}: NoticesFiltersProps) => {
+  const dispatch = useAppDispatch();
+
+  // Fetch filters data
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchSex());
+    dispatch(fetchSpecies());
+  }, [dispatch]);
+
+  // Get data from Redux
   const categoriesList = useAppSelector(selectNoticesFiltersCatecoriesList);
   const sexList = useAppSelector(selectNoticesFiltersSexList);
   const speciesList = useAppSelector(selectNoticesFiltersSpeciesList);
+
   const categoryItem = useAppSelector(selectNoticesFiltersCatecoreyItem);
   const sexItem = useAppSelector(selectNoticesFiltersSexItem);
   const speciesItem = useAppSelector(selectNoticesFiltersSpeciesItem);
 
-  const [fieldCategoryValue, setFieldCategoryValue] = useState<string>(categoryItem);
-  const [fieldSexValue, setFieldSexValue] = useState<string>(sexItem);
-  const [fieldSpeciesValue, setFieldSpeciesValue] = useState<string>(speciesItem);
-
-  // const handleSubmitCategory = (e: FormEvent<HTMLFormElement>): void => {
-  //   e.preventDefault();
-  //   console.log(e.target.value);
-  // };
+  // Set field value
+  const handleChangeCategories = (e: SelectChangeEvent): void => {
+    dispatch(setCategoriesItem(e.target.value));
+  };
+  const handleChangeSex = (e: SelectChangeEvent): void => {
+    dispatch(setSexItem(e.target.value));
+  };
+  const handleChangeSpecies = (e: SelectChangeEvent): void => {
+    dispatch(setSpeciesItem(e.target.value));
+  };
 
   return (
     <div className={s.noticesFilters}>
-      <SearchForm />
-      {/* <form className={s.form} onSubmit={handleSubmitCategory}></form> */}
+      <div className={s.top}>
+        <SearchForm className={s.search} smallLight={true} />
+
+        <div className={s.fieldsWrap}>
+          <NoticesFiltersField
+            fieldPlaceholder={'Category'}
+            fieldName={'category'}
+            fieldValue={categoryItem}
+            selectOptions={categoriesList}
+            handleChange={handleChangeCategories}
+            className={'categories'}
+          />
+          <NoticesFiltersField
+            fieldPlaceholder={'By gender'}
+            fieldName={'sex'}
+            fieldValue={sexItem}
+            selectOptions={sexList}
+            handleChange={handleChangeSex}
+            className={'sex'}
+          />
+        </div>
+
+        <NoticesFiltersField
+          fieldPlaceholder={'By type'}
+          fieldName={'species'}
+          fieldValue={speciesItem}
+          selectOptions={speciesList}
+          handleChange={handleChangeSpecies}
+          className={'species'}
+        />
+      </div>
+
+      <div className={s.devider}></div>
+
+      <div className={s.bottom}>Radio buttons</div>
     </div>
   );
 };

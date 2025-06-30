@@ -42,7 +42,7 @@ const News = ({}: NewsProps) => {
     <section className={clsx(s.news, 'extra-container')}>
       <div className={s.header}>
         <TitleMain>News</TitleMain>
-        <SearchForm />
+        <SearchForm className={s.search} />
       </div>
 
       {isLoading ? (

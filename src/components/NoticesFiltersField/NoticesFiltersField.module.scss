@@ -1,0 +1,14 @@
+.formControl.categories,
+.formControl.sex {
+  @include adaptiveValue('width', 190, 170, $pc, $mobile);
+
+  @media (max-width: rem($mobileMediumBefore)) {
+    width: 100%;
+  }
+}
+
+.species {
+  @media (min-width: rem($mobileMedium)) {
+    max-width: 190px;
+  }
+}

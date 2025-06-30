@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, ComponentProps, FormEvent, useEffect, useState } from 'react';
 import s from './SearchForm.module.scss';
 import clsx from 'clsx';
 import { svgIcon } from '@/components/App';
@@ -6,9 +6,11 @@ import { selectValue } from '@/store/search/selectors';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { resetValue, setValue } from '@/store/search/slice';
 
-export interface SearchFormProps {}
+export interface SearchFormProps extends ComponentProps<'form'> {
+  smallLight?: boolean;
+}
 
-const SearchForm = ({}: SearchFormProps) => {
+const SearchForm = ({ smallLight, className, ...rest }: SearchFormProps) => {
   const searchValue = useAppSelector(selectValue);
   const [fieldValue, setFieldValue] = useState<string>(searchValue);
   const dispatch = useAppDispatch();
@@ -39,7 +41,7 @@ const SearchForm = ({}: SearchFormProps) => {
   }, [dispatch]);
 
   return (
-    <form className={s.searchForm} onSubmit={handleSubmit}>
+    <form className={clsx(s.searchForm, smallLight && s.smallLight, className)} onSubmit={handleSubmit} {...rest}>
       <input
         className={s.field}
         type="text"
