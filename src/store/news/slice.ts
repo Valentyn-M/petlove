@@ -8,6 +8,7 @@ export interface NewsState {
   items: NewsItem[];
   loading: boolean;
   error: string | null;
+  searchValue: string;
 }
 
 const initialState: NewsState = {
@@ -16,6 +17,7 @@ const initialState: NewsState = {
   items: [],
   loading: false,
   error: null,
+  searchValue: '',
 };
 
 const slice = createSlice({
@@ -24,6 +26,12 @@ const slice = createSlice({
   reducers: {
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
+    },
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
+    resetSearchValue: (state) => {
+      state.searchValue = '';
     },
   },
   extraReducers(builder) {
@@ -46,6 +54,6 @@ const slice = createSlice({
   },
 });
 
-export const { setCurrentPage } = slice.actions;
+export const { setCurrentPage, setSearchValue, resetSearchValue } = slice.actions;
 
 export const newsReducer = slice.reducer;

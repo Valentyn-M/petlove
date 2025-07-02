@@ -10,7 +10,7 @@ export interface UserPets {
   pets: Pets[] | null;
 }
 
-export interface AuthState {
+interface AuthState {
   user: User;
   token: string | null;
   isLoggedIn: boolean;

@@ -1,57 +1,49 @@
-import { ChangeEvent, ComponentProps, FormEvent, useEffect, useState } from 'react';
-import s from './SearchForm.module.scss';
+import { ComponentProps, FormEvent, ReactElement, cloneElement, useEffect } from 'react';
 import clsx from 'clsx';
+import s from './SearchForm.module.scss';
 import { svgIcon } from '@/components/App';
-import { selectValue } from '@/store/search/selectors';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { resetValue, setValue } from '@/store/search/slice';
 
 export interface SearchFormProps extends ComponentProps<'form'> {
+  children: ReactElement<any>;
+  fieldValue: string;
+  setFieldValue(value: string): void;
+  valueFromStore: string;
+  onReset(): void;
+  onSubmit(e: FormEvent<HTMLFormElement>): void;
   smallLight?: boolean;
+  inputClassName?: string;
 }
 
-const SearchForm = ({ smallLight, className, ...rest }: SearchFormProps) => {
-  const searchValue = useAppSelector(selectValue);
-  const [fieldValue, setFieldValue] = useState<string>(searchValue);
-  const dispatch = useAppDispatch();
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setFieldValue(e.target.value);
-  };
-
-  const handleClick = (): void => {
-    setFieldValue('');
-    dispatch(resetValue());
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    dispatch(setValue(fieldValue));
-  };
-
+const SearchForm = ({
+  children,
+  fieldValue,
+  setFieldValue,
+  valueFromStore,
+  onReset,
+  onSubmit,
+  smallLight,
+  className,
+  inputClassName,
+  ...rest
+}: SearchFormProps) => {
   useEffect(() => {
-    setFieldValue(searchValue);
-  }, [searchValue]);
+    setFieldValue(valueFromStore);
+  }, [valueFromStore, setFieldValue]);
 
-  // Clean Search
   useEffect(() => {
     return () => {
-      dispatch(resetValue());
+      onReset();
     };
-  }, [dispatch]);
+  }, []);
+
+  const styledInput = cloneElement(children, {
+    className: clsx(children.props.className, inputClassName ?? s.field),
+  });
 
   return (
-    <form className={clsx(s.searchForm, smallLight && s.smallLight, className)} onSubmit={handleSubmit} {...rest}>
-      <input
-        className={s.field}
-        type="text"
-        name="search"
-        aria-label="Search"
-        placeholder="Search"
-        value={fieldValue}
-        onChange={handleChange}
-      />
-      <button type="button" onClick={handleClick} className={clsx(s.btn, s.reset, fieldValue && s.visible)}>
+    <form className={clsx(s.searchForm, smallLight && s.smallLight, className)} onSubmit={onSubmit} {...rest}>
+      {styledInput}
+      <button type="button" onClick={onReset} className={clsx(s.btn, s.reset, fieldValue && s.visible)}>
         <svg className={clsx(s.fieldIcon, s.iconCross)}>
           <use href={`${svgIcon}#icon-cross`} />
         </svg>

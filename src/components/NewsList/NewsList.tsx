@@ -7,6 +7,7 @@ export interface NewsListProps {}
 
 const NewsList = ({}: NewsListProps) => {
   const newsItems = useAppSelector(selectNewsItems);
+  console.log(newsItems);
 
   return (
     <ul className={s.list}>

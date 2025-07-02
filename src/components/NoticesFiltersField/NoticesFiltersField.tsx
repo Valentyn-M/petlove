@@ -29,6 +29,15 @@ const NoticesFiltersField = ({
         // maxWidth: '14.125rem', // 226px
         borderRadius: '1.875rem', // 30px
         backgroundColor: 'var(--white-color)',
+        border: '1px solid var(--white-color)',
+        transition: 'border-color 0.3s',
+        '&:hover': {
+          borderColor: 'var(--brand-color)',
+        },
+        // TODO не відчуває фокус
+        '&:focus': {
+          borderColor: 'var(--brand-color)',
+        },
 
         // outlined input
         '& .MuiOutlinedInput-root': {

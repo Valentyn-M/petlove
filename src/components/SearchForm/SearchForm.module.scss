@@ -34,7 +34,7 @@
   transition: all 0.3s ease 0s;
 
   .smallLight & {
-    border: none;
+    border-color: $whiteColor;
     background-color: $whiteColor;
   }
 

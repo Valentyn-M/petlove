@@ -1,7 +1,7 @@
 import { fetchCategories, fetchSex, fetchSpecies } from '@/store/noticesFilters/oprations';
 import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
 
-export interface NoticesFiltersState {
+interface NoticesFiltersState {
   categoriesList: string[];
   sexList: string[];
   speciesList: string[];
@@ -10,6 +10,7 @@ export interface NoticesFiltersState {
   categoryItem: string;
   sexItem: string;
   speciesItem: string;
+  searchValue: string;
 }
 
 const initialState: NoticesFiltersState = {
@@ -21,6 +22,7 @@ const initialState: NoticesFiltersState = {
   categoryItem: '',
   sexItem: '',
   speciesItem: '',
+  searchValue: '',
 };
 
 const slice = createSlice({
@@ -40,6 +42,12 @@ const slice = createSlice({
       state.categoryItem = '';
       state.sexItem = '';
       state.speciesItem = '';
+    },
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
+    resetSearchValue: (state) => {
+      state.searchValue = '';
     },
   },
   extraReducers(builder) {
@@ -75,6 +83,7 @@ const slice = createSlice({
   },
 });
 
-export const { setCategoriesItem, setSexItem, setSpeciesItem, resetFiltersItems } = slice.actions;
+export const { setCategoriesItem, setSexItem, setSpeciesItem, resetFiltersItems, setSearchValue, resetSearchValue } =
+  slice.actions;
 
 export const noticesFiltersReducer = slice.reducer;

@@ -26,6 +26,7 @@
     "react-head": "^3.4.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
+    "react-select": "^5.10.1",
     "redux-persist": "^6.0.0",
     "yup": "^1.6.1"
   },

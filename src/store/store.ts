@@ -1,8 +1,8 @@
 import { authReducer } from '@/store/auth/slice';
+import { citiesReducer } from '@/store/cities/slice';
 import { friendsReducer } from '@/store/friends/slice';
 import { newsReducer } from '@/store/news/slice';
-import { noticesFiltersReducer } from '@/store/noticesFilters/noticesFilters';
-import { searchReducer } from '@/store/search/slice';
+import { noticesFiltersReducer } from '@/store/noticesFilters/slice';
 import { configureStore } from '@reduxjs/toolkit';
 
 // 1
@@ -23,10 +23,10 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    search: searchReducer,
     news: newsReducer,
     friends: friendsReducer,
     noticesFilters: noticesFiltersReducer,
+    cities: citiesReducer,
   },
 
   // 4

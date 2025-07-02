@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import s from './NoticesFilters.module.scss';
-import SearchForm from '@/components/SearchForm/SearchForm';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   selectNoticesFiltersCatecoreyItem,
@@ -12,19 +11,25 @@ import {
 } from '@/store/noticesFilters/selectors';
 import { SelectChangeEvent } from '@mui/material';
 import { fetchCategories, fetchSex, fetchSpecies } from '@/store/noticesFilters/oprations';
-import { setCategoriesItem, setSexItem, setSpeciesItem } from '@/store/noticesFilters/noticesFilters';
+import { setCategoriesItem, setSexItem, setSpeciesItem } from '@/store/noticesFilters/slice';
 import NoticesFiltersField from '@/components/NoticesFiltersField/NoticesFiltersField';
+import { selectCitiesItems } from '@/store/cities/selectors';
+import { fetchCities } from '@/store/cities/operations';
+import NoticesFiltersSearch from '@/components/NoticesFiltersSearch/NoticesFiltersSearch';
+import NoticesFiltersSelect from '@/components/NoticesFiltersSelect/NoticesFiltersSelect';
 
 export interface NoticesFiltersProps {}
 
 const NoticesFilters = ({}: NoticesFiltersProps) => {
   const dispatch = useAppDispatch();
 
-  // Fetch filters data
+  // Fetch filters data, cities
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchSex());
     dispatch(fetchSpecies());
+
+    dispatch(fetchCities());
   }, [dispatch]);
 
   // Get data from Redux
@@ -35,6 +40,8 @@ const NoticesFilters = ({}: NoticesFiltersProps) => {
   const categoryItem = useAppSelector(selectNoticesFiltersCatecoreyItem);
   const sexItem = useAppSelector(selectNoticesFiltersSexItem);
   const speciesItem = useAppSelector(selectNoticesFiltersSpeciesItem);
+
+  const citiesList = useAppSelector(selectCitiesItems);
 
   // Set field value
   const handleChangeCategories = (e: SelectChangeEvent): void => {
@@ -50,7 +57,7 @@ const NoticesFilters = ({}: NoticesFiltersProps) => {
   return (
     <div className={s.noticesFilters}>
       <div className={s.top}>
-        <SearchForm className={s.search} smallLight={true} />
+        <NoticesFiltersSearch />
 
         <div className={s.fieldsWrap}>
           <NoticesFiltersField
@@ -80,6 +87,8 @@ const NoticesFilters = ({}: NoticesFiltersProps) => {
           className={'species'}
         />
       </div>
+
+      <NoticesFiltersSelect cities={citiesList} />
 
       <div className={s.devider}></div>
 

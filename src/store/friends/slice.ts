@@ -2,7 +2,7 @@ import { fetchFriends } from '@/store/friends/operations';
 import { FriendsItem } from '@/store/types';
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface FriendsState {
+interface FriendsState {
   items: FriendsItem[];
   loading: boolean;
   error: boolean;

@@ -6,3 +6,4 @@ export const selectNoticesFiltersSpeciesList = (state: RootState) => state.notic
 export const selectNoticesFiltersCatecoreyItem = (state: RootState) => state.noticesFilters.categoryItem;
 export const selectNoticesFiltersSexItem = (state: RootState) => state.noticesFilters.sexItem;
 export const selectNoticesFiltersSpeciesItem = (state: RootState) => state.noticesFilters.speciesItem;
+export const selectNoticesSearchValue = (state: RootState) => state.noticesFilters.searchValue;
