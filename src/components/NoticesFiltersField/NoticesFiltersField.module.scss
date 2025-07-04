@@ -1,14 +1,36 @@
-.formControl.categories,
-.formControl.sex {
+.formControl.categoriesField,
+.formControl.genderField {
   @include adaptiveValue('width', 190, 170, $pc, $mobile);
 
-  @media (max-width: rem($mobileMediumBefore)) {
+  @media (max-width: rem($mobileMedium)) {
     width: 100%;
   }
 }
 
-.species {
-  @media (min-width: rem($mobileMedium)) {
+.speciesField {
+  @media (min-width: rem($mobileMediumAfter)) {
     max-width: 190px;
+  }
+}
+
+.formControl.field {
+  font-size: 16px;
+  line-height: 1.25;
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+  height: 48px;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('height', 48, 42, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-left', 14, 12, $mobileMedium, $mobileSmall, 1, 0, true);
+    @include adaptiveValue('padding-right', 14, 12, $mobileMedium, $mobileSmall, 1, 0, true);
+  }
+}
+
+.formControl {
+  &.focused {
+    border-color: var(--brand-color);
   }
 }

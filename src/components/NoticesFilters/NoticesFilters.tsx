@@ -17,6 +17,7 @@ import { selectCitiesItems } from '@/store/cities/selectors';
 import { fetchCities } from '@/store/cities/operations';
 import NoticesFiltersSearch from '@/components/NoticesFiltersSearch/NoticesFiltersSearch';
 import NoticesFiltersSelect from '@/components/NoticesFiltersSelect/NoticesFiltersSelect';
+import clsx from 'clsx';
 
 export interface NoticesFiltersProps {}
 
@@ -66,7 +67,8 @@ const NoticesFilters = ({}: NoticesFiltersProps) => {
             fieldValue={categoryItem}
             selectOptions={categoriesList}
             handleChange={handleChangeCategories}
-            className={'categories'}
+            className={'categoriesField'}
+            classNameGeneral={'field'}
           />
           <NoticesFiltersField
             fieldPlaceholder={'By gender'}
@@ -74,7 +76,8 @@ const NoticesFilters = ({}: NoticesFiltersProps) => {
             fieldValue={sexItem}
             selectOptions={sexList}
             handleChange={handleChangeSex}
-            className={'sex'}
+            className={'genderField'}
+            classNameGeneral={'field'}
           />
         </div>
 
@@ -84,11 +87,12 @@ const NoticesFilters = ({}: NoticesFiltersProps) => {
           fieldValue={speciesItem}
           selectOptions={speciesList}
           handleChange={handleChangeSpecies}
-          className={'species'}
+          className={'speciesField'}
+          classNameGeneral={'field'}
         />
-      </div>
 
-      <NoticesFiltersSelect cities={citiesList} />
+        <NoticesFiltersSelect cities={citiesList} />
+      </div>
 
       <div className={s.devider}></div>
 

@@ -2,6 +2,7 @@ import s from './NoticesFiltersField.module.scss';
 import SvgArrowIcon from '@/components/SvgArrowIcon/SvgArrowIcon';
 import { FormControl, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import clsx from 'clsx';
+import { useState } from 'react';
 
 export interface NoticesFiltersFieldProps {
   fieldPlaceholder: string;
@@ -10,6 +11,7 @@ export interface NoticesFiltersFieldProps {
   selectOptions: string[];
   handleChange(e: SelectChangeEvent): void;
   className?: string;
+  classNameGeneral?: string;
 }
 
 const NoticesFiltersField = ({
@@ -19,13 +21,22 @@ const NoticesFiltersField = ({
   selectOptions,
   handleChange,
   className,
+  classNameGeneral,
 }: NoticesFiltersFieldProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <FormControl
-      className={clsx(s.formControl, className && s[className as keyof typeof s])}
+      className={clsx(
+        s.formControl,
+        className && s[className as keyof typeof s],
+        classNameGeneral && s[classNameGeneral as keyof typeof s],
+        isFocused && s.focused
+      )}
       fullWidth
       sx={{
         // main
+        height: '100%',
         // maxWidth: '14.125rem', // 226px
         borderRadius: '1.875rem', // 30px
         backgroundColor: 'var(--white-color)',
@@ -34,20 +45,18 @@ const NoticesFiltersField = ({
         '&:hover': {
           borderColor: 'var(--brand-color)',
         },
-        // TODO не відчуває фокус
-        '&:focus': {
-          borderColor: 'var(--brand-color)',
-        },
 
         // outlined input
         '& .MuiOutlinedInput-root': {
+          height: '100%',
           color: 'var(--main-color)',
           fontFamily: 'Manrope, sans-serif',
           fontWeight: 500,
-          fontSize: '1rem', // 16px
-          lineHeight: 1.25,
           letterSpacing: '-0.03em',
           textTransform: 'capitalize',
+          // Деякі стилі змінюються при зміні екрану, тому прописуємо їх ззовні
+          fontSize: 'inherit',
+          lineHeight: 'inherit',
 
           // fieldset
           '& fieldset': {
@@ -57,13 +66,15 @@ const NoticesFiltersField = ({
 
         // select
         '& .MuiSelect-select': {
-          padding: '0.875rem !important', // 14px 36px 14px 18px
-          minHeight: 'unset !important',
+          padding: 0,
+          height: '100% !important',
+          display: 'flex',
+          alignItems: 'center',
         },
 
         // icon
         '& .MuiSelect-icon': {
-          right: '15px',
+          right: 0,
           top: 'calc(50% - 0.5625rem)', // 9px (half of icon height)
           fill: 'var(--main-color)',
         },
@@ -73,6 +84,8 @@ const NoticesFiltersField = ({
         displayEmpty
         value={fieldValue}
         onChange={handleChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         name={fieldName}
         id={fieldName}
         input={<OutlinedInput notched={false} />}

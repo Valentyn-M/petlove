@@ -1,5 +1,11 @@
 .search {
-  @media (min-width: rem($mobileMedium)) {
+  @media (min-width: rem($mobileMediumAfter)) {
     max-width: 227px;
+  }
+}
+
+.search.focused {
+  .field {
+    border-color: var(--brand-color);
   }
 }

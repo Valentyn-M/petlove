@@ -41,7 +41,7 @@
     @include adaptiveValue('gap', 16, 8, $mobileMedium, $mobileSmall);
   }
 
-  @media (max-width: rem($mobileMediumBefore)) {
+  @media (max-width: rem($mobileMedium)) {
     width: 100%;
   }
 }
