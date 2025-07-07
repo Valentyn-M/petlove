@@ -1,0 +1,51 @@
+.noticesFiltersSort {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('gap', 8, 10, $mobileMedium, $mobileSmall);
+  }
+}
+
+.btn {
+  border-radius: 30px;
+  padding: 13px;
+  background-color: var(--white-color);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  border: 1px solid var(--white-color);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding', 13, 11, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('gap', 8, 6, $mobileMedium, $mobileSmall);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      border-color: var(--brand-color);
+    }
+  }
+  &:focus {
+    border-color: var(--brand-color);
+  }
+
+  &.active {
+    background-color: var(--brand-color);
+    color: var(--white-color);
+    border-color: var(--brand-color);
+  }
+}
+
+.btnIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--white-color);
+}

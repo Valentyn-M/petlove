@@ -1,5 +1,4 @@
 import { authReducer } from '@/store/auth/slice';
-import { citiesReducer } from '@/store/cities/slice';
 import { friendsReducer } from '@/store/friends/slice';
 import { newsReducer } from '@/store/news/slice';
 import { noticesFiltersReducer } from '@/store/noticesFilters/slice';
@@ -26,7 +25,6 @@ export const store = configureStore({
     news: newsReducer,
     friends: friendsReducer,
     noticesFilters: noticesFiltersReducer,
-    cities: citiesReducer,
   },
 
   // 4

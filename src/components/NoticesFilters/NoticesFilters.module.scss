@@ -32,16 +32,3 @@
     @include adaptiveValue('gap', 16, 12, $mobileMedium, $mobileSmall);
   }
 }
-
-.fieldsWrap {
-  display: flex;
-  gap: 16px;
-
-  @media (max-width: rem($mobileMedium)) {
-    @include adaptiveValue('gap', 16, 8, $mobileMedium, $mobileSmall);
-  }
-
-  @media (max-width: rem($mobileMedium)) {
-    width: 100%;
-  }
-}

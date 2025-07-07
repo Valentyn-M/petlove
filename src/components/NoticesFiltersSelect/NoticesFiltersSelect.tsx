@@ -1,35 +1,37 @@
 import s from './NoticesFiltersSelect.module.scss';
-import { City } from '@/store/types';
 import SearchForm from '@/components/SearchForm/SearchForm';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { FormEvent, useState } from 'react';
-import { selectCitiesSearchValue } from '@/store/cities/selectors';
-import { resetSearchValue, setSearchValue } from '@/store/cities/slice';
-import Select, { SingleValue } from 'react-select';
+import { FormEvent, useRef, useState } from 'react';
+import Select, { SelectInstance, SingleValue } from 'react-select';
 import FormatOptionLabel from '@/components/FormatOptionLabel/FormatOptionLabel';
 import clsx from 'clsx';
-import { fetchCities, fetchFilteredCities } from '@/store/cities/operations';
+import { selectNoticesCitiesList, selectNoticesLocationId } from '@/store/noticesFilters/selectors';
+import { resetLocationId, setLocationId } from '@/store/noticesFilters/slice';
+import { fetchCities, fetchFilteredCities } from '@/store/noticesFilters/oprations';
 
-export interface NoticesFiltersSelectProps {
-  cities: City[];
-}
+export interface NoticesFiltersSelectProps {}
 
-const NoticesFiltersSelect = ({ cities }: NoticesFiltersSelectProps) => {
-  const options = cities.map((city) => ({
+const NoticesFiltersSelect = ({}: NoticesFiltersSelectProps) => {
+  const citiesList = useAppSelector(selectNoticesCitiesList);
+
+  const options = citiesList.map((city) => ({
     value: city._id,
     label: `${city.stateEn}, ${city.cityEn}`,
   }));
 
-  const valueFromStore = useAppSelector(selectCitiesSearchValue);
-  const [fieldValue, setFieldValue] = useState(valueFromStore);
+  const locationId = useAppSelector(selectNoticesLocationId);
+  const [fieldValue, setFieldValue] = useState(locationId);
   const dispatch = useAppDispatch();
 
   // Select from list
+  const selectRef = useRef<SelectInstance<SelectOptionType>>(null);
   const handleSelectChange = (option: SingleValue<SelectOptionType>) => {
     const value = option?.value ?? '';
     setFieldValue(value);
-    dispatch(setSearchValue(value));
-    setMenuOpen(false); // закриваємо меню примусово
+    dispatch(setLocationId(value));
+    setMenuOpen(false);
+    const input = selectRef.current?.inputRef;
+    if (input) input.blur();
   };
 
   const selectedOption = options.find((option) => option.value === fieldValue) || null;
@@ -37,14 +39,14 @@ const NoticesFiltersSelect = ({ cities }: NoticesFiltersSelectProps) => {
   // Click on "cross" icon
   const handleReset = (): void => {
     setFieldValue('');
-    dispatch(resetSearchValue());
+    dispatch(resetLocationId());
     dispatch(fetchCities());
   };
 
   // Click on "search" icon
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    dispatch(setSearchValue(fieldValue));
+    dispatch(setLocationId(fieldValue));
     dispatch(fetchCities());
   };
 
@@ -75,7 +77,7 @@ const NoticesFiltersSelect = ({ cities }: NoticesFiltersSelectProps) => {
 
   return (
     <SearchForm
-      valueFromStore={valueFromStore}
+      valueFromStore={locationId}
       fieldValue={fieldValue}
       setFieldValue={setFieldValue}
       onReset={handleReset}
@@ -84,6 +86,7 @@ const NoticesFiltersSelect = ({ cities }: NoticesFiltersSelectProps) => {
       smallLight={true}
     >
       <Select<SelectOptionType>
+        ref={selectRef}
         options={options}
         isSearchable
         isClearable
