@@ -12,7 +12,7 @@ export const fetchNews = createAsyncThunk<
   NewsResponse,
   FetchNewsParams,
   { state: { news: NewsState } } // типізація state для thunkAPI
->('fetchNews', async ({ searchValue = '' }, thunkAPI) => {
+>('news/fetchNews', async ({ searchValue = '' }, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
     const currentPage = state.news.currentPage;

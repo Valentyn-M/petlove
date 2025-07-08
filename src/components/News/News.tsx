@@ -14,7 +14,6 @@ import { useEffect } from 'react';
 import { fetchNews } from '@/store/news/operations';
 import Loader from '@/components/Loader/Loader';
 import { setCurrentPage } from '@/store/news/slice';
-import { usePrevious } from '@/hooks/usePrevious';
 import NewsSearch from '@/components/NewsSearch/NewsSearch';
 
 export interface NewsProps {}
@@ -26,13 +25,10 @@ const News = ({}: NewsProps) => {
   const isLoading = useAppSelector(selectNewsLoading);
   const totalPages = useAppSelector(selectNewsTotalPages);
 
-  const prevSearchValue = usePrevious(searchValue);
-
+  // Якщо користувач ввів новий пошуковий запит — то ми скидаємо сторінку на першу
   useEffect(() => {
-    if (searchValue !== prevSearchValue) {
-      dispatch(setCurrentPage(1));
-    }
-  }, [searchValue, prevSearchValue, dispatch]);
+    dispatch(setCurrentPage(1));
+  }, [searchValue, dispatch]);
 
   useEffect(() => {
     dispatch(fetchNews({ searchValue }));

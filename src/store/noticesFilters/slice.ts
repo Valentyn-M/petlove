@@ -10,32 +10,42 @@ import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
 
 interface NoticesFiltersState {
   searchValue: string;
+
   categoriesList: string[];
   sexList: string[];
   speciesList: string[];
+
   categoryItem: string;
   sexItem: string;
   speciesItem: string;
+
   citiesList: City[];
   locationId: string;
+
   byPopularity: boolean | null;
   byPrice: boolean | null;
+
   loading: boolean;
   error: string | null;
 }
 
 const initialState: NoticesFiltersState = {
   searchValue: '',
+
   categoriesList: [],
   sexList: [],
   speciesList: [],
+
   categoryItem: '',
   sexItem: '',
   speciesItem: '',
+
   citiesList: [],
   locationId: '',
+
   byPopularity: null,
   byPrice: null,
+
   loading: false,
   error: null,
 };
