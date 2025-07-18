@@ -7,42 +7,54 @@
   bottom: 0;
   background: rgba(38, 38, 38, 0.3);
   z-index: 1000;
+}
 
-  .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    // transform: translate(-50%, -50%); - Прописано у самій модалці
-    // Пояснення:
-    // framer-motion не читає transform: translate(-50%, -50%) з CSS.
-    // Він повністю перезаписує transform, тому треба явно вказати x і y.
-    // Використання x: '-50%' і y: '-50%' повторює translate(-50%, -50%).
-    background: $whiteColor;
-    border-radius: 30px;
-    padding: 80px;
-    width: 90%;
-    max-width: 448px;
-    max-height: 95vh;
-    overflow-y: auto;
-    z-index: 1001;
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  // transform: translate(-50%, -50%); - Прописано у самій модалці
+  // Пояснення:
+  // framer-motion не читає transform: translate(-50%, -50%) з CSS.
+  // Він повністю перезаписує transform, тому треба явно вказати x і y.
+  // Використання x: '-50%' і y: '-50%' повторює translate(-50%, -50%).
+  background: $whiteColor;
+  border-radius: 30px;
+  padding: 80px 20px;
+  width: 90%;
+  max-width: 448px;
+  max-height: 95vh;
+  overflow-y: auto;
+  z-index: 1001;
 
-    @media (max-width: rem($mobileMediumBefore)) {
-      padding: 40px 28px;
-    }
-
-    .closeBtn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .iconClose {
-        width: 24px;
-        height: 24px;
-        fill: $mainColor;
-      }
-    }
+  @media (max-width: rem($mobileMediumBefore)) {
+    padding: 40px 20px;
   }
+}
+
+.modal.padding60To60 {
+  padding: 60px;
+
+  @media (max-width: rem($mobileMediumBefore)) {
+    padding: 40px 20px;
+  }
+}
+
+.modal.padding40To20 {
+  padding: 40px 20px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconClose {
+  width: 24px;
+  height: 24px;
+  fill: $mainColor;
 }

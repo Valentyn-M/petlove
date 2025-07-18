@@ -4,15 +4,18 @@ import { svgIcon } from '@/components/App';
 import s from './Modal.module.scss';
 import { useEffect } from 'react';
 import { FocusTrap } from 'focus-trap-react';
+import clsx from 'clsx';
 
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   contentLabel: string;
   children: React.ReactNode;
+  padding60To60?: boolean;
+  padding40To20?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children, padding60To60, padding40To20 }) => {
   useEffect(() => {
     const body = document.body;
 
@@ -51,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children }
             onClick={onClose}
           >
             <motion.div
-              className={s.modal}
+              className={clsx(s.modal, padding60To60 && s.padding60To60, padding40To20 && s.padding40To20)}
               initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
               animate={{
                 opacity: 1,

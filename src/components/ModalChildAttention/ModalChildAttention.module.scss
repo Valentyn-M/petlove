@@ -1,4 +1,4 @@
-.modalChildLogout {
+.modalChildAttention {
   text-align: center;
 }
 
@@ -12,16 +12,26 @@
   font-size: 24px;
   line-height: 1.16667;
   letter-spacing: -0.03em;
+  color: var(--brand-color);
+  margin-bottom: 20px;
+}
+
+.text {
+  p {
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+  }
   margin-bottom: 28px;
 }
 
-.buttons {
+.links {
   display: flex;
   justify-content: center;
   gap: 8px;
 }
 
-.btn {
+.link {
   flex-grow: 1;
   max-width: 140px;
 

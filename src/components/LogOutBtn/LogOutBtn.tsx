@@ -1,5 +1,4 @@
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
-import s from './LogOutBtn.module.scss';
 import Modal from '@/components/Modal/Modal';
 import ModalChildLogout from '@/components/ModalChildLogout/ModalChildLogout';
 import { useModal } from '@/hooks/useModal';
@@ -10,17 +9,19 @@ export interface LogOutBtnProps {
 }
 
 const LogOutBtn = ({ light, outline }: LogOutBtnProps) => {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { openModal, closeModal, isModalOpen } = useModal();
 
   return (
     <>
-      <ButtonMain light={light} outline={outline} onClick={openModal}>
+      <ButtonMain light={light} outline={outline} onClick={() => openModal('logout')}>
         Log out
       </ButtonMain>
 
-      <Modal isOpen={isOpen} onClose={closeModal} contentLabel="Logout">
-        <ModalChildLogout onClose={closeModal} />
-      </Modal>
+      {isModalOpen('logout') && (
+        <Modal isOpen={true} onClose={closeModal} contentLabel="Logout">
+          <ModalChildLogout onClose={closeModal} />
+        </Modal>
+      )}
     </>
   );
 };

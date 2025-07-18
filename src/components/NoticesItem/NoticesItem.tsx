@@ -3,6 +3,12 @@ import s from './NoticesItem.module.scss';
 import { svgIcon } from '@/components/App';
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import ButtonFunction from '@/components/ButtonFunction/ButtonFunction';
+import { useModal } from '@/hooks/useModal';
+import Modal from '@/components/Modal/Modal';
+import ModalChildAttention from '@/components/ModalChildAttention/ModalChildAttention';
+import { useAppSelector } from '@/store/hooks';
+import { selectIsLoggedIn } from '@/store/auth/selectors';
+import ModalChildNotice from '@/components/ModalChildNotice/ModalChildNotice';
 
 export interface NoticesItemProps {
   newsData: NoticesItem;
@@ -18,6 +24,30 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
     const [year, month, day] = birthday.split('-');
     birthdayFormatted = `${day}.${month}.${year}`;
   }
+
+  // Modals
+  const { openModal, closeModal, isModalOpen } = useModal();
+
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  const handleClickLearnMore = (): void => {
+    if (!isLoggedIn) {
+      openModal('attention');
+    } else {
+      openModal('notice');
+    }
+  };
+
+  const handleClickFavorite = (): void => {
+    if (!isLoggedIn) {
+      openModal('attention');
+    } else {
+      console.log(
+        'відправляє запит на backend для додавання або видалення оголошення зі списку улюблених оголошень, після чого  іконка-сердечко за допомогою стилізації відмальовує поточний актуальний стан оголошення.'
+      );
+    }
+  };
+
   return (
     <article className={s.article}>
       <div className={s.imageWrap}>
@@ -62,11 +92,25 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerСase={true} className={s.learnMore}>
+        <ButtonMain lowerСase={true} className={s.learnMore} onClick={handleClickLearnMore}>
           Learn more
         </ButtonMain>
-        <ButtonFunction iconName="heart-empty" />
+
+        <ButtonFunction iconName="heart-empty" onClick={handleClickFavorite} />
       </div>
+
+      {/* Modals */}
+      {isModalOpen('attention') && (
+        <Modal isOpen={true} onClose={closeModal} contentLabel="Attention" padding60To60={true}>
+          <ModalChildAttention />
+        </Modal>
+      )}
+
+      {isModalOpen('notice') && (
+        <Modal isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To20={true}>
+          <ModalChildNotice />
+        </Modal>
+      )}
     </article>
   );
 };
