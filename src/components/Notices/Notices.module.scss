@@ -13,11 +13,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
-  @include adaptiveValue('margin-bottom', 40, 44, $pc, $mobile);
-
-  @media (max-width: rem($mobile)) {
-    @include adaptiveValue('margin-bottom', 44, 40, $mobile, $mobileSmall);
-  }
+  margin-bottom: 40px;
 
   @media (max-width: rem($mobileMedium)) {
     flex-direction: column;

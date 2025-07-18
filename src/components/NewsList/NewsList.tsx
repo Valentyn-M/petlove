@@ -9,13 +9,15 @@ const NewsList = ({}: NewsListProps) => {
   const newsItems = useAppSelector(selectNewsItems);
 
   return (
-    <ul className={s.list}>
-      {newsItems.map((newsItem) => (
-        <li key={newsItem._id} className={s.item}>
-          <NewsItem newsData={newsItem} />
-        </li>
-      ))}
-    </ul>
+    newsItems.length > 1 && (
+      <ul className={s.list}>
+        {newsItems.map((newsItem) => (
+          <li key={newsItem._id} className={s.item}>
+            <NewsItem newsData={newsItem} />
+          </li>
+        ))}
+      </ul>
+    )
   );
 };
 

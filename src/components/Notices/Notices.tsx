@@ -9,7 +9,6 @@ import Loader from '@/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectNoticesCurrentPage, selectNoticesLoading, selectNoticesTotalPages } from '@/store/notices/selectors';
 import { useEffect } from 'react';
-import { usePrevious } from '@/hooks/usePrevious';
 import {
   selectNoticesByPopularity,
   selectNoticesByPrice,

@@ -13,10 +13,14 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  @include adaptiveValue('margin-bottom', 60, 44, $pc, $mobile);
+  &:not(:last-child) {
+    @include adaptiveValue('margin-bottom', 60, 44, $pc, $mobile);
+  }
 
   @media (max-width: rem($mobile)) {
-    @include adaptiveValue('margin-bottom', 44, 24, $mobile, $mobileSmall);
+    &:not(:last-child) {
+      @include adaptiveValue('margin-bottom', 44, 24, $mobile, $mobileSmall);
+    }
   }
 
   @media (max-width: rem($mobileMedium)) {

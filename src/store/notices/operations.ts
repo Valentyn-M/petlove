@@ -33,8 +33,8 @@ export const fetchNotices = createAsyncThunk<NoticesResponse, FetchNoticesParams
       if (sex) queryParams.sex = sex;
       if (species) queryParams.species = species;
       if (locationId) queryParams.locationId = locationId;
-      if (typeof byPopularity === 'boolean') queryParams.byPopularity = byPopularity;
-      if (typeof byPrice === 'boolean') queryParams.byPrice = byPrice;
+      if (typeof byPopularity === 'boolean') queryParams.byPopularity = !byPopularity; // change to the opposite value - the backend is incorrectly configured
+      if (typeof byPrice === 'boolean') queryParams.byPrice = !byPrice; // change to the opposite value - the backend is incorrectly configured
 
       const response = await goitApi.get('/notices', { params: queryParams });
       return response.data;

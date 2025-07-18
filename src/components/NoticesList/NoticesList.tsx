@@ -9,16 +9,16 @@ export interface NoticesListProps {}
 const NoticesList = ({}: NoticesListProps) => {
   const noticesItems = useAppSelector(selectNoticesItems);
 
-  console.log(noticesItems);
-
   return (
-    <ul className={clsx(s.noticesList, 'extra-container')}>
-      {noticesItems.map((noticesItem) => (
-        <li key={noticesItem._id} className={s.item}>
-          <NoticesItem newsData={noticesItem} />
-        </li>
-      ))}
-    </ul>
+    noticesItems.length > 1 && (
+      <ul className={clsx(s.noticesList, 'extra-container')}>
+        {noticesItems.map((noticesItem) => (
+          <li key={noticesItem._id} className={s.item}>
+            <NoticesItem newsData={noticesItem} />
+          </li>
+        ))}
+      </ul>
+    )
   );
 };
 
