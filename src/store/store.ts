@@ -1,6 +1,7 @@
 import { authReducer } from '@/store/auth/slice';
 import { friendsReducer } from '@/store/friends/slice';
 import { newsReducer } from '@/store/news/slice';
+import { noticeDetailsReducer } from '@/store/noticeDetails/slice';
 import { noticesReducer } from '@/store/notices/slice';
 import { noticesFiltersReducer } from '@/store/noticesFilters/slice';
 import { configureStore } from '@reduxjs/toolkit';
@@ -27,6 +28,7 @@ export const store = configureStore({
     friends: friendsReducer,
     noticesFilters: noticesFiltersReducer,
     notices: noticesReducer,
+    noticeDetails: noticeDetailsReducer,
   },
 
   // 4

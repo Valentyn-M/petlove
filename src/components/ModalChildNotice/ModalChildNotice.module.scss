@@ -1,0 +1,15 @@
+.iconStar {
+  fill: var(--light-color);
+  width: 16px;
+  height: 16px;
+
+  &.filled {
+    fill: var(--brand-color);
+  }
+}
+
+.iconHeart {
+  fill: var(--light-color);
+  width: 18px;
+  height: 18px;
+}

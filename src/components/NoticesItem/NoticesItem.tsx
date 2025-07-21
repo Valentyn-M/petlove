@@ -15,7 +15,7 @@ export interface NoticesItemProps {
 }
 
 const NoticesItem = ({ newsData }: NoticesItemProps) => {
-  const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price } = newsData;
+  const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = newsData;
 
   const priceFormatted = typeof price === 'number' ? price.toFixed(2) : '0.00';
 
@@ -66,24 +66,24 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
 
       <div className={s.datails}>
         <div className={s.datailsItem}>
-          <span className={s.datailsTitle}>Name</span>
-          <span className={s.datailsValue}>{name}</span>
+          <div className={s.datailsTitle}>Name</div>
+          <div className={s.datailsValue}>{name}</div>
         </div>
         <div className={s.datailsItem}>
-          <span className={s.datailsTitle}>Birthday</span>
-          <span className={s.datailsValue}>{birthdayFormatted}</span>
+          <div className={s.datailsTitle}>Birthday</div>
+          <div className={s.datailsValue}>{birthdayFormatted}</div>
         </div>
         <div className={s.datailsItem}>
-          <span className={s.datailsTitle}>Sex</span>
-          <span className={s.datailsValue}>{sex}</span>
+          <div className={s.datailsTitle}>Sex</div>
+          <div className={s.datailsValue}>{sex}</div>
         </div>
         <div className={s.datailsItem}>
-          <span className={s.datailsTitle}>Species</span>
-          <span className={s.datailsValue}>{species}</span>
+          <div className={s.datailsTitle}>Species</div>
+          <div className={s.datailsValue}>{species}</div>
         </div>
         <div className={s.datailsItem}>
-          <span className={s.datailsTitle}>Category</span>
-          <span className={s.datailsValue}>{category}</span>
+          <div className={s.datailsTitle}>Category</div>
+          <div className={s.datailsValue}>{category}</div>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerСase={true} className={s.learnMore} onClick={handleClickLearnMore}>
+        <ButtonMain lowerCase={true} className={s.learnMore} onClick={handleClickLearnMore}>
           Learn more
         </ButtonMain>
 
@@ -108,7 +108,7 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
 
       {isModalOpen('notice') && (
         <Modal isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To20={true}>
-          <ModalChildNotice />
+          <ModalChildNotice noticeId={_id} onClose={closeModal} />
         </Modal>
       )}
     </article>
