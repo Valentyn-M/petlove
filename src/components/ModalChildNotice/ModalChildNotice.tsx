@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import s from './ModalChildNotice.module.scss';
-import { selectNoticesDetailsItem, selectNoticesDetailsLoading } from '@/store/noticeDetails/selectors';
+import { selectNoticesDetailsItem } from '@/store/noticeDetails/selectors';
 import { useEffect } from 'react';
 import { fetchNotice } from '@/store/noticeDetails/operations';
 import Loader from '@/components/Loader/Loader';
@@ -9,6 +9,7 @@ import { useSnackbar } from 'notistack';
 import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
+import LinkMain from '@/components/LinkMain/LinkMain';
 
 export interface ModalChildNoticeProps {
   noticeId: string;
@@ -17,7 +18,6 @@ export interface ModalChildNoticeProps {
 
 const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
   const noticeDetails = useAppSelector(selectNoticesDetailsItem);
-  const isLoading = useAppSelector(selectNoticesDetailsLoading);
 
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -60,7 +60,7 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
 
   return (
     <div className={s.modalChildNoticeProps}>
-      <div className={s.imageWrap}>
+      <div className={s.header}>
         <div className={s.category}>{category}</div>
         <img className={s.image} src={imgURL} alt={title} width="150" height="150" />
       </div>
@@ -102,16 +102,16 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerCase={true} className={s.btn}>
+        <ButtonMain lowerCase className={s.btn}>
           <span>Add to</span>
           <svg className={s.iconHeart}>
             <use href={`${svgIcon}#icon-heart-empty`} />
           </svg>
         </ButtonMain>
 
-        <ButtonMain lowerCase={true} light={true} className={s.btn}>
+        <LinkMain href="mailto:mail@petlove.com" lowerCase light className={s.btn}>
           Contact
-        </ButtonMain>
+        </LinkMain>
       </div>
     </div>
   );

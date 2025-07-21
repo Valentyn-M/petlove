@@ -18,7 +18,7 @@ const LogOutBtn = ({ light, outline }: LogOutBtnProps) => {
       </ButtonMain>
 
       {isModalOpen('logout') && (
-        <Modal isOpen={true} onClose={closeModal} contentLabel="Logout">
+        <Modal isOpen={true} onClose={closeModal} contentLabel="Logout" padding80To80={true}>
           <ModalChildLogout onClose={closeModal} />
         </Modal>
       )}

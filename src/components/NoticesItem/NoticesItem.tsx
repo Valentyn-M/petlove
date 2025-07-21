@@ -107,7 +107,7 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
       )}
 
       {isModalOpen('notice') && (
-        <Modal isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To20={true}>
+        <Modal isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To72={true}>
           <ModalChildNotice noticeId={_id} onClose={closeModal} />
         </Modal>
       )}

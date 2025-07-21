@@ -22,10 +22,9 @@
 }
 
 .btn {
-  flex-grow: 1;
-  max-width: 140px;
+  width: 140px;
 
-  @media (max-width: rem($mobileSmall)) {
-    max-width: 135px;
+  @media (max-width: rem($mobileMedium)) {
+    width: 135px;
   }
 }

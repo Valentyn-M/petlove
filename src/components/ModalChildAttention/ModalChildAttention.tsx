@@ -17,10 +17,10 @@ const ModalChildAttention = ({}: ModalChildAttentionProps) => {
         </p>
       </div>
       <div className={s.links}>
-        <LinkMain to="/login" lowerСase={true} className={s.link}>
+        <LinkMain to="/login" lowerCase={true} className={s.link}>
           Log In
         </LinkMain>
-        <LinkMain to="/registration" light={true} lowerСase={true} className={s.link}>
+        <LinkMain to="/registration" light={true} lowerCase={true} className={s.link}>
           Registration
         </LinkMain>
       </div>

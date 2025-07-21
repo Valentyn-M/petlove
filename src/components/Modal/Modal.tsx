@@ -11,11 +11,20 @@ export interface ModalProps {
   onClose: () => void;
   contentLabel: string;
   children: React.ReactNode;
+  padding80To80?: boolean;
   padding60To60?: boolean;
-  padding40To20?: boolean;
+  padding40To72?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children, padding60To60, padding40To20 }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  contentLabel,
+  children,
+  padding80To80,
+  padding60To60,
+  padding40To72,
+}) => {
   useEffect(() => {
     const body = document.body;
 
@@ -54,7 +63,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, contentLabel, children, 
             onClick={onClose}
           >
             <motion.div
-              className={clsx(s.modal, padding60To60 && s.padding60To60, padding40To20 && s.padding40To20)}
+              className={clsx(
+                s.modal,
+                padding80To80 && s.padding80To80,
+                padding60To60 && s.padding60To60,
+                padding40To72 && s.padding40To72
+              )}
               initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
               animate={{
                 opacity: 1,

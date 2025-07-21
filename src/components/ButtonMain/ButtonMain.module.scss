@@ -83,4 +83,11 @@
   padding: 14px 24px;
   text-transform: unset;
   font-weight: 500;
+
+  @media (max-width: rem($mobileSmall)) {
+    font-size: 14px;
+    line-height: 1.28571;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
