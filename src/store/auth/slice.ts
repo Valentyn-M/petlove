@@ -6,7 +6,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 export interface UserPets {
   noticesViewed: Notice[] | null;
-  noticesFavorites: Notice[] | null;
+  noticesFavorites: Notice[];
   pets: Pets[] | null;
 }
 
@@ -34,7 +34,7 @@ const initialState: AuthState = {
   error: null,
   userPets: {
     noticesViewed: null,
-    noticesFavorites: null,
+    noticesFavorites: [],
     pets: null,
   },
 };

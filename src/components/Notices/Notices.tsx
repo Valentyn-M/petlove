@@ -20,6 +20,9 @@ import {
 } from '@/store/noticesFilters/selectors';
 import { setCurrentPage } from '@/store/notices/slice';
 import { fetchNotices } from '@/store/notices/operations';
+import { selectAuthUserPetsNoticesFavorites, selectIsLoggedIn } from '@/store/auth/selectors';
+import { selectNoticesFavoritesItems } from '@/store/noticesFavorites/selectors';
+import { setFavorites } from '@/store/noticesFavorites/slice';
 
 export interface NoticesProps {}
 
@@ -62,6 +65,17 @@ const Notices = ({}: NoticesProps) => {
   const handleChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
+
+  // Favorites notices
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);
+  const userFavoriteNotices = useAppSelector(selectAuthUserPetsNoticesFavorites);
+  useEffect(() => {
+    if ((isLoggedIn && favoriteNotices.length === 0) || userFavoriteNotices.length > 0) {
+      const ids = userFavoriteNotices.map((item) => item._id);
+      dispatch(setFavorites(ids));
+    }
+  }, [dispatch, isLoggedIn, favoriteNotices, userFavoriteNotices]);
 
   return (
     <section className={s.notices}>
