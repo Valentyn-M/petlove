@@ -42,6 +42,7 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
     if (!isLoggedIn) {
       openModal('attention');
     } else {
+      // TODO add dispatch
       console.log(
         'відправляє запит на backend для додавання або видалення оголошення зі списку улюблених оголошень, після чого  іконка-сердечко за допомогою стилізації відмальовує поточний актуальний стан оголошення.'
       );

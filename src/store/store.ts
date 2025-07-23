@@ -3,6 +3,7 @@ import { friendsReducer } from '@/store/friends/slice';
 import { newsReducer } from '@/store/news/slice';
 import { noticeDetailsReducer } from '@/store/noticeDetails/slice';
 import { noticesReducer } from '@/store/notices/slice';
+import { noticesFavoritesReducer } from '@/store/noticesFavorites/slice';
 import { noticesFiltersReducer } from '@/store/noticesFilters/slice';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -29,6 +30,7 @@ export const store = configureStore({
     noticesFilters: noticesFiltersReducer,
     notices: noticesReducer,
     noticeDetails: noticeDetailsReducer,
+    noticesFavorites: noticesFavoritesReducer,
   },
 
   // 4

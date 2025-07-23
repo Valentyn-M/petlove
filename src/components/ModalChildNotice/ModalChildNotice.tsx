@@ -102,6 +102,7 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
+        {/* TODO add handleClick */}
         <ButtonMain lowerCase className={s.btn}>
           <span>Add to</span>
           <svg className={s.iconHeart}>

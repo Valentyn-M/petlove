@@ -1,10 +1,9 @@
-// Get a notice by id
-
 import { goitApi } from '@/api/goitApi';
 import { NoticeDetailsResponse } from '@/store/types';
 import { handleThunkError } from '@/store/utils';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+// Get a notice by id
 /*
  * GET @ /notices/{id}
  */
