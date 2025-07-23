@@ -10,6 +10,8 @@ import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import LinkMain from '@/components/LinkMain/LinkMain';
+import { selectNoticesFavoritesItems, selectNoticesFavoritesLoading } from '@/store/noticesFavorites/selectors';
+import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
 
 export interface ModalChildNoticeProps {
   noticeId: string;
@@ -18,6 +20,8 @@ export interface ModalChildNoticeProps {
 
 const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
   const noticeDetails = useAppSelector(selectNoticesDetailsItem);
+  const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);
+  const isLoadingFavoriteNotices = useAppSelector(selectNoticesFavoritesLoading);
 
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -58,11 +62,22 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
 
   const priceFormatted = typeof price === 'number' ? price.toFixed(2) : '0.00';
 
+  // Favorite Notice
+  const isFavorite = favoriteNotices.includes(noticeId);
+
+  const handleClick = (): void => {
+    if (!isFavorite) {
+      dispatch(addNoticeToFavorites(noticeId));
+    } else {
+      dispatch(removeNoticeFromFavorites(noticeId));
+    }
+  };
+
   return (
     <div className={s.modalChildNoticeProps}>
       <div className={s.header}>
         <div className={s.category}>{category}</div>
-        <img className={s.image} src={imgURL} alt={title} width="150" height="150" />
+        <img className={s.image} src={imgURL} alt={title || 'Pet photo'} width="150" height="150" />
       </div>
 
       <h3 className={s.title}>{title}</h3>
@@ -102,12 +117,17 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        {/* TODO add handleClick */}
-        <ButtonMain lowerCase className={s.btn}>
-          <span>Add to</span>
-          <svg className={s.iconHeart}>
-            <use href={`${svgIcon}#icon-heart-empty`} />
-          </svg>
+        <ButtonMain lowerCase className={s.btn} disabled={isLoadingFavoriteNotices} onClick={handleClick}>
+          {isLoadingFavoriteNotices ? (
+            'Loading...'
+          ) : (
+            <>
+              <span>{!isFavorite ? 'Add to' : 'Remove from'}</span>
+              <svg className={s.iconHeart}>
+                <use href={`${svgIcon}#icon-heart${isFavorite ? '' : '-empty'}`} />
+              </svg>
+            </>
+          )}
         </ButtonMain>
 
         <LinkMain href="mailto:mail@petlove.com" lowerCase light className={s.btn}>

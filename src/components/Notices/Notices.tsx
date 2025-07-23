@@ -8,7 +8,7 @@ import NoticesFiltersResetButton from '@/components/NoticesFiltersResetButton/No
 import Loader from '@/components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectNoticesCurrentPage, selectNoticesLoading, selectNoticesTotalPages } from '@/store/notices/selectors';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
   selectNoticesByPopularity,
   selectNoticesByPrice,
@@ -70,12 +70,18 @@ const Notices = ({}: NoticesProps) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);
   const userFavoriteNotices = useAppSelector(selectAuthUserPetsNoticesFavorites);
+
+  const favoriteIds = useMemo(() => {
+    return userFavoriteNotices.map((item) => item._id);
+  }, [userFavoriteNotices]);
+
   useEffect(() => {
-    if ((isLoggedIn && favoriteNotices.length === 0) || userFavoriteNotices.length > 0) {
-      const ids = userFavoriteNotices.map((item) => item._id);
-      dispatch(setFavorites(ids));
+    if (isLoggedIn) {
+      if (favoriteNotices.length === 0 && userFavoriteNotices.length > 0) {
+        dispatch(setFavorites(favoriteIds));
+      }
     }
-  }, [dispatch, isLoggedIn, favoriteNotices, userFavoriteNotices]);
+  }, [isLoggedIn, userFavoriteNotices, dispatch]);
 
   return (
     <section className={s.notices}>

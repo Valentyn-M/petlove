@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/store/hooks';
 import { logoutUser } from '@/store/auth/operations';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { resetFavorites } from '@/store/noticesFavorites/slice';
 
 export interface ModalChildLogoutProps {
   onClose: () => void;
@@ -18,12 +19,13 @@ const ModalChildLogout = ({ onClose }: ModalChildLogoutProps) => {
   const handleClick = () => {
     dispatch(logoutUser())
       .unwrap()
-      .catch((error) => {
-        enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
-      })
-      .finally(() => {
+      .then(() => {
+        dispatch(resetFavorites());
         onClose();
         navigate('/');
+      })
+      .catch((error) => {
+        enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
       });
   };
 

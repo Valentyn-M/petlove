@@ -7,9 +7,9 @@ export interface ButtonFunctionProps extends ComponentProps<'button'> {
   iconName: string;
 }
 
-const ButtonFunction = ({ className, iconName, ...rest }: ButtonFunctionProps) => {
+const ButtonFunction = ({ className, iconName, disabled, ...rest }: ButtonFunctionProps) => {
   return (
-    <button type="button" {...rest} className={clsx(s.btn, className)}>
+    <button type="button" disabled={disabled} {...rest} className={clsx(s.btn, disabled && s.disabled, className)}>
       <svg className={s.icon}>
         <use href={`${svgIcon}#icon-${iconName}`} />
       </svg>

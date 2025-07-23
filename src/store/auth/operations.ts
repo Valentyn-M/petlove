@@ -69,7 +69,7 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkAPI
 
 // ==========================================================================================================================
 
-// REFRESH
+// REFRESH (to check if the user is logged in)
 /*
  * GET @ /users/current
  * headers: Authorization: Bearer token

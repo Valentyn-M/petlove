@@ -45,6 +45,11 @@
       color: $brandColor;
     }
   }
+
+  @media (max-width: rem($mobileSmall)) {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
 }
 
 .button.light {
@@ -60,6 +65,13 @@
     &:focus {
       background-color: $beigeColorDark;
     }
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    font-size: 14px;
+    line-height: 1.28571;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 }
 

@@ -22,9 +22,13 @@
 }
 
 .btn {
-  width: 140px;
+  min-width: 140px;
 
   @media (max-width: rem($mobileMedium)) {
-    width: 135px;
+    min-width: 135px;
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    @include adaptiveValue('min-width', 135, 115, $mobileSmall);
   }
 }

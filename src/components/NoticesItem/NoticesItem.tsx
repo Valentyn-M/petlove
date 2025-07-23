@@ -6,9 +6,11 @@ import ButtonFunction from '@/components/ButtonFunction/ButtonFunction';
 import { useModal } from '@/hooks/useModal';
 import Modal from '@/components/Modal/Modal';
 import ModalChildAttention from '@/components/ModalChildAttention/ModalChildAttention';
-import { useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { selectIsLoggedIn } from '@/store/auth/selectors';
 import ModalChildNotice from '@/components/ModalChildNotice/ModalChildNotice';
+import { selectNoticesFavoritesItems, selectNoticesFavoritesLoading } from '@/store/noticesFavorites/selectors';
+import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
 
 export interface NoticesItemProps {
   newsData: NoticesItem;
@@ -16,6 +18,12 @@ export interface NoticesItemProps {
 
 const NoticesItem = ({ newsData }: NoticesItemProps) => {
   const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = newsData;
+
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);
+  const isLoadingFavoriteNotices = useAppSelector(selectNoticesFavoritesLoading);
+
+  const dispatch = useAppDispatch();
 
   const priceFormatted = typeof price === 'number' ? price.toFixed(2) : '0.00';
 
@@ -25,27 +33,30 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
     birthdayFormatted = `${day}.${month}.${year}`;
   }
 
+  // Favorite Notice
+  const isFavorite = favoriteNotices.includes(_id);
+
+  const handleClickFavorite = (): void => {
+    if (!isLoggedIn) {
+      openModal('attention');
+      return;
+    }
+
+    if (!isFavorite) {
+      dispatch(addNoticeToFavorites(_id));
+    } else {
+      dispatch(removeNoticeFromFavorites(_id));
+    }
+  };
+
   // Modals
   const { openModal, closeModal, isModalOpen } = useModal();
-
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const handleClickLearnMore = (): void => {
     if (!isLoggedIn) {
       openModal('attention');
     } else {
       openModal('notice');
-    }
-  };
-
-  const handleClickFavorite = (): void => {
-    if (!isLoggedIn) {
-      openModal('attention');
-    } else {
-      // TODO add dispatch
-      console.log(
-        'відправляє запит на backend для додавання або видалення оголошення зі списку улюблених оголошень, після чого  іконка-сердечко за допомогою стилізації відмальовує поточний актуальний стан оголошення.'
-      );
     }
   };
 
@@ -97,7 +108,11 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
           Learn more
         </ButtonMain>
 
-        <ButtonFunction iconName="heart-empty" onClick={handleClickFavorite} />
+        <ButtonFunction
+          iconName={isFavorite ? 'heart' : 'heart-empty'}
+          disabled={isLoadingFavoriteNotices}
+          onClick={handleClickFavorite}
+        />
       </div>
 
       {/* Modals */}

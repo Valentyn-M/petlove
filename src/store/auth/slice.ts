@@ -123,7 +123,7 @@ function setUserDataFromPayload(state: AuthState, payload: Partial<GetFullUserIn
   }
 
   if ('noticesFavorites' in payload) {
-    state.userPets.noticesFavorites = payload.noticesFavorites ?? null;
+    state.userPets.noticesFavorites = payload.noticesFavorites ?? [];
   }
 
   if ('noticesViewed' in payload) {

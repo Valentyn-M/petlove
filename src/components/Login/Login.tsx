@@ -5,7 +5,6 @@ import imageTablet1x from '../../assets/images/login/image_tablet.png';
 import imageTablet2x from '../../assets/images/login/image_tablet@2x.png';
 import imagePc1x from '../../assets/images/login/image_pc.png';
 import imagePc2x from '../../assets/images/login/image_pc@2x.png';
-import imageIcon1x from '../../assets/images/login/icon.png';
 import PetBlock from '@/components/PetBlock/PetBlock';
 import LoginForm from '@/components/LoginForm/LoginForm';
 

@@ -1,13 +1,13 @@
 import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf, PayloadAction } from '@reduxjs/toolkit';
 
-interface NotecesFavorites {
+interface NoticesFavorites {
   items: string[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: NotecesFavorites = {
+const initialState: NoticesFavorites = {
   items: [],
   loading: false,
   error: null,
@@ -17,9 +17,11 @@ const slice = createSlice({
   name: 'noticesFavorites',
   initialState,
   reducers: {
-    setFavorites: (state, action) => {
+    setFavorites: (state, action: PayloadAction<string[]>) => {
       state.items = action.payload;
-      localStorage.setItem('favorites', JSON.stringify(state.items));
+    },
+    resetFavorites: (state) => {
+      state.items = [];
     },
   },
   extraReducers(builder) {
@@ -53,6 +55,6 @@ const slice = createSlice({
   },
 });
 
-export const { setFavorites } = slice.actions;
+export const { setFavorites, resetFavorites } = slice.actions;
 
 export const noticesFavoritesReducer = slice.reducer;

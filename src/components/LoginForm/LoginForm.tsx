@@ -8,7 +8,7 @@ import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
 import TitleMain from '@/components/TitleMain/TitleMain';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { loginUser } from '@/store/auth/operations';
+import { loginUser, refreshUser } from '@/store/auth/operations';
 import { useSnackbar } from 'notistack';
 import { selectIsLoading } from '@/store/auth/selectors';
 
@@ -50,6 +50,7 @@ const LoginForm = ({}: LoginFormProps) => {
     dispatch(loginUser(values))
       .unwrap()
       .then(() => {
+        dispatch(refreshUser());
         actions.resetForm();
         navigate('/profile');
       })
