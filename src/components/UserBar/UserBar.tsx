@@ -22,7 +22,7 @@ const UserBar = ({ isHome }: UserBarProps) => {
       <div className={clsx(s.user, isHome && s.light)}>
         <div className={s.userAvatarWrap}>
           {userAvatar ? (
-            <img className={s.userAvatar} src={userAvatar} alt="User avatar" width="24" height="24" />
+            <img className={s.userAvatar} src={userAvatar} alt="User avatar" width="50" height="50" />
           ) : (
             <svg className={s.iconUser}>
               <use href={`${svgIcon}#icon-user`} />
