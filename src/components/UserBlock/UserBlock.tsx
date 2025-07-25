@@ -5,6 +5,7 @@ import Modal from '@/components/Modal/Modal';
 import { useModal } from '@/hooks/useModal';
 import { useAppSelector } from '@/store/hooks';
 import { selectUserAvatar, selectUserEmail, selectUserName, selectUserPhone } from '@/store/auth/selectors';
+import clsx from 'clsx';
 
 export interface UserBlockProps {}
 
@@ -38,9 +39,9 @@ const UserBlock = ({}: UserBlockProps) => {
       <h3 className={s.title}>My information</h3>
 
       <ul className={s.list}>
-        <li className={s.item}>Name</li>
-        <li className={s.item}>name@gmail.com|</li>
-        <li className={s.item}>+380</li>
+        <li className={clsx(s.item, userName && s.filled)}>{userName || 'Name'}</li>
+        <li className={clsx(s.item, userEmail && s.filled)}>{userEmail || 'name@gmail.com'}</li>
+        <li className={clsx(s.item, userPhone && s.filled)}>{userPhone || '+380'}</li>
       </ul>
 
       {isModalOpen('edit-user') && (
