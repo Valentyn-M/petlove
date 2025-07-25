@@ -1,0 +1,15 @@
+.profile {
+  padding-top: 32px;
+  padding-bottom: 32px;
+
+  @media (min-width: rem($tabletAfter)) {
+    gap: 32px;
+    display: grid;
+    grid-template-columns: calc((520 / 1216) * 100%) calc((664 / 1216) * 100%);
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
