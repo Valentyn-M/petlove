@@ -7,7 +7,7 @@ export interface User {
   phone: string | null;
 }
 
-// ==========================================================================================================================
+//---------------------------------------------------
 
 // We send to backend
 export interface RegisterCredentials {
@@ -23,7 +23,7 @@ export interface RegisterResponse {
   token: string;
 }
 
-// ==========================================================================================================================
+//---------------------------------------------------
 
 // We send to backend
 export interface LoginCredentials {
@@ -38,7 +38,7 @@ export interface LoginResponse {
   token: string;
 }
 
-// ==========================================================================================================================
+//---------------------------------------------------
 
 // We get from backend on request "refreshUser"
 export type Notice = {
@@ -66,7 +66,7 @@ export interface RefreshUserResponse {
   noticesFavorites: Notice[];
 }
 
-// ==========================================================================================================================
+//---------------------------------------------------
 
 // We get from backend on request "getFullUserInfo"
 export interface Pets {
@@ -96,6 +96,18 @@ export interface GetFullUserInfoResponse {
   pets: Pets[];
   createdAt: string;
   updatedAt: string;
+}
+
+//---------------------------------------------------
+
+// User edit
+
+// We send to backend
+export interface EditUserCredentials {
+  name?: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
 }
 
 // ==========================================================================================================================

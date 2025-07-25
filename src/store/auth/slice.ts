@@ -1,4 +1,4 @@
-import { getFullUserInfo, loginUser, logoutUser, refreshUser, registerUser } from '@/store/auth/operations';
+import { editUser, getFullUserInfo, loginUser, logoutUser, refreshUser, registerUser } from '@/store/auth/operations';
 import { GetFullUserInfoResponse, Notice, Pets, User } from '@/store/types';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
@@ -77,13 +77,21 @@ const slice = createSlice({
       // GET FULL USER INFO
       .addCase(getFullUserInfo.fulfilled, (state, action) => {
         setUserDataFromPayload(state, action.payload);
-        state.isRefreshing = false;
+        state.loading = false;
+        state.error = null;
+      })
+      // ==========================================================================================================================
+      // EDIT USER
+      .addCase(editUser.fulfilled, (state, action) => {
+        setUserDataFromPayload(state, action.payload);
+        state.loading = false;
+        state.error = null;
       })
       // ==========================================================================================================================
       // ==========================================================================================================================
       // Status Pending
       .addMatcher(
-        isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending, getFullUserInfo.pending),
+        isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending, getFullUserInfo.pending, editUser.pending),
         (state) => {
           state.loading = true;
           state.error = null;
@@ -92,7 +100,13 @@ const slice = createSlice({
 
       // Status Rejected
       .addMatcher(
-        isAnyOf(registerUser.rejected, loginUser.rejected, logoutUser.rejected, getFullUserInfo.rejected),
+        isAnyOf(
+          registerUser.rejected,
+          loginUser.rejected,
+          logoutUser.rejected,
+          getFullUserInfo.rejected,
+          editUser.rejected
+        ),
         (state, action) => {
           state.loading = false;
           state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
@@ -111,7 +125,9 @@ export const authReducer = slice.reducer;
 function setUserDataFromPayload(state: AuthState, payload: Partial<GetFullUserInfoResponse>) {
   state.user.name = payload.name ?? null;
   state.user.email = payload.email ?? null;
-  state.token = payload.token ?? null;
+  if ('token' in payload && payload.token) {
+    state.token = payload.token;
+  }
 
   // Check if there are additional fields in payload (avatar, phone, pets, etc.)
 

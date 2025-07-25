@@ -1,5 +1,6 @@
 import { goitApi } from '@/api/goitApi';
 import {
+  EditUserCredentials,
   GetFullUserInfoResponse,
   LoginCredentials,
   LoginResponse,
@@ -95,6 +96,27 @@ export const getFullUserInfo = createAsyncThunk<GetFullUserInfoResponse>(
   async (_, thunkAPI) => {
     try {
       const response = await goitApi.get('/users/current/full');
+      return response.data;
+    } catch (error) {
+      return handleThunkError(error, thunkAPI);
+    }
+  }
+);
+
+// ==========================================================================================================================
+
+// User edit
+/*
+ * PATCH @ /users/current/edit
+ * headers: Authorization: Bearer token
+ */
+export const editUser = createAsyncThunk<GetFullUserInfoResponse, EditUserCredentials>(
+  'auth/editUser',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await goitApi.patch('/users/current/edit', credentials);
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
       return handleThunkError(error, thunkAPI);
