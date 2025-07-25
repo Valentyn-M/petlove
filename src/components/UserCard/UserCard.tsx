@@ -1,10 +1,15 @@
 import ButtonFunction from '@/components/ButtonFunction/ButtonFunction';
 import s from './UserCard.module.scss';
 import { svgIcon } from '@/components/App';
+import { useModal } from '@/hooks/useModal';
+import Modal from '@/components/Modal/Modal';
+import ModalChildEditUser from '@/components/ModalChildEditUser/ModalChildEditUser';
 
 export interface UserCardProps {}
 
 const UserCard = ({}: UserCardProps) => {
+  const { openModal, closeModal, isModalOpen } = useModal();
+
   return (
     <div className={s.userCard}>
       <div className={s.header}>
@@ -14,8 +19,15 @@ const UserCard = ({}: UserCardProps) => {
             <use href={`${svgIcon}#icon-user`} />
           </svg>
         </div>
-        <ButtonFunction iconName="edit" className={s.btnEdit} />
+        <ButtonFunction iconName="edit" className={s.btnEdit} onClick={() => openModal('edit-user')} />
       </div>
+
+      {/* Modals */}
+      {isModalOpen('edit-user') && (
+        <Modal isOpen={true} onClose={closeModal} contentLabel="Edit user">
+          <ModalChildEditUser />
+        </Modal>
+      )}
     </div>
   );
 };
