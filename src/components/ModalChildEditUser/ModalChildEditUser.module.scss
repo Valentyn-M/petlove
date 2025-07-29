@@ -68,6 +68,7 @@
     display: flex;
     gap: 8px;
     justify-content: space-between;
+    align-items: flex-start;
 
     @media (min-width: rem($mobileMediumAfter)) {
       margin-bottom: 20px;
@@ -149,6 +150,16 @@
   @media (max-width: rem($mobileMedium)) {
     @include adaptiveValue('margin-left', 16, 13, $mobileMedium, $mobileSmall);
     @include adaptiveValue('margin-right', 16, 13, $mobileMedium, $mobileSmall);
+  }
+
+  .labelAvatar & {
+    margin-left: 12px;
+    margin-right: 12px;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('margin-left', 12, 13, $mobileMedium, $mobileSmall);
+      @include adaptiveValue('margin-right', 12, 13, $mobileMedium, $mobileSmall);
+    }
   }
 }
 

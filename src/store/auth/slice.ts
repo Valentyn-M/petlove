@@ -1,4 +1,12 @@
-import { editUser, getFullUserInfo, loginUser, logoutUser, refreshUser, registerUser } from '@/store/auth/operations';
+import {
+  changeAvatar,
+  editUser,
+  getFullUserInfo,
+  loginUser,
+  logoutUser,
+  refreshUser,
+  registerUser,
+} from '@/store/auth/operations';
 import { GetFullUserInfoResponse, Notice, Pets, User } from '@/store/types';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
@@ -16,6 +24,7 @@ interface AuthState {
   isLoggedIn: boolean;
   loading: boolean;
   isRefreshing: boolean;
+  loadingAvatar: boolean;
   error: string | null;
   userPets: UserPets;
 }
@@ -30,6 +39,7 @@ const initialState: AuthState = {
   token: null,
   isLoggedIn: false,
   loading: false,
+  loadingAvatar: false,
   isRefreshing: false,
   error: null,
   userPets: {
@@ -42,7 +52,11 @@ const initialState: AuthState = {
 const slice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setDefaltAvatar: (state) => {
+      state.user.avatar = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // REGISTER
@@ -87,6 +101,18 @@ const slice = createSlice({
         state.loading = false;
         state.error = null;
       })
+      // CHANGE AVATAR
+      .addCase(changeAvatar.pending, (state) => {
+        state.loadingAvatar = true;
+      })
+      .addCase(changeAvatar.fulfilled, (state, action) => {
+        setUserDataFromPayload(state, action.payload);
+        state.loadingAvatar = false;
+        state.error = null;
+      })
+      .addCase(changeAvatar.rejected, (state) => {
+        state.loadingAvatar = false;
+      })
       // ==========================================================================================================================
       // ==========================================================================================================================
       // Status Pending
@@ -114,6 +140,8 @@ const slice = createSlice({
       );
   },
 });
+
+export const { setDefaltAvatar } = slice.actions;
 
 export const authReducer = slice.reducer;
 

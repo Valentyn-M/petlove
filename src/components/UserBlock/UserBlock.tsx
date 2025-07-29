@@ -46,7 +46,7 @@ const UserBlock = ({}: UserBlockProps) => {
 
       {isModalOpen('edit-user') && (
         <Modal className={s.modal} isOpen={true} padding50To50 onClose={closeModal} contentLabel="Edit user">
-          <ModalChildEditUser />
+          <ModalChildEditUser onClose={closeModal} />
         </Modal>
       )}
     </div>
