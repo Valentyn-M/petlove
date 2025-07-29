@@ -1,12 +1,12 @@
 import { goitApi } from '@/api/goitApi';
 import {
-  EditUserCredentials,
   GetFullUserInfoResponse,
   LoginCredentials,
   LoginResponse,
   RefreshUserResponse,
   RegisterCredentials,
   RegisterResponse,
+  UserData,
 } from '@/store/types';
 import { clearAuthHeader, handleThunkError, setAuthHeader } from '@/store/utils';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -110,11 +110,11 @@ export const getFullUserInfo = createAsyncThunk<GetFullUserInfoResponse>(
  * PATCH @ /users/current/edit
  * headers: Authorization: Bearer token
  */
-export const editUser = createAsyncThunk<GetFullUserInfoResponse, EditUserCredentials>(
+export const editUser = createAsyncThunk<GetFullUserInfoResponse, UserData>(
   'auth/editUser',
-  async (credentials, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      const response = await goitApi.patch('/users/current/edit', credentials);
+      const response = await goitApi.patch('/users/current/edit', userData);
       // After successful login, add the token to the HTTP header
       setAuthHeader(response.data.token);
       return response.data;

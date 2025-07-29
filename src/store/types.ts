@@ -103,7 +103,7 @@ export interface GetFullUserInfoResponse {
 // User edit
 
 // We send to backend
-export interface EditUserCredentials {
+export interface UserData {
   name?: string;
   email?: string;
   phone?: string;
