@@ -73,6 +73,17 @@
   }
 }
 
+.modal.padding50To50 {
+  padding: 50px;
+
+  @media (max-width: rem($mobileMedium)) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    @include adaptiveValue('padding-left', 40, 20, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-right', 40, 20, $mobileMedium, $mobileSmall);
+  }
+}
+
 .closeBtn {
   position: absolute;
   top: 20px;

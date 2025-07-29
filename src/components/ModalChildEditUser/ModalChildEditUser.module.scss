@@ -1,0 +1,72 @@
+.avatar {
+  margin: 0 auto;
+  width: 86px;
+  height: 86px;
+  background-color: var(--beige-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.iconUser {
+  width: 50px;
+  height: 50px;
+  fill: var(--brand-color);
+}
+
+.userAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// form
+
+.field {
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  border-radius: 30px;
+  padding: 16px;
+  width: 100%;
+  font-family: $fontFamily;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: $mainColor;
+  outline: none;
+  transition: all 0.3s ease 0s;
+
+  &::placeholder {
+    color: rgba(38, 38, 38, 0.5);
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $brandColor;
+  }
+
+  &.filled {
+    border-color: var(--brand-color);
+  }
+
+  .label.error & {
+    border-color: $errorColor;
+  }
+
+  &.fieldAvar {
+    padding: 12px;
+  }
+}
+
+.fieldError {
+  display: block;
+  margin-top: 4px;
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 12px;
+  line-height: 1.16667;
+  letter-spacing: -0.03em;
+  color: $errorColor;
+}
