@@ -15,7 +15,7 @@ const EditUserBtn = ({}: EditUserBtnProps) => {
       <ButtonFunction iconName="edit" className={clsx(s.btn, s.btnEdit)} onClick={() => openModal('edit-user')} />
 
       {isModalOpen('edit-user') && (
-        <Modal isOpen={true} padding50To50 onClose={closeModal} contentLabel="Edit user">
+        <Modal className={s.modal} isOpen={true} padding50To50 onClose={closeModal} contentLabel="Edit user">
           <ModalChildEditUser />
         </Modal>
       )}

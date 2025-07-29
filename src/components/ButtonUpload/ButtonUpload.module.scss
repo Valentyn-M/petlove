@@ -19,6 +19,12 @@
   &:focus {
     background-color: $beigeColorDark;
   }
+
+  @media (max-width: rem($mobileMedium)) {
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.33333;
+  }
 }
 
 .icon {

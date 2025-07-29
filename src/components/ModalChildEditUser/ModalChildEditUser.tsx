@@ -66,58 +66,60 @@ const ModalChildEditUser = ({}: ModalChildEditUserProps) => {
       <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
         {({ errors }) => (
           <Form className={s.form}>
-            <label className={`${s.label} ${errors.name ? s.error : ''}`} htmlFor="avatar">
-              <div className={s.fieldWrap}>
+            <div className={s.fieldsBlock}>
+              <label className={`${s.label} ${s.labelAvatar} ${errors.name ? s.error : ''}`} htmlFor="avatar">
+                <div className={s.fieldWrap}>
+                  <Field
+                    className={clsx(s.field, s.fieldAvar, userAvatar && s.filled)}
+                    type="text"
+                    name="avatar"
+                    id="avatar"
+                    placeholder="https://"
+                    autoComplete="off"
+                  />
+                  <ErrorMessage className={s.fieldError} name="name" component="span" />
+                </div>
+                <ButtonUpload className={s.btnAvatar} />
+              </label>
+
+              <label className={`${s.label} ${errors.name ? s.error : ''}`} htmlFor="name">
                 <Field
-                  className={clsx(s.field, s.fieldAvar, userAvatar && s.filled)}
+                  className={clsx(s.field, userName && s.filled)}
                   type="text"
-                  name="avatar"
-                  id="avatar"
-                  placeholder="https://"
+                  name="name"
+                  id="name"
+                  placeholder="Name"
                   autoComplete="off"
                 />
                 <ErrorMessage className={s.fieldError} name="name" component="span" />
-              </div>
-              <ButtonUpload />
-            </label>
+              </label>
 
-            <label className={`${s.label} ${errors.name ? s.error : ''}`} htmlFor="name">
-              <Field
-                className={clsx(s.field, userName && s.filled)}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name"
-                autoComplete="off"
-              />
-              <ErrorMessage className={s.fieldError} name="name" component="span" />
-            </label>
+              <label className={`${s.label} ${errors.email ? s.error : ''}`} htmlFor="email">
+                <Field
+                  className={clsx(s.field, userEmail && s.filled)}
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="name@gmail.com"
+                  autoComplete="off"
+                />
+                <ErrorMessage className={s.fieldError} name="email" component="span" />
+              </label>
 
-            <label className={`${s.label} ${errors.email ? s.error : ''}`} htmlFor="email">
-              <Field
-                className={clsx(s.field, userEmail && s.filled)}
-                type="text"
-                name="email"
-                id="email"
-                placeholder="name@gmail.com"
-                autoComplete="off"
-              />
-              <ErrorMessage className={s.fieldError} name="email" component="span" />
-            </label>
+              <label className={`${s.label} ${errors.phone ? s.error : ''}`} htmlFor="phone">
+                <Field
+                  className={clsx(s.field, userPhone && s.filled)}
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  placeholder="+380"
+                  autoComplete="off"
+                />
+                <ErrorMessage className={s.fieldError} name="phone" component="span" />
+              </label>
+            </div>
 
-            <label className={`${s.label} ${errors.phone ? s.error : ''}`} htmlFor="phone">
-              <Field
-                className={clsx(s.field, userPhone && s.filled)}
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="+380"
-                autoComplete="off"
-              />
-              <ErrorMessage className={s.fieldError} name="phone" component="span" />
-            </label>
-
-            <ButtonMain className={s.btn} disabled={isLoading} type="submit">
+            <ButtonMain className={clsx(s.btn, s.btnSubmit)} disabled={isLoading} lowerCase type="submit">
               {isLoading ? 'Saving...' : 'Save'}
             </ButtonMain>
           </Form>

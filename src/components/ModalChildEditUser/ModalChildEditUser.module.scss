@@ -1,18 +1,36 @@
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33333;
+  margin-bottom: 20px;
+
+  @media (max-width: rem($mobileMedium)) {
+    font-size: 20px;
+    line-height: 1;
+    @include adaptiveValue('font-size', 18, 20, $mobileMedium, $mobileSmall);
+  }
+}
+
 .avatar {
   margin: 0 auto;
   width: 86px;
-  height: 86px;
+  aspect-ratio: 1;
   background-color: var(--beige-color);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   overflow: hidden;
+  margin-bottom: 12px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('width', 86, 80, $mobileMedium, $mobileSmall);
+  }
 }
 
 .iconUser {
   width: 50px;
-  height: 50px;
+  aspect-ratio: 1;
   fill: var(--brand-color);
 }
 
@@ -23,11 +41,52 @@
 }
 
 // form
+.fieldsBlock {
+  margin-bottom: 40px;
+
+  > * {
+    &:not(:last-child) {
+      margin-bottom: 14px;
+    }
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-bottom', 40, 20, $mobileMedium, $mobileSmall);
+
+    > * {
+      &:not(:last-child) {
+        @include adaptiveValue('margin-bottom', 14, 10, $mobileMedium, $mobileSmall);
+      }
+    }
+  }
+}
+
+.label {
+  display: block;
+
+  &.labelAvatar {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+
+    @media (min-width: rem($mobileMediumAfter)) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.fieldWrap {
+  flex-grow: 1;
+}
+
+.btnAvatar {
+  flex-shrink: 0;
+}
 
 .field {
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
-  padding: 16px;
+  padding: 15px;
   width: 100%;
   font-family: $fontFamily;
   font-weight: 500;
@@ -37,6 +96,13 @@
   color: $mainColor;
   outline: none;
   transition: all 0.3s ease 0s;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
+
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding', 15, 11, $mobileMedium, $mobileSmall);
+  }
 
   &::placeholder {
     color: rgba(38, 38, 38, 0.5);
@@ -56,7 +122,17 @@
   }
 
   &.fieldAvar {
-    padding: 12px;
+    padding: 11px;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+
+    @media (max-width: rem($mobileMedium)) {
+      line-height: 1.33333;
+
+      @include adaptiveValue('font-size', 14, 12, $mobileMedium, $mobileSmall);
+      @include adaptiveValue('padding', 11, 12, $mobileMedium, $mobileSmall);
+    }
   }
 }
 
@@ -69,4 +145,21 @@
   line-height: 1.16667;
   letter-spacing: -0.03em;
   color: $errorColor;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-left', 16, 13, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-right', 16, 13, $mobileMedium, $mobileSmall);
+  }
+}
+
+.btn.btnSubmit {
+  width: 100%;
+  padding: 16px;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
+
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding', 16, 12, $mobileMedium, $mobileSmall);
+  }
 }

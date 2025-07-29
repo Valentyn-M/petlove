@@ -10,6 +10,7 @@ export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   contentLabel: string;
+  className?: string;
   children: React.ReactNode;
   padding80To80?: boolean;
   padding60To60?: boolean;
@@ -21,6 +22,7 @@ const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   contentLabel,
+  className,
   children,
   padding80To80,
   padding60To60,
@@ -67,6 +69,7 @@ const Modal: React.FC<ModalProps> = ({
             <motion.div
               className={clsx(
                 s.modal,
+                className && className,
                 padding80To80 && s.padding80To80,
                 padding60To60 && s.padding60To60,
                 padding40To72 && s.padding40To72,
