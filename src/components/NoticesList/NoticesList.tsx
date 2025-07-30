@@ -14,7 +14,7 @@ const NoticesList = ({}: NoticesListProps) => {
       <ul className={clsx(s.noticesList, 'extra-container')}>
         {noticesItems.map((noticesItem) => (
           <li key={noticesItem._id} className={s.item}>
-            <NoticesItem newsData={noticesItem} />
+            <NoticesItem noticeData={noticesItem} />
           </li>
         ))}
       </ul>

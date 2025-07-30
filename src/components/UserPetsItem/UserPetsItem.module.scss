@@ -1,0 +1,69 @@
+.userPetsItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid var(--grey-color-light2);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.imgBlock {
+  width: 90px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.infoBlock {
+  flex-grow: 1;
+  margin-left: 25px;
+  margin-right: 4px;
+  align-self: center;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  margin-bottom: 12px;
+}
+
+.datails {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 27px;
+}
+
+.datailsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.datailsTitle {
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--grey-color);
+}
+
+.datailsValue {
+  font-size: 12px;
+  line-height: 1.16667;
+  letter-spacing: -0.02em;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.btn {
+  flex-shrink: 0;
+}

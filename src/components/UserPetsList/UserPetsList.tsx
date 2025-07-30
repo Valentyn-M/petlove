@@ -7,16 +7,13 @@ export interface UserPetsListProps {}
 
 const UserPetsList = ({}: UserPetsListProps) => {
   const userPetsItems = useAppSelector(selectAuthUserPetsItems);
-  console.log(userPetsItems);
 
   return (
     userPetsItems &&
     userPetsItems.length > 1 && (
       <ul className={s.userPetsList}>
         {userPetsItems.map((userPet) => (
-          <li key={userPet._id} className={s.item}>
-            <UserPetsItem />
-          </li>
+          <UserPetsItem key={userPet._id} userPetData={userPet} />
         ))}
       </ul>
     )

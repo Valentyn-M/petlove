@@ -17,14 +17,26 @@
     cursor: not-allowed;
   }
 
-  @media (max-width: rem($mobileSmall)) {
-    padding: 14px;
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('padding', 15, 14, $mobileMedium, $mobileSmall);
+  }
+
+  .icon {
+    fill: var(--brand-color);
+    width: 18px;
+    aspect-ratio: 1;
+    display: flex;
   }
 }
 
-.icon {
-  fill: var(--brand-color);
-  width: 18px;
-  height: 18px;
-  display: flex;
+.small {
+  padding: 10px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('padding', 10, 7, $mobileMedium, $mobileSmall);
+
+    .icon {
+      @include adaptiveValue('width', 18, 16, $mobileMedium, $mobileSmall);
+    }
+  }
 }

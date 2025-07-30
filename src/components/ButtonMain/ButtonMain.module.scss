@@ -27,82 +27,74 @@
     opacity: 0.75;
   }
 
-  @media (max-width: rem($mobileSmall)) {
-    font-size: 14px;
+  // outline
+  &.outline {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background-color: transparent;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $beigeColor;
+        color: $brandColor;
+      }
+      &:focus {
+        background-color: $beigeColor;
+        color: $brandColor;
+      }
+    }
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('padding-top', 14, 11, $mobileMedium, $mobileSmall);
+      @include adaptiveValue('padding-bottom', 14, 11, $mobileMedium, $mobileSmall);
+    }
+  }
+
+  &.light {
+    background-color: $beigeColor;
+    color: $brandColor;
+    border: none;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $beigeColorDark;
+      }
+      &:focus {
+        background-color: $beigeColorDark;
+      }
+    }
+  }
+
+  // grey
+  &.grey {
+    background: rgba(38, 38, 38, 0.05);
+    color: $mainColor;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $brandColorDark;
+        color: $whiteColor;
+      }
+      &:focus {
+        background-color: $brandColorDark;
+        color: $whiteColor;
+      }
+    }
+  }
+
+  // lowerCase
+  &.lowerCase {
+    padding: 14px 24px;
+    text-transform: unset;
+    font-weight: 500;
+  }
+
+  // Mobile styles
+  @media (max-width: rem($mobileMedium)) {
     line-height: 1.28571;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-}
-
-.button.outline {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background-color: transparent;
-
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: $beigeColor;
-      color: $brandColor;
-    }
-    &:focus {
-      background-color: $beigeColor;
-      color: $brandColor;
-    }
-  }
-
-  @media (max-width: rem($mobileSmall)) {
-    padding-top: 11px;
-    padding-bottom: 11px;
-  }
-}
-
-.button.light {
-  background-color: $beigeColor;
-  color: $brandColor;
-  border: none;
-
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: $beigeColorDark;
-    }
-    &:focus {
-      background-color: $beigeColorDark;
-    }
-  }
-
-  @media (max-width: rem($mobileSmall)) {
-    font-size: 14px;
-    line-height: 1.28571;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-}
-
-.button.grey {
-  background: rgba(38, 38, 38, 0.05);
-  color: $mainColor;
-
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: $brandColorDark;
-      color: $whiteColor;
-    }
-    &:focus {
-      background-color: $brandColorDark;
-      color: $whiteColor;
-    }
-  }
-}
-
-.button.lowerCase {
-  padding: 14px 24px;
-  text-transform: unset;
-  font-weight: 500;
-
-  @media (max-width: rem($mobileSmall)) {
-    font-size: 14px;
-    line-height: 1.28571;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-top', 15, 12, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 15, 12, $mobileMedium, $mobileSmall);
   }
 }

@@ -7,7 +7,7 @@ import {
   refreshUser,
   registerUser,
 } from '@/store/auth/operations';
-import { GetFullUserInfoResponse, Notice, Pets, User } from '@/store/types';
+import { GetFullUserInfoResponse, Notice, Pet, User } from '@/store/types';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 // interface User is moved to the type file "types.ts"
@@ -15,7 +15,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 export interface UserPets {
   noticesViewed: Notice[] | null;
   noticesFavorites: Notice[];
-  pets: Pets[] | null;
+  pets: Pet[] | null;
 }
 
 interface AuthState {

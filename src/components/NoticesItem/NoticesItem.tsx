@@ -13,11 +13,11 @@ import { selectNoticesFavoritesItems, selectNoticesFavoritesLoading } from '@/st
 import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
 
 export interface NoticesItemProps {
-  newsData: NoticesItem;
+  noticeData: NoticesItem;
 }
 
-const NoticesItem = ({ newsData }: NoticesItemProps) => {
-  const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = newsData;
+const NoticesItem = ({ noticeData }: NoticesItemProps) => {
+  const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = noticeData;
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);

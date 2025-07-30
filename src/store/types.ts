@@ -69,17 +69,14 @@ export interface RefreshUserResponse {
 //---------------------------------------------------
 
 // We get from backend on request "getFullUserInfo"
-export interface Pets {
+export interface Pet {
   _id: string;
   name: string;
-  birthday: string;
+  title: string;
+  imgURL: string;
   species: string;
-  breed: string;
+  birthday: string;
   sex: string;
-  comments: string;
-  avatar: string;
-  location: string;
-  category: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -93,7 +90,7 @@ export interface GetFullUserInfoResponse {
   token: string;
   noticesViewed: Notice[];
   noticesFavorites: Notice[];
-  pets: Pets[];
+  pets: Pet[];
   createdAt: string;
   updatedAt: string;
 }
