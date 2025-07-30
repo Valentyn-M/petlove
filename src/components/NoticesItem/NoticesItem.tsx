@@ -117,13 +117,19 @@ const NoticesItem = ({ newsData }: NoticesItemProps) => {
 
       {/* Modals */}
       {isModalOpen('attention') && (
-        <Modal isOpen={true} onClose={closeModal} contentLabel="Attention" padding60To60={true}>
+        <Modal
+          className={s.madalAttention}
+          isOpen={true}
+          onClose={closeModal}
+          contentLabel="Attention"
+          padding60To60={true}
+        >
           <ModalChildAttention />
         </Modal>
       )}
 
       {isModalOpen('notice') && (
-        <Modal isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To72={true}>
+        <Modal className={s.modalNotice} isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To72={true}>
           <ModalChildNotice noticeId={_id} onClose={closeModal} />
         </Modal>
       )}

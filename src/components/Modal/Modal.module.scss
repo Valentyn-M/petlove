@@ -36,8 +36,8 @@
   padding: 80px;
 
   @media (max-width: rem($mobileMedium)) {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    @include adaptiveValue('padding-top', 80, 40, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 80, 40, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-left', 80, 28, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-right', 80, 28, $mobileMedium, $mobileSmall);
   }
@@ -52,8 +52,8 @@
   padding: 60px;
 
   @media (max-width: rem($mobileMedium)) {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    @include adaptiveValue('padding-top', 60, 40, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 60, 40, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-left', 60, 20, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-right', 60, 20, $mobileMedium, $mobileSmall);
   }
@@ -77,8 +77,8 @@
   padding: 50px;
 
   @media (max-width: rem($mobileMedium)) {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    @include adaptiveValue('padding-top', 50, 40, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 50, 40, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-left', 40, 20, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-right', 40, 20, $mobileMedium, $mobileSmall);
   }

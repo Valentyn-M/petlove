@@ -141,9 +141,11 @@
 }
 
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
@@ -152,15 +154,6 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-width: 160px;
-
-  @media (max-width: rem($mobileMedium)) {
-    min-width: 135px;
-  }
-
-  @media (max-width: rem($mobileSmallBefore)) {
-    min-width: max-content;
-  }
 }
 
 .iconHeart {
