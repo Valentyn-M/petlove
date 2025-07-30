@@ -8,6 +8,10 @@
   text-transform: uppercase;
   color: $whiteColor;
   transition: all 0.3s ease 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 
   @media (any-hover: hover) {
     &:hover {

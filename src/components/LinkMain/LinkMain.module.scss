@@ -8,6 +8,10 @@
   text-transform: uppercase;
   color: $whiteColor;
   transition: all 0.3s ease 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
   @media (any-hover: hover) {
     &:hover {
@@ -64,10 +68,10 @@
   }
 
   @media (max-width: rem($mobileSmall)) {
-    font-size: 14px;
-    line-height: 1.28571;
     padding-top: 12px;
     padding-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.28571;
   }
 }
 
@@ -77,9 +81,22 @@
   font-weight: 500;
 
   @media (max-width: rem($mobileSmall)) {
-    font-size: 14px;
-    line-height: 1.28571;
     padding-top: 12px;
     padding-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.28571;
+  }
+}
+
+.link.small {
+  padding: 10px 20px;
+  text-transform: unset;
+  font-weight: 500;
+
+  @media (max-width: rem($mobileSmall)) {
+    padding-left: 16px;
+    padding-right: 16px;
+    font-size: 14px;
+    line-height: 1.28571;
   }
 }

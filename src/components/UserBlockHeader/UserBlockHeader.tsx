@@ -1,10 +1,10 @@
-import s from './UserCardHeader.module.scss';
+import s from './UserBlockHeader.module.scss';
 import { svgIcon } from '@/components/App';
 import EditUserBtn from '@/components/EditUserBtn/EditUserBtn';
 
-export interface UserCardHeaderProps {}
+export interface UserBlockHeaderProps {}
 
-const UserCardHeader = ({}: UserCardHeaderProps) => {
+const UserBlockHeader = ({}: UserBlockHeaderProps) => {
   return (
     <div className={s.userCardHeader}>
       <div className={s.userLabel}>
@@ -18,4 +18,4 @@ const UserCardHeader = ({}: UserCardHeaderProps) => {
   );
 };
 
-export default UserCardHeader;
+export default UserBlockHeader;

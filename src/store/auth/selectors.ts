@@ -14,4 +14,4 @@ export const selectIsRefreshing = (state: RootState) => state.auth.isRefreshing;
 
 export const selectAuthUserPetsNoticesViewed = (state: RootState) => state.auth.userPets.noticesViewed;
 export const selectAuthUserPetsNoticesFavorites = (state: RootState) => state.auth.userPets.noticesFavorites;
-export const selectAuthUserPetsPets = (state: RootState) => state.auth.userPets.pets;
+export const selectAuthUserPetsItems = (state: RootState) => state.auth.userPets.pets;

@@ -25,6 +25,7 @@ const RegistrationPage = lazy(() => import('@/pages/RegistrationPage/Registratio
 const LoginPage = lazy(() => import('@/pages/LoginPage/LoginPage'));
 
 const ProfilePage = lazy(() => import('@/pages/ProfilePage/ProfilePage'));
+const AddPetPage = lazy(() => import('@/pages/AddPetPage/AddPetPage'));
 
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage/NotFoundPage'));
 
@@ -77,6 +78,8 @@ function App() {
 
           {/* Only for Registered users */}
           <Route path="/profile" element={<PrivateRoute component={<ProfilePage />} redirectTo="/login" />} />
+
+          <Route path="/add-pet" element={<PrivateRoute component={<AddPetPage />} redirectTo="/login" />} />
 
           {/* TODO NotFoundPage */}
           <Route path="*" element={<NotFoundPage />} />

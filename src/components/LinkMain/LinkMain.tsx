@@ -7,6 +7,7 @@ type CommonProps = {
   light?: boolean;
   outline?: boolean;
   lowerCase?: boolean;
+  small?: boolean;
   className?: string;
   children: React.ReactNode;
 };
@@ -17,8 +18,15 @@ type ExternalLinkProps = CommonProps & React.AnchorHTMLAttributes<HTMLAnchorElem
 type LinkMainProps = InternalLinkProps | ExternalLinkProps;
 
 const LinkMain: React.FC<LinkMainProps> = (props) => {
-  const { light, outline, lowerCase, className, children, ...rest } = props;
-  const classNames = clsx(s.link, light && s.light, outline && s.outline, lowerCase && s.lowerCase, className);
+  const { light, outline, lowerCase, small, className, children, ...rest } = props;
+  const classNames = clsx(
+    s.link,
+    light && s.light,
+    outline && s.outline,
+    lowerCase && s.lowerCase,
+    small && s.small,
+    className
+  );
 
   if ('href' in props && props.href) {
     const { href, ...anchorRest } = rest as React.AnchorHTMLAttributes<HTMLAnchorElement>;

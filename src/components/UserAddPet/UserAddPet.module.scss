@@ -1,0 +1,21 @@
+.userAddPet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33333;
+}
+
+.iconAdd {
+  width: 18px;
+  aspect-ratio: 1;
+  fill: var(--white-color);
+}
