@@ -1,5 +1,13 @@
 .userPetsList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
+
+  @media (max-width: rem($tablet)) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: rem($mobileBefore)) {
+    grid-template-columns: 1fr;
+  }
 }

@@ -2,6 +2,11 @@
   display: flex;
   justify-content: space-between;
   gap: 140px;
+
+  @media (max-width: rem($mobileMedium)) {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
 }
 
 .userLabel {

@@ -2,4 +2,11 @@
   border-radius: 60px;
   background-color: var(--white-color);
   padding: 40px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('border-radius', 60, 30, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-top', 40, 18, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-left', 40, 20, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-right', 40, 20, $mobileMedium, $mobileSmall);
+  }
 }

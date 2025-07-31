@@ -1,10 +1,8 @@
 .userBlockBody {
   margin-top: -38px;
 
-  > * {
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
+  @media (max-width: rem($mobileMedium)) {
+    margin-top: unset;
   }
 }
 
@@ -17,22 +15,31 @@
   line-height: 1.28571;
   letter-spacing: -0.02em;
   text-decoration: underline;
+  margin-bottom: 28px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-bottom', 28, 30, $mobileMedium, $mobileSmall);
+  }
 }
 
 .avatarWrap {
   width: 110px;
-  height: 110px;
+  aspect-ratio: 1;
   background-color: var(--beige-color);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   overflow: hidden;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('width', 110, 94, $mobileMedium, $mobileSmall);
+  }
 }
 
 .iconUser {
   width: 50px;
-  height: 50px;
+  aspect-ratio: 1;
   fill: var(--brand-color);
 }
 
@@ -46,25 +53,46 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 1.33333;
+  margin-bottom: 20px;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.25;
+    @include adaptiveValue('font-size', 18, 16, $mobileMedium, $mobileSmall);
+  }
 }
 
 .list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 14px;
+
+  @media (max-width: rem($tablet)) {
+    // grid-template-columns: repeat(auto-fill, minmax(min(275px, 100%), 1fr));
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .item {
   height: 100%;
   border: 1px solid var(--grey-color-light);
   border-radius: 30px;
-  padding: 16px;
+  padding: 15px;
   width: 100%;
   line-height: 1.25;
   letter-spacing: -0.03em;
 
   &.filled {
     border-color: var(--brand-color);
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
+    @include adaptiveValue('padding', 15, 11, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
   }
 }
 
