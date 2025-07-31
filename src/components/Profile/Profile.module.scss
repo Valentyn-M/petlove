@@ -9,7 +9,7 @@
   }
 
   @media (max-width: rem($mobileMedium)) {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    @include adaptiveValue('padding-top', 32, 18, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 32, 18, $mobileMedium, $mobileSmall);
   }
 }

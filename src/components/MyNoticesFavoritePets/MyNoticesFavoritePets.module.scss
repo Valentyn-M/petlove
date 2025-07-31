@@ -1,0 +1,18 @@
+.text {
+  margin: 180px auto 148px;
+  text-align: center;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  max-width: 468px;
+
+  .brandColor {
+    font-weight: 700;
+  }
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1.28571;
+    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-top', 180, 80, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-bottom', 148, 62, $mobileMedium, $mobileSmall);
+  }
+}
