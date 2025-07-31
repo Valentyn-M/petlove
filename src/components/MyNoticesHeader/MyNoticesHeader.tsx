@@ -1,5 +1,6 @@
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import s from './MyNoticesHeader.module.scss';
+import clsx from 'clsx';
 
 export interface MyNoticesHeaderProps {
   activateFavoritePets(): void;
@@ -16,10 +17,20 @@ const MyNoticesHeader = ({
 }: MyNoticesHeaderProps) => {
   return (
     <div className={s.myNoticesHeader}>
-      <ButtonMain lowerCase inactive={!isFavoriteActive} onClick={() => activateFavoritePets()}>
+      <ButtonMain
+        className={clsx(s.btn, s.switcher)}
+        lowerCase
+        inactive={!isFavoriteActive}
+        onClick={() => activateFavoritePets()}
+      >
         My favorite pets
       </ButtonMain>
-      <ButtonMain lowerCase inactive={!isViewedActive} onClick={() => activateViewedPets()}>
+      <ButtonMain
+        className={clsx(s.btn, s.switcher)}
+        lowerCase
+        inactive={!isViewedActive}
+        onClick={() => activateViewedPets()}
+      >
         Viewed
       </ButtonMain>
     </div>
