@@ -7,11 +7,22 @@ export interface ButtonMainProps extends ComponentProps<'button'> {
   outline?: boolean;
   grey?: boolean;
   lowerCase?: boolean;
+  inactive?: boolean;
 }
 // ComponentProps<'button'> — додає підтримку всіх стандартних атрибутів кнопки
 // children, onClick, type, disabled, aria-*, form, name - все включено в ComponentProps<'button'>
 
-const ButtonMain = ({ light, outline, grey, lowerCase, className, children, disabled, ...rest }: ButtonMainProps) => {
+const ButtonMain = ({
+  light,
+  outline,
+  grey,
+  lowerCase,
+  inactive,
+  className,
+  children,
+  disabled,
+  ...rest
+}: ButtonMainProps) => {
   return (
     <button
       type="button"
@@ -23,6 +34,7 @@ const ButtonMain = ({ light, outline, grey, lowerCase, className, children, disa
         outline && s.outline,
         grey && s.grey,
         lowerCase && s.lowerCase,
+        inactive && s.inactive,
         disabled && s.disabled,
         className
       )}

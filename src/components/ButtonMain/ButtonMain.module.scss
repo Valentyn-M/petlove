@@ -90,6 +90,21 @@
     font-weight: 500;
   }
 
+  // inactive
+  &.inactive {
+    background-color: var(--white-color);
+    color: var(--main-color);
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--beige-color-dark);
+      }
+      &:focus {
+        background-color: var(--beige-color-dark);
+      }
+    }
+  }
+
   // Mobile styles
   @media (max-width: rem($mobileMedium)) {
     line-height: 1.28571;
