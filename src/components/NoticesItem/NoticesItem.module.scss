@@ -5,6 +5,24 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  @media (max-width: rem($mobileSmall)) {
+    @include adaptiveValue('padding', 24, 20, $mobileSmall);
+  }
+
+  // profile
+  &.profile {
+    padding: 14px;
+    padding-bottom: 24px;
+
+    @media (max-width: rem($mobileMedium)) {
+      padding: 24px;
+    }
+
+    @media (max-width: rem($mobileSmall)) {
+      @include adaptiveValue('padding', 24, 20, $mobileSmall);
+    }
+  }
 }
 
 .imageWrap {
@@ -21,6 +39,33 @@
   @media (max-width: rem($mobileSmall)) {
     height: 178px;
     aspect-ratio: unset;
+  }
+
+  // profile
+  .profile & {
+    height: 162px;
+    margin-bottom: 14px;
+
+    @media (max-width: rem($tablet)) {
+      aspect-ratio: 314/162;
+      height: auto;
+    }
+
+    @media (max-width: rem($mobile)) {
+      height: 162px;
+      aspect-ratio: unset;
+    }
+
+    @media (max-width: rem($mobileMedium)) {
+      aspect-ratio: 287/178;
+      height: auto;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: rem($mobileSmall)) {
+      height: 178px;
+      aspect-ratio: unset;
+    }
   }
 }
 
@@ -89,6 +134,15 @@
   @media (max-width: rem($mobileSmall)) {
     @include adaptiveValue('gap', 14, 5, $mobileSmall);
   }
+
+  // profile
+  .profile & {
+    margin-bottom: 14px;
+
+    @media (max-width: rem($mobileMedium)) {
+      margin-bottom: 16px;
+    }
+  }
 }
 
 .datailsItem {
@@ -139,6 +193,11 @@
   @media (max-width: rem($mobileMedium)) {
     @include adaptiveValue('margin-bottom', 24, 16, $mobileMedium, $mobileSmall);
   }
+
+  // profile
+  .profile & {
+    margin-bottom: 16px;
+  }
 }
 
 .price {
@@ -160,8 +219,32 @@
   gap: 10px;
 }
 
-.learnMore {
+.btn.learnMore {
   flex-grow: 1;
+
+  // profile
+  .profile & {
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('padding-top', 12, 14, $mobileMedium, $mobileSmall);
+      @include adaptiveValue('padding-bottom', 12, 14, $mobileMedium, $mobileSmall);
+    }
+  }
+}
+
+.btn.favorite {
+  // profile
+  .profile & {
+    padding-top: 13px;
+    padding-bottom: 13px;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('padding-top', 13, 14, $mobileMedium, $mobileSmall);
+      @include adaptiveValue('padding-bottom', 13, 14, $mobileMedium, $mobileSmall);
+    }
+  }
 }
 
 // ==========================================================================================================================

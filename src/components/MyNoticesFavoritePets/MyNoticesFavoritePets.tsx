@@ -15,7 +15,7 @@ const MyNoticesFavoritePets = ({}: MyNoticesFavoritePetsProps) => {
         <ul className={s.list}>
           {favoritePets.map((favoritePet) => (
             <li key={favoritePet._id} className={s.item}>
-              <NoticesItem noticeData={favoritePet} />
+              <NoticesItem noticeData={favoritePet} variant="profile" />
             </li>
           ))}
         </ul>

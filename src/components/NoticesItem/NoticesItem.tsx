@@ -11,12 +11,14 @@ import { selectIsLoggedIn } from '@/store/auth/selectors';
 import ModalChildNotice from '@/components/ModalChildNotice/ModalChildNotice';
 import { selectNoticesFavoritesItems, selectNoticesFavoritesLoading } from '@/store/noticesFavorites/selectors';
 import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
+import clsx from 'clsx';
 
 export interface NoticesItemProps {
   noticeData: NoticesItem;
+  variant?: string;
 }
 
-const NoticesItem = ({ noticeData }: NoticesItemProps) => {
+const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
   const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = noticeData;
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
@@ -61,7 +63,7 @@ const NoticesItem = ({ noticeData }: NoticesItemProps) => {
   };
 
   return (
-    <article className={s.article}>
+    <article className={clsx(s.article, { [s.profile]: variant === 'profile' })}>
       <div className={s.imageWrap}>
         <img className={s.image} src={imgURL} alt={title} width="315" height="178" loading="lazy" />
       </div>
@@ -104,13 +106,14 @@ const NoticesItem = ({ noticeData }: NoticesItemProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerCase={true} className={s.learnMore} onClick={handleClickLearnMore}>
+        <ButtonMain lowerCase={true} className={clsx(s.btn, s.learnMore)} onClick={handleClickLearnMore}>
           Learn more
         </ButtonMain>
 
         <ButtonFunction
-          iconName={isFavorite ? 'heart' : 'heart-empty'}
+          iconName={variant === 'profile' ? 'trash' : isFavorite ? 'heart' : 'heart-empty'}
           disabled={isLoadingFavoriteNotices}
+          className={clsx(s.btn, s.favorite)}
           onClick={handleClickFavorite}
         />
       </div>

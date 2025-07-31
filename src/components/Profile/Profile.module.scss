@@ -6,6 +6,7 @@
     gap: 32px;
     display: grid;
     grid-template-columns: calc((520 / 1216) * 100%) calc((664 / 1216) * 100%);
+    align-items: start;
   }
 
   @media (max-width: rem($mobileMedium)) {
