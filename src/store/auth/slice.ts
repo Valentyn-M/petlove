@@ -1,11 +1,14 @@
 import {
+  addNoticeToFavorites,
   changeAvatar,
   editUser,
+  getCurrentUserInfo,
   getFullUserInfo,
   loginUser,
   logoutUser,
   refreshUser,
   registerUser,
+  removeNoticeFromFavorites,
 } from '@/store/auth/operations';
 import { GetFullUserInfoResponse, Notice, Pet, User } from '@/store/types';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
@@ -25,6 +28,8 @@ interface AuthState {
   loading: boolean;
   isRefreshing: boolean;
   loadingAvatar: boolean;
+  loadingCurrentUser: boolean;
+  loadingFullUser: boolean;
   error: string | null;
   userPets: UserPets;
 }
@@ -40,6 +45,8 @@ const initialState: AuthState = {
   isLoggedIn: false,
   loading: false,
   loadingAvatar: false,
+  loadingCurrentUser: false,
+  loadingFullUser: false,
   isRefreshing: false,
   error: null,
   userPets: {
@@ -88,11 +95,29 @@ const slice = createSlice({
         state.isRefreshing = false;
       })
       // ==========================================================================================================================
+      // GET CURRENT USER INFO
+      .addCase(getCurrentUserInfo.pending, (state) => {
+        state.loadingCurrentUser = true;
+      })
+      .addCase(getCurrentUserInfo.fulfilled, (state, action) => {
+        setUserDataFromPayload(state, action.payload);
+        state.loadingCurrentUser = false;
+      })
+      .addCase(getCurrentUserInfo.rejected, (state) => {
+        state.loadingCurrentUser = false;
+      })
+      // ==========================================================================================================================
       // GET FULL USER INFO
+      .addCase(getFullUserInfo.pending, (state) => {
+        state.loadingFullUser = true;
+      })
       .addCase(getFullUserInfo.fulfilled, (state, action) => {
         setUserDataFromPayload(state, action.payload);
-        state.loading = false;
+        state.loadingFullUser = false;
         state.error = null;
+      })
+      .addCase(getFullUserInfo.rejected, (state) => {
+        state.loadingFullUser = false;
       })
       // ==========================================================================================================================
       // EDIT USER
@@ -114,10 +139,29 @@ const slice = createSlice({
         state.loadingAvatar = false;
       })
       // ==========================================================================================================================
+      // Add notice to Favorites
+      .addCase(addNoticeToFavorites.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+
+      // Remove notice from Favorites
+      .addCase(removeNoticeFromFavorites.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      // ==========================================================================================================================
       // ==========================================================================================================================
       // Status Pending
       .addMatcher(
-        isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending, getFullUserInfo.pending, editUser.pending),
+        isAnyOf(
+          registerUser.pending,
+          loginUser.pending,
+          logoutUser.pending,
+          editUser.pending,
+          addNoticeToFavorites.pending,
+          removeNoticeFromFavorites.pending
+        ),
         (state) => {
           state.loading = true;
           state.error = null;
@@ -130,8 +174,9 @@ const slice = createSlice({
           registerUser.rejected,
           loginUser.rejected,
           logoutUser.rejected,
-          getFullUserInfo.rejected,
-          editUser.rejected
+          editUser.rejected,
+          addNoticeToFavorites.rejected,
+          removeNoticeFromFavorites.rejected
         ),
         (state, action) => {
           state.loading = false;

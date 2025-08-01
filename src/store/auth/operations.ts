@@ -70,7 +70,7 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkAPI
 
 // ==========================================================================================================================
 
-// REFRESH (to check if the user is logged in)
+// REFRESH - to check if the user is logged in
 /*
  * GET @ /users/current
  * headers: Authorization: Bearer token
@@ -136,6 +136,57 @@ export const changeAvatar = createAsyncThunk<GetFullUserInfoResponse, UserData>(
       const response = await goitApi.patch('/users/current/edit', userData);
       // After successful login, add the token to the HTTP header
       setAuthHeader(response.data.token);
+      return response.data;
+    } catch (error) {
+      return handleThunkError(error, thunkAPI);
+    }
+  }
+);
+
+// ==========================================================================================================================
+
+// Add a notice to user favorites
+/*
+ * POST @ /notices/favorites/add/{id}
+ */
+export const addNoticeToFavorites = createAsyncThunk<string[], string>(
+  'auth/addNoticeToFavorites',
+  async (id, thunkAPI) => {
+    try {
+      const response = await goitApi.post(`/notices/favorites/add/${id}`);
+      return response.data;
+    } catch (error) {
+      return handleThunkError(error, thunkAPI);
+    }
+  }
+);
+
+// Remove a notice from user favorites
+/*
+ * DELETE @ /notices/favorites/remove/{id}
+ */
+export const removeNoticeFromFavorites = createAsyncThunk<string[], string>(
+  'auth/removeNoticeFromFavorites',
+  async (id, thunkAPI) => {
+    try {
+      const response = await goitApi.delete(`/notices/favorites/remove/${id}`);
+      return response.data;
+    } catch (error) {
+      return handleThunkError(error, thunkAPI);
+    }
+  }
+);
+
+// GET CURRENT USER INFO
+/*
+ * GET @ /users/current
+ * headers: Authorization: Bearer token
+ */
+export const getCurrentUserInfo = createAsyncThunk<RefreshUserResponse>(
+  'auth/getCurrentUserInfo',
+  async (_, thunkAPI) => {
+    try {
+      const response = await goitApi.get('/users/current');
       return response.data;
     } catch (error) {
       return handleThunkError(error, thunkAPI);

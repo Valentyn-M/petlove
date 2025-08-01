@@ -14,7 +14,7 @@ export interface ModalProps {
   children: React.ReactNode;
   padding80To80?: boolean;
   padding60To60?: boolean;
-  padding40To72?: boolean;
+  padding40To50?: boolean;
   padding50To50?: boolean;
 }
 
@@ -26,7 +26,7 @@ const Modal: React.FC<ModalProps> = ({
   children,
   padding80To80,
   padding60To60,
-  padding40To72,
+  padding40To50,
   padding50To50,
 }) => {
   useEffect(() => {
@@ -72,7 +72,7 @@ const Modal: React.FC<ModalProps> = ({
                 className && className,
                 padding80To80 && s.padding80To80,
                 padding60To60 && s.padding60To60,
-                padding40To72 && s.padding40To72,
+                padding40To50 && s.padding40To50,
                 padding50To50 && s.padding50To50
               )}
               initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}

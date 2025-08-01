@@ -2,6 +2,8 @@ import { RootState } from '@/store/store';
 
 export const selectIsLoading = (state: RootState) => state.auth.loading;
 export const selectIsLoadingAvatar = (state: RootState) => state.auth.loadingAvatar;
+export const selectIsLoadingCurrentUser = (state: RootState) => state.auth.loadingCurrentUser;
+export const selectIsLoadingFullUser = (state: RootState) => state.auth.loadingFullUser;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectIsToken = (state: RootState) => state.auth.token;
 

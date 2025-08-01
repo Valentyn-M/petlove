@@ -7,11 +7,15 @@ import { useModal } from '@/hooks/useModal';
 import Modal from '@/components/Modal/Modal';
 import ModalChildAttention from '@/components/ModalChildAttention/ModalChildAttention';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { selectIsLoggedIn } from '@/store/auth/selectors';
+import {
+  selectAuthUserPetsNoticesFavorites,
+  selectIsLoadingCurrentUser,
+  selectIsLoggedIn,
+} from '@/store/auth/selectors';
 import ModalChildNotice from '@/components/ModalChildNotice/ModalChildNotice';
-import { selectNoticesFavoritesItems, selectNoticesFavoritesLoading } from '@/store/noticesFavorites/selectors';
-import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
 import clsx from 'clsx';
+import { addNoticeToFavorites, getCurrentUserInfo, removeNoticeFromFavorites } from '@/store/auth/operations';
+import { enqueueSnackbar } from 'notistack';
 
 export interface NoticesItemProps {
   noticeData: NoticesItem;
@@ -22,8 +26,8 @@ const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
   const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = noticeData;
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);
-  const isLoadingFavoriteNotices = useAppSelector(selectNoticesFavoritesLoading);
+  const isLoadingCurrentUser = useAppSelector(selectIsLoadingCurrentUser);
+  const userFavoriteNotices = useAppSelector(selectAuthUserPetsNoticesFavorites);
 
   const dispatch = useAppDispatch();
 
@@ -36,18 +40,24 @@ const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
   }
 
   // Favorite Notice
-  const isFavorite = favoriteNotices.includes(_id);
+  const isFavorite = userFavoriteNotices.some((favorite) => favorite._id === _id);
 
-  const handleClickFavorite = (): void => {
+  const handleClickFavorite = async (): Promise<void> => {
     if (!isLoggedIn) {
       openModal('attention');
       return;
     }
 
-    if (!isFavorite) {
-      dispatch(addNoticeToFavorites(_id));
-    } else {
-      dispatch(removeNoticeFromFavorites(_id));
+    try {
+      if (!isFavorite) {
+        await dispatch(addNoticeToFavorites(_id)).unwrap();
+      } else {
+        await dispatch(removeNoticeFromFavorites(_id)).unwrap();
+      }
+
+      await dispatch(getCurrentUserInfo()).unwrap();
+    } catch (error) {
+      enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
     }
   };
 
@@ -61,6 +71,12 @@ const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
       openModal('notice');
     }
   };
+
+  // Define icon for ButtonFunction
+  let iconName = isFavorite ? 'heart' : 'heart-empty';
+  if (variant === 'profile') {
+    iconName = 'trash';
+  }
 
   return (
     <article className={clsx(s.article, { [s.profile]: variant === 'profile' })}>
@@ -110,9 +126,10 @@ const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
           Learn more
         </ButtonMain>
 
+        {/* TODO In Profile -> Viewed it must be hidden */}
         <ButtonFunction
-          iconName={variant === 'profile' ? 'trash' : isFavorite ? 'heart' : 'heart-empty'}
-          disabled={isLoadingFavoriteNotices}
+          iconName={iconName}
+          disabled={isLoadingCurrentUser}
           className={clsx(s.btn, s.favorite)}
           onClick={handleClickFavorite}
         />
@@ -132,7 +149,7 @@ const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
       )}
 
       {isModalOpen('notice') && (
-        <Modal className={s.modalNotice} isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To72={true}>
+        <Modal className={s.modalNotice} isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To50>
           <ModalChildNotice noticeId={_id} onClose={closeModal} />
         </Modal>
       )}

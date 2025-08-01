@@ -52,7 +52,10 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
   });
 
   // Change avatar
-  const handleUploadAvatar = async (avatarUrl: string, validateForm: () => Promise<FormikErrors<FormValues>>): void => {
+  const handleUploadAvatar = async (
+    avatarUrl: string,
+    validateForm: () => Promise<FormikErrors<FormValues>>
+  ): Promise<void> => {
     const errors = await validateForm();
     if (errors.avatar) return;
 

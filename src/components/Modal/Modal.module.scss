@@ -59,12 +59,12 @@
   }
 }
 
-.modal.padding40To72 {
-  padding: 40px 72px;
+.modal.padding40To50 {
+  padding: 40px 50px;
 
   @media (max-width: rem($mobileMedium)) {
-    @include adaptiveValue('padding-left', 72, 28, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('padding-right', 72, 28, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-left', 50, 28, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-right', 50, 28, $mobileMedium, $mobileSmall);
   }
 
   @media (max-width: rem($mobileSmall)) {

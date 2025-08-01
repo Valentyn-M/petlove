@@ -10,8 +10,8 @@ import { svgIcon } from '@/components/App';
 import clsx from 'clsx';
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import LinkMain from '@/components/LinkMain/LinkMain';
-import { selectNoticesFavoritesItems, selectNoticesFavoritesLoading } from '@/store/noticesFavorites/selectors';
-import { addNoticeToFavorites, removeNoticeFromFavorites } from '@/store/noticesFavorites/operations';
+import { selectAuthUserPetsNoticesFavorites, selectIsLoadingCurrentUser } from '@/store/auth/selectors';
+import { addNoticeToFavorites, getCurrentUserInfo, removeNoticeFromFavorites } from '@/store/auth/operations';
 
 export interface ModalChildNoticeProps {
   noticeId: string;
@@ -20,8 +20,8 @@ export interface ModalChildNoticeProps {
 
 const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
   const noticeDetails = useAppSelector(selectNoticesDetailsItem);
-  const favoriteNotices = useAppSelector(selectNoticesFavoritesItems);
-  const isLoadingFavoriteNotices = useAppSelector(selectNoticesFavoritesLoading);
+  const isLoadingCurrentUser = useAppSelector(selectIsLoadingCurrentUser);
+  const userFavoriteNotices = useAppSelector(selectAuthUserPetsNoticesFavorites);
 
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -63,15 +63,22 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
   const priceFormatted = typeof price === 'number' ? price.toFixed(2) : '0.00';
 
   // Favorite Notice
-  const isFavorite = favoriteNotices.includes(noticeId);
+  const isFavorite = userFavoriteNotices.some((favorite) => favorite._id === noticeId);
 
-  const handleClick = (): void => {
-    if (!isFavorite) {
-      dispatch(addNoticeToFavorites(noticeId));
-    } else {
-      dispatch(removeNoticeFromFavorites(noticeId));
+  const handleClick = async (): Promise<void> => {
+    try {
+      if (!isFavorite) {
+        await dispatch(addNoticeToFavorites(noticeId)).unwrap();
+      } else {
+        await dispatch(removeNoticeFromFavorites(noticeId)).unwrap();
+      }
+
+      await dispatch(getCurrentUserInfo()).unwrap();
+    } catch (error) {
+      enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
     }
   };
+  const btnLabel = !isFavorite ? 'Adding...' : 'Removing...';
 
   return (
     <div className={s.modalChildNoticeProps}>
@@ -117,9 +124,9 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerCase className={s.btn} disabled={isLoadingFavoriteNotices} onClick={handleClick}>
-          {isLoadingFavoriteNotices ? (
-            'Loading...'
+        <ButtonMain lowerCase className={s.btn} disabled={isLoadingCurrentUser} onClick={handleClick}>
+          {isLoadingCurrentUser ? (
+            btnLabel
           ) : (
             <>
               <span>{!isFavorite ? 'Add to' : 'Remove from'}</span>
