@@ -20,9 +20,10 @@ import { enqueueSnackbar } from 'notistack';
 export interface NoticesItemProps {
   noticeData: NoticesItem;
   variant?: string;
+  isBtnFunc?: boolean;
 }
 
-const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
+const NoticesItem = ({ noticeData, variant = 'default', isBtnFunc = true }: NoticesItemProps) => {
   const { imgURL, title, popularity, name, birthday, sex, species, category, comment, price, _id } = noticeData;
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
@@ -126,13 +127,14 @@ const NoticesItem = ({ noticeData, variant = 'default' }: NoticesItemProps) => {
           Learn more
         </ButtonMain>
 
-        {/* TODO In Profile -> Viewed it must be hidden */}
-        <ButtonFunction
-          iconName={iconName}
-          disabled={isLoadingCurrentUser}
-          className={clsx(s.btn, s.favorite)}
-          onClick={handleClickFavorite}
-        />
+        {isBtnFunc && (
+          <ButtonFunction
+            iconName={iconName}
+            disabled={isLoadingCurrentUser}
+            className={clsx(s.btn, s.favorite)}
+            onClick={handleClickFavorite}
+          />
+        )}
       </div>
 
       {/* Modals */}

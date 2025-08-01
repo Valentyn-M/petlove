@@ -115,16 +115,16 @@
 
 .datails {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   margin-bottom: 16px;
-  @include adaptiveValue('gap', 20, 5, $pc, $tablet);
+  @include adaptiveValue('gap', 20, 8, $pc, $tablet);
 
   @media (max-width: rem($tablet)) {
     @include adaptiveValue('gap', 20, 16, $tablet, $mobile);
   }
 
   @media (max-width: rem($mobile)) {
-    @include adaptiveValue('gap', 16, 5, $mobile, $mobileMedium);
+    @include adaptiveValue('gap', 16, 8, $mobile, $mobileMedium);
   }
 
   @media (max-width: rem($mobileMedium)) {
@@ -132,15 +132,34 @@
   }
 
   @media (max-width: rem($mobileSmall)) {
-    @include adaptiveValue('gap', 14, 5, $mobileSmall);
+    @include adaptiveValue('gap', 14, 8, $mobileSmall);
   }
 
   // profile
   .profile & {
     margin-bottom: 14px;
+    @include adaptiveValue('gap', 16, 8, $pc, $tablet);
+    @include adaptiveValue('font-size', 12, 11, $pc, $tablet);
+
+    @media (max-width: rem($tablet)) {
+      font-size: 12px;
+      @include adaptiveValue('gap', 20, 16, $tablet, $mobile);
+    }
+
+    @media (max-width: rem($mobile)) {
+      @include adaptiveValue('gap', 16, 8, $mobile, $mobileMedium);
+      @include adaptiveValue('font-size', 12, 11, $mobile, $mobileMedium);
+    }
 
     @media (max-width: rem($mobileMedium)) {
       margin-bottom: 16px;
+      font-size: 12px;
+      @include adaptiveValue('gap', 20, 14, $mobileMedium, $mobileSmall);
+    }
+
+    @media (max-width: rem($mobileSmall)) {
+      @include adaptiveValue('font-size', 12, 11, $mobileSmall);
+      @include adaptiveValue('gap', 14, 8, $mobileSmall);
     }
   }
 }
@@ -149,6 +168,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  max-width: 64px;
 }
 
 .datailsTitle {
@@ -161,6 +181,7 @@
 .datailsValue {
   line-height: 1.16667;
   letter-spacing: -0.02em;
+  word-break: break-word;
   &::first-letter {
     text-transform: uppercase;
   }
