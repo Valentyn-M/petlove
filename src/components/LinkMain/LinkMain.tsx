@@ -8,6 +8,7 @@ type CommonProps = {
   outline?: boolean;
   lowerCase?: boolean;
   inactive?: boolean;
+  grey?: boolean;
   className?: string;
   children: React.ReactNode;
 };
@@ -18,13 +19,14 @@ type ExternalLinkProps = CommonProps & React.AnchorHTMLAttributes<HTMLAnchorElem
 type LinkMainProps = InternalLinkProps | ExternalLinkProps;
 
 const LinkMain: React.FC<LinkMainProps> = (props) => {
-  const { light, outline, lowerCase, inactive, className, children, ...rest } = props;
+  const { light, outline, lowerCase, inactive, grey, className, children, ...rest } = props;
   const classNames = clsx(
     s.link,
     light && s.light,
     outline && s.outline,
     lowerCase && s.lowerCase,
     inactive && s.inactive,
+    grey && s.grey,
     className
   );
 
