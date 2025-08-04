@@ -12,9 +12,10 @@ export interface PetBlockProps {
   imgAlt: string;
   imgWidth: string;
   imgHeight: string;
-  petName: string;
-  petBirthday: string;
-  petAbout: string;
+  isPetBlockInfo?: boolean;
+  petName?: string;
+  petBirthday?: string;
+  petAbout?: string;
   petType?: string;
 }
 
@@ -28,6 +29,7 @@ const PetBlock = ({
   imgAlt,
   imgWidth,
   imgHeight,
+  isPetBlockInfo = false,
   petName,
   petBirthday,
   petAbout,
@@ -47,7 +49,9 @@ const PetBlock = ({
         />
         <img className={s.image} src={imageMobile1x} alt={imgAlt} width={imgWidth} height={imgHeight} loading="lazy" />
       </picture>
-      <PetBlockInfo petName={petName} petBirthday={petBirthday} petAbout={petAbout} petType={petType} />
+      {isPetBlockInfo && (
+        <PetBlockInfo petName={petName} petBirthday={petBirthday} petAbout={petAbout} petType={petType} />
+      )}
     </div>
   );
 };

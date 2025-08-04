@@ -23,6 +23,7 @@ const Login = ({}: LoginProps) => {
         imgAlt={'Dog'}
         imgWidth="335"
         imgHeight="280"
+        isPetBlockInfo={true}
         petName={'Rich'}
         petBirthday={'21.09.2020'}
         petAbout={

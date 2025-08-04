@@ -2,13 +2,18 @@ import IconPet from '@/components/IconPet/IconPet';
 import s from './PetBlockInfo.module.scss';
 
 export interface PetBlockInfoProps {
-  petName: string;
-  petBirthday: string;
-  petAbout: string;
-  petType: string;
+  petName?: string;
+  petBirthday?: string;
+  petAbout?: string;
+  petType?: string;
 }
 
-const PetBlockInfo = ({ petName, petBirthday, petAbout, petType }: PetBlockInfoProps) => {
+const PetBlockInfo = ({
+  petName = 'Cat',
+  petBirthday = '01.01.2025',
+  petAbout = 'Pet description',
+  petType = 'cat',
+}: PetBlockInfoProps) => {
   return (
     <div className={s.petBlockInfo}>
       <IconPet small={true} petType={petType} />

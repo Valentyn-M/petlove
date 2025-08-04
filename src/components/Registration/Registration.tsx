@@ -23,6 +23,7 @@ const Registration = ({}: RegistrationProps) => {
         imgAlt={'Cat'}
         imgWidth="334"
         imgHeight="280"
+        isPetBlockInfo={true}
         petName={'Jack'}
         petBirthday={'18.10.2021'}
         petAbout={
