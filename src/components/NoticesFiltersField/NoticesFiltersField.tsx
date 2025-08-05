@@ -12,6 +12,10 @@ export interface NoticesFiltersFieldProps {
   handleChange(e: SelectChangeEvent): void;
   className?: string;
   classNameGeneral?: string;
+  isOutline?: boolean;
+  isFilled?: boolean;
+  isError?: boolean;
+  specialOption?: boolean;
 }
 
 const NoticesFiltersField = ({
@@ -22,8 +26,23 @@ const NoticesFiltersField = ({
   handleChange,
   className,
   classNameGeneral,
+  isOutline = false,
+  isFilled = false,
+  isError = false,
+  specialOption = true,
 }: NoticesFiltersFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  let isBorder = 'none';
+  if (isOutline) {
+    if (isFilled) {
+      isBorder = 'var(--brand-color)';
+    } else if (isError) {
+      isBorder = 'var(--error-color)';
+    } else {
+      isBorder = 'var(--grey-color-light)';
+    }
+  }
 
   return (
     <FormControl
@@ -45,6 +64,8 @@ const NoticesFiltersField = ({
         '&:hover': {
           borderColor: 'var(--brand-color)',
         },
+        // Styles from AddPetForm
+        borderColor: isBorder,
 
         // outlined input
         '& .MuiOutlinedInput-root': {
@@ -53,7 +74,6 @@ const NoticesFiltersField = ({
           fontFamily: 'Manrope, sans-serif',
           fontWeight: 500,
           letterSpacing: '-0.03em',
-          textTransform: 'capitalize',
           // Деякі стилі змінюються при зміні екрану, тому прописуємо їх ззовні
           fontSize: 'inherit',
           lineHeight: 'inherit',
@@ -70,11 +90,12 @@ const NoticesFiltersField = ({
           height: '100% !important',
           display: 'flex',
           alignItems: 'center',
+          paddingLeft: '0.875rem', // 14px
         },
 
         // icon
         '& .MuiSelect-icon': {
-          right: 0,
+          right: '0.875rem', // 14px
           top: 'calc(50% - 0.5625rem)', // 9px (half of icon height)
           fill: 'var(--main-color)',
         },
@@ -89,9 +110,17 @@ const NoticesFiltersField = ({
         name={fieldName}
         id={fieldName}
         input={<OutlinedInput notched={false} />}
-        renderValue={(selected) => selected || fieldPlaceholder}
         inputProps={{ 'aria-label': 'Filter' }}
         IconComponent={SvgArrowIcon}
+        // Make firdt letter toUpperCase
+        // renderValue={(selected) => selected || fieldPlaceholder}
+        renderValue={(selected) =>
+          selected ? (
+            selected.charAt(0).toUpperCase() + selected.slice(1)
+          ) : (
+            <span style={{ color: 'var(--grey-color)' }}>{fieldPlaceholder}</span>
+          )
+        }
         // list wrapper
         MenuProps={{
           PaperProps: {
@@ -103,6 +132,9 @@ const NoticesFiltersField = ({
               padding: '0.875rem', // 14px
               paddingRight: '0', // 0
               maxHeight: '13.5rem', // 216px
+              // marginLeft: '-15px',
+              // Styles from AddPetForm
+              border: isOutline ? '1px solid var(--grey-color-light)' : 'none',
 
               // scrollbar
               '&::-webkit-scrollbar': {
@@ -172,7 +204,7 @@ const NoticesFiltersField = ({
         }}
       >
         {/* Special option */}
-        <MenuItem value="">Show all</MenuItem>
+        {specialOption && <MenuItem value="">Show all</MenuItem>}
 
         {selectOptions.map((option) => (
           <MenuItem key={`select-option-${option}`} value={option}>

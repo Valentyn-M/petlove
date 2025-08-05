@@ -1,17 +1,28 @@
 import { svgIcon } from '@/components/App';
 import s from './AddPetForm.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import clsx from 'clsx';
 import ButtonUpload from '@/components/ButtonUpload/ButtonUpload';
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import LinkMain from '@/components/LinkMain/LinkMain';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { selectNoticesFiltersSpeciesList } from '@/store/noticesFilters/selectors';
+import NoticesFiltersField from '@/components/NoticesFiltersField/NoticesFiltersField';
+import { fetchSpecies } from '@/store/noticesFilters/oprations';
 
 export interface AddPetFormProps {}
 
 const AddPetForm = ({}: AddPetFormProps) => {
   const [petPhoto, setPetPhoto] = useState<string>('');
+
+  // Fetch Species
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchSpecies());
+  }, [dispatch]);
+  const speciesList = useAppSelector(selectNoticesFiltersSpeciesList);
 
   interface FormValues {
     sex: string;
@@ -19,7 +30,7 @@ const AddPetForm = ({}: AddPetFormProps) => {
     title: string;
     name: string;
     // birthday: string;
-    // type: string;
+    type: string;
   }
 
   const initialValues: FormValues = {
@@ -28,7 +39,7 @@ const AddPetForm = ({}: AddPetFormProps) => {
     title: '',
     name: '',
     // birthday: '',
-    // type: '',
+    type: '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -37,11 +48,11 @@ const AddPetForm = ({}: AddPetFormProps) => {
       .matches(/^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/, 'Pet photo URL must be valid')
       .required('Pet photo is required'),
     title: Yup.string().min(3, 'Too short!').max(20, 'Too long!').required('Title is required'),
-    name: Yup.string().min(3, 'Too short!').max(20, 'Too long!').required('Pet name is required'),
+    name: Yup.string().min(3, 'Too short!').max(20, 'Too long!').required('Pet’s Name is required'),
     //   birthday: Yup.string()
     //     .matches(/^\d{4}-\d{2}-\d{2}$/)
     //     .required('Pet birthday is required'),
-    //   type: Yup.string().required('Pet type is required'),
+    type: Yup.string().required('Type of pet is required'),
   });
 
   const handleSubmit = (values: FormikValues): void => {
@@ -57,7 +68,7 @@ const AddPetForm = ({}: AddPetFormProps) => {
         </h2>
 
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
-          {({ errors, values, setFieldValue }) => (
+          {({ errors, touched, values, setFieldValue }) => (
             <Form className={s.form}>
               {/* Sex */}
               <div className={s.sexButtonsBlock}>
@@ -67,7 +78,7 @@ const AddPetForm = ({}: AddPetFormProps) => {
                     type="button"
                     onClick={() => setFieldValue('sex', 'female')}
                   >
-                    <svg className={clsx(s.iconSex, s.iconFemale)}>
+                    <svg className={s.iconSex}>
                       <use href={`${svgIcon}#icon-female`} />
                     </svg>
                   </button>
@@ -76,16 +87,16 @@ const AddPetForm = ({}: AddPetFormProps) => {
                     type="button"
                     onClick={() => setFieldValue('sex', 'male')}
                   >
-                    <svg className={clsx(s.iconSex, s.iconMale)}>
+                    <svg className={s.iconSex}>
                       <use href={`${svgIcon}#icon-male`} />
                     </svg>
                   </button>
                   <button
-                    className={clsx(s.btnSex, s.btnunknown, values.sex === 'unknown' && s.active)}
+                    className={clsx(s.btnSex, s.btnUnknown, values.sex === 'unknown' && s.active)}
                     type="button"
                     onClick={() => setFieldValue('sex', 'unknown')}
                   >
-                    <svg className={clsx(s.iconSex, s.iconUnknown)}>
+                    <svg className={s.iconSex}>
                       <use href={`${svgIcon}#icon-sexual-reproductive`} />
                     </svg>
                   </button>
@@ -94,9 +105,9 @@ const AddPetForm = ({}: AddPetFormProps) => {
               </div>
 
               {/* Photo */}
-              <div className={s.avatar}>
-                {!petPhoto ? (
-                  <svg className={s.iconUser}>
+              <div className={s.photo}>
+                {!petPhoto || errors.imgURL ? (
+                  <svg className={s.iconPet}>
                     <use href={`${svgIcon}#icon-cat-footprint`} />
                   </svg>
                 ) : (
@@ -105,10 +116,13 @@ const AddPetForm = ({}: AddPetFormProps) => {
               </div>
 
               <div className={s.fieldsBlock}>
-                <label className={`${s.label} ${s.labelPhoto} ${errors.imgURL ? s.error : ''}`} htmlFor="avatar">
+                <label
+                  className={`${s.label} ${s.labelPhoto} ${errors.imgURL && touched.imgURL ? s.error : ''}`}
+                  htmlFor="imgURL"
+                >
                   <div className={s.fieldWrap}>
                     <Field
-                      className={clsx(s.field, s.field)}
+                      className={clsx(s.field, s.fieldPhoto, values.imgURL && s.filled)}
                       type="text"
                       name="imgURL"
                       id="imgURL"
@@ -117,11 +131,11 @@ const AddPetForm = ({}: AddPetFormProps) => {
                     />
                     <ErrorMessage className={s.fieldError} name="imgURL" component="span" />
                   </div>
-                  <ButtonUpload className={s.btnAvatar} onClick={() => setPetPhoto(values.imgURL.trim())} />
+                  <ButtonUpload className={s.btnPhoto} onClick={() => setPetPhoto(values.imgURL.trim())} />
                 </label>
 
                 {/* Title */}
-                <label className={`${s.label} ${errors.title ? s.error : ''}`} htmlFor="name">
+                <label className={`${s.label} ${errors.title && touched.title ? s.error : ''}`} htmlFor="title">
                   <Field
                     className={clsx(s.field, values.title && s.filled)}
                     type="text"
@@ -134,7 +148,7 @@ const AddPetForm = ({}: AddPetFormProps) => {
                 </label>
 
                 {/* Name */}
-                <label className={`${s.label} ${errors.name ? s.error : ''}`} htmlFor="name">
+                <label className={`${s.label} ${errors.name && touched.name ? s.error : ''}`} htmlFor="name">
                   <Field
                     className={clsx(s.field, values.name && s.filled)}
                     type="text"
@@ -145,6 +159,24 @@ const AddPetForm = ({}: AddPetFormProps) => {
                   />
                   <ErrorMessage className={s.fieldError} name="name" component="span" />
                 </label>
+
+                {/* Type of pet */}
+                <div className={`${s.label}`}>
+                  <NoticesFiltersField
+                    fieldPlaceholder={'Type of pet'}
+                    fieldName={'type'}
+                    fieldValue={values.type}
+                    selectOptions={speciesList}
+                    handleChange={(e) => setFieldValue('type', e.target.value)}
+                    className={clsx('addPetSelect')}
+                    classNameGeneral={clsx('field')}
+                    isOutline={true}
+                    isFilled={!!values.type}
+                    isError={!!errors.type && !!touched.type}
+                    specialOption={false}
+                  />
+                  <ErrorMessage className={s.fieldError} name="type" component="span" />
+                </div>
               </div>
 
               <div className={s.footer}>
