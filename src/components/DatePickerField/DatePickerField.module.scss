@@ -1,0 +1,49 @@
+.field {
+  // Все залежить від поля inputRoot: воно приймає стан та класи
+  // hover (:hover), focus (Mui-focused), error (.Mui-error)
+  .inputRoot {
+    border-radius: 30px;
+    padding: 15px;
+    width: 100%;
+    font-family: $fontFamily;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: var(--main-color);
+
+    fieldset {
+      border: 1px solid var(--grey-color-light);
+      transition: border-color 0.3s;
+    }
+
+    &:hover fieldset {
+      border-color: var(--brand-color);
+    }
+  }
+
+  // field приймає класс filled
+  &.filled {
+    .inputRoot {
+      fieldset {
+        border: 1px solid var(--brand-color);
+      }
+    }
+  }
+}
+
+// focus (MUI додає клас .Mui-focused на той же елемент, що має .inputRoot)
+:global(.Mui-focused).inputRoot fieldset {
+  border: 1px solid var(--brand-color) !important;
+}
+
+// error (MUI додає клас .Mui-error на той же елемент, що має .inputRoot)
+:global(.Mui-error).inputRoot fieldset {
+  border-color: var(--error-color);
+}
+
+// ==========================================================================================================================
+
+.inputElement {
+  background-color: red;
+}

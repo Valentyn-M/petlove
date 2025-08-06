@@ -10,6 +10,7 @@ export interface NoticesFiltersFieldProps {
   fieldValue: string;
   selectOptions: string[];
   handleChange(e: SelectChangeEvent): void;
+  onBlur?: () => void;
   className?: string;
   classNameGeneral?: string;
   isOutline?: boolean;
@@ -24,6 +25,7 @@ const NoticesFiltersField = ({
   fieldValue,
   selectOptions,
   handleChange,
+  onBlur,
   className,
   classNameGeneral,
   isOutline = false,
@@ -106,7 +108,11 @@ const NoticesFiltersField = ({
         value={fieldValue}
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onBlur={() => {
+          setIsFocused(false);
+          // викликаємо передану з форми функцію
+          onBlur?.();
+        }}
         name={fieldName}
         id={fieldName}
         input={<OutlinedInput notched={false} />}

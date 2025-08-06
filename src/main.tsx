@@ -8,6 +8,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from '@/store/store';
 import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { themeDatePicker } from '@/theme/themeDatePicker';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,7 +19,10 @@ createRoot(document.getElementById('root')!).render(
         <BrowserRouter>
           <HeadProvider>
             <SnackbarProvider autoHideDuration={4000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-              <App />
+              <ThemeProvider theme={themeDatePicker}>
+                <CssBaseline />
+                <App />
+              </ThemeProvider>
             </SnackbarProvider>
           </HeadProvider>
         </BrowserRouter>

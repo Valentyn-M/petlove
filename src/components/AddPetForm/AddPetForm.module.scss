@@ -250,7 +250,7 @@
 
   &:hover,
   &:focus {
-    border-color: $brandColor;
+    border-color: var(--brand-color);
   }
 
   &.filled {
@@ -258,7 +258,7 @@
   }
 
   .label.error & {
-    border-color: $errorColor;
+    border-color: var(--error-color);
   }
 
   &.fieldPhoto {
