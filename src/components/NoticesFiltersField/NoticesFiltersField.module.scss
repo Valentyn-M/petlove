@@ -28,6 +28,10 @@
     // @include adaptiveValue('padding-left', 14, 12, $mobileMedium, $mobileSmall, 1, 0, true);
     // @include adaptiveValue('padding-right', 14, 12, $mobileMedium, $mobileSmall, 1, 0, true);
   }
+
+  &.addPetSelect {
+    height: 52px;
+  }
 }
 
 .formControl {

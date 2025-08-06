@@ -2,6 +2,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import s from './DatePickerField.module.scss';
 import { format, isValid, parseISO } from 'date-fns';
 import clsx from 'clsx';
+import SvgCalendarIcon from '@/components/SvgCalendarIcon/SvgCalendarIcon';
 
 export interface DatePickerFieldProps {
   value: string;
@@ -37,6 +38,9 @@ const DatePickerField = ({
         onChange(date ? format(date, 'yyyy-MM-dd') : '');
       }}
       format={displayFormat}
+      slots={{
+        openPickerIcon: SvgCalendarIcon, // <-- підміняємо іконку
+      }}
       slotProps={{
         textField: {
           name,
@@ -48,18 +52,17 @@ const DatePickerField = ({
           fullWidth: true,
           // Класи для зовнішнього контейнера інпута
           className: clsx(s.field, { [s.filled]: isFilled }, className),
-          // Ось сюди прокидуємо клас для самого OutlinedInput-root
+
+          // Клас на "outlined" контейнер (root OutlinedInput)
           InputProps: {
             disableUnderline: true,
             className: s.inputRoot,
           },
-          // А сюди — на нутрощі <input>
-          inputProps: {
-            className: s.inputElement,
-          },
         },
+
+        // Icon
         openPickerButton: {
-          className: s.dateIcon,
+          className: s.calendarIcon,
         },
       }}
     />
