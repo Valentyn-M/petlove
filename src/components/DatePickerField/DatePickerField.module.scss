@@ -84,3 +84,76 @@
 }
 
 // ==========================================================================================================================
+
+// Calendar
+
+.calendarPopper {
+  .calendarPaper {
+    margin-top: 4px;
+    box-shadow: none;
+    border: 1px solid var(--grey-color-light);
+    border-radius: 15px;
+    font-family: $fontFamily;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: var(--main-color);
+
+    // Заголовок місяця
+    :global(.MuiPickersCalendarHeader-root .MuiPickersCalendarHeader-labelContainer) {
+      font-family: inherit;
+      font-weight: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+      color: inherit;
+    }
+
+    // Кнопки навігації
+    :global(.MuiPickersArrowSwitcher-root) {
+      button {
+        :global(.MuiSvgIcon-root) {
+          fill: var(--main-color);
+        }
+      }
+    }
+
+    /* ====== Числа ====== */
+    // Всі дні
+    :global(.MuiButtonBase-root.MuiPickersDay-root:not(.Mui-selected)) {
+    }
+
+    // Сьогодні
+    :global(.MuiButtonBase-root.MuiPickersDay-root:not(.Mui-selected).MuiPickersDay-today) {
+      border: 1px solid var(--grey-color-light);
+    }
+
+    // Вибраний день
+    :global(.MuiButtonBase-root.MuiPickersDay-root.Mui-selected) {
+      background: var(--brand-color);
+    }
+
+    /* ====== РОКИ ====== */
+    // Спільні стилі кнопок-років
+    :global(.MuiYearCalendar-button) {
+      font-family: inherit;
+      font-weight: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+      color: inherit;
+    }
+
+    // Поточний рік, але НЕ вибраний
+    :global(.MuiYearCalendar-button[aria-current='date']:not(.Mui-selected)) {
+      border: 1px solid var(--grey-color-light);
+    }
+
+    // Вибраний рік
+    :global(.MuiYearCalendar-button.Mui-selected) {
+      background: var(--brand-color);
+      color: var(--white-color);
+    }
+  }
+}

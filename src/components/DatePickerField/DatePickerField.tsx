@@ -55,7 +55,6 @@ const DatePickerField = ({
 
           // Клас на "outlined" контейнер (root OutlinedInput)
           InputProps: {
-            disableUnderline: true,
             className: s.inputRoot,
           },
         },
@@ -64,6 +63,12 @@ const DatePickerField = ({
         openPickerButton: {
           className: s.calendarIcon,
         },
+
+        // Клас для Popper’а (опційно, якщо треба позиціонування/анімації)
+        popper: { className: s.calendarPopper },
+
+        // Клас для самого календаря
+        desktopPaper: { className: s.calendarPaper },
       }}
     />
   );
