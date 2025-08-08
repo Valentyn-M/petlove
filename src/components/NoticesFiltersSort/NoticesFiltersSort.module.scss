@@ -4,7 +4,7 @@
   flex-wrap: wrap;
 
   @media (max-width: rem($mobileMedium)) {
-    @include adaptiveValue('gap', 8, 10, $mobileMedium, $mobileSmall);
+    gap: 10px;
   }
 }
 
@@ -23,9 +23,9 @@
 
   @media (max-width: rem($mobileMedium)) {
     line-height: 1.28571;
-    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('padding', 13, 11, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('gap', 8, 6, $mobileMedium, $mobileSmall);
+    font-size: 14px;
+    padding: 11px;
+    gap: 6px;
   }
 
   @media (any-hover: hover) {

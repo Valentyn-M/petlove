@@ -26,9 +26,10 @@
   }
 
   @media (max-width: rem($mobileMedium)) {
-    padding: 12px;
+    padding: 10px;
     font-size: 12px;
     line-height: 1.33333;
+    gap: 5px;
   }
 }
 
@@ -36,4 +37,8 @@
   width: 18px;
   aspect-ratio: 1;
   fill: var(--brand-color);
+
+  @media (max-width: rem($mobileMedium)) {
+    width: 16px;
+  }
 }

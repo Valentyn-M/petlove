@@ -7,6 +7,7 @@ export interface ButtonMainProps extends ComponentProps<'button'> {
   outline?: boolean;
   grey?: boolean;
   lowerCase?: boolean;
+  small?: boolean;
   inactive?: boolean;
 }
 // ComponentProps<'button'> — додає підтримку всіх стандартних атрибутів кнопки
@@ -17,6 +18,7 @@ const ButtonMain = ({
   outline,
   grey,
   lowerCase,
+  small,
   inactive,
   className,
   children,
@@ -34,6 +36,7 @@ const ButtonMain = ({
         outline && s.outline,
         grey && s.grey,
         lowerCase && s.lowerCase,
+        small && s.small,
         inactive && s.inactive,
         disabled && s.disabled,
         className

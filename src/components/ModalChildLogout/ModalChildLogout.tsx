@@ -32,10 +32,10 @@ const ModalChildLogout = ({ onClose }: ModalChildLogoutProps) => {
       <IconPet className={s.iconPet} />
       <h3 className={s.title}>Already leaving?</h3>
       <div className={s.buttons}>
-        <ButtonMain className={s.btn} lowerCase={true} onClick={handleClick}>
+        <ButtonMain className={s.btn} lowerCase={true} small onClick={handleClick}>
           Yes
         </ButtonMain>
-        <ButtonMain className={s.btn} lowerCase={true} grey={true} onClick={() => onClose()}>
+        <ButtonMain className={s.btn} lowerCase={true} small grey={true} onClick={() => onClose()}>
           Cancel
         </ButtonMain>
       </div>

@@ -9,7 +9,7 @@ const UserAddPet = ({}: UserAddPetProps) => {
   return (
     <div className={s.userAddPet}>
       <h3 className={s.title}>My pets</h3>
-      <LinkMain to="/add-pet" lowerCase className={clsx(s.link, s.linkAdd)}>
+      <LinkMain to="/add-pet" lowerCase small className={clsx(s.link, s.linkAdd)}>
         <span>Add pet</span>
         <svg className={s.iconAdd}>
           <use href={`${svgIcon}#icon-plus`} />

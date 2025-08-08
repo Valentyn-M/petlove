@@ -68,7 +68,13 @@ const DatePickerField = ({
         popper: { className: s.calendarPopper },
 
         // Клас для самого календаря
+        /* === desktop  === */
         desktopPaper: { className: s.calendarPaper },
+
+        /* === mobile === */
+        mobilePaper: { className: s.calendarPaper }, // той самий стиль, що й для desktop
+        dialog: { className: s.calendarDialog }, // якщо хочеш підправити Dialog
+        /* mobileTransition: { timeout: 200 }  // приклад, якщо треба змінити анімацію */
       }}
     />
   );

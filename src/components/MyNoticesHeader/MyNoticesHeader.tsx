@@ -20,6 +20,7 @@ const MyNoticesHeader = ({
       <ButtonMain
         className={clsx(s.btn, s.switcher)}
         lowerCase
+        small
         inactive={!isFavoriteActive}
         onClick={() => activateFavoritePets()}
       >
@@ -28,6 +29,7 @@ const MyNoticesHeader = ({
       <ButtonMain
         className={clsx(s.btn, s.switcher)}
         lowerCase
+        small
         inactive={!isViewedActive}
         onClick={() => activateViewedPets()}
       >

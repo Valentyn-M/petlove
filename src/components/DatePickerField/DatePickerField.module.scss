@@ -49,6 +49,12 @@
   opacity: 1;
   padding: 16px;
   padding-right: 0;
+
+  @media (max-width: rem($mobileMedium)) {
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.28571;
+  }
 }
 
 .field :global(.MuiPickersSectionList-section),
@@ -77,7 +83,12 @@
 
 // Calendar icon
 .field .inputRoot .calendarIcon {
-  margin-right: 7px; // 15px (padding) - 8px
+  margin-right: 8px; // 16px (general padding) - 8px (icon padding)
+
+  @media (max-width: rem($mobileMedium)) {
+    padding: 4px; // 12px (general padding) - 8px (icon padding)
+  }
+
   :global(.MuiSvgIcon-root) {
     fill: var(--main-color);
   }
@@ -87,6 +98,7 @@
 
 // Calendar
 
+// === desktop ===
 .calendarPopper {
   .calendarPaper {
     margin-top: 4px;
@@ -155,5 +167,88 @@
       background: var(--brand-color);
       color: var(--white-color);
     }
+  }
+}
+
+// ==========================================================================================================================
+
+// === mobile ===
+/* твої існуючі правила залишаються */
+
+.calendarDialog {
+  // Бекдроп
+  :global(.MuiBackdrop-root) {
+    background: rgba(38, 38, 38, 0.3);
+  }
+
+  // Модалка
+  .calendarPaper {
+    border-radius: 30px;
+    font-family: $fontFamily;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--main-color);
+  }
+
+  // Select date
+  :global(.MuiPickersToolbar-title) {
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
+  // Title (Selected date)
+  :global(.MuiDatePickerToolbar-title) {
+    font-family: inherit;
+    font-weight: inherit;
+    color: var(--main-color);
+  }
+
+  // Month and year Title
+  :global(.MuiPickersCalendarHeader-labelContainer) {
+    font-family: inherit;
+    font-weight: inherit;
+    color: var(--main-color);
+  }
+
+  /* ====== Числа ====== */
+  // Всі дні
+  :global(.MuiButtonBase-root.MuiPickersDay-root:not(.Mui-selected)) {
+  }
+
+  // Сьогодні
+  :global(.MuiButtonBase-root.MuiPickersDay-root:not(.Mui-selected).MuiPickersDay-today) {
+    border: 1px solid var(--grey-color-light);
+  }
+
+  // Вибраний день
+  :global(.MuiButtonBase-root.MuiPickersDay-root.Mui-selected) {
+    background: var(--brand-color);
+  }
+
+  /* ====== РОКИ ====== */
+  // Спільні стилі кнопок-років
+  :global(.MuiYearCalendar-root .MuiYearCalendar-button) {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+
+  // Поточний рік, але НЕ вибраний
+  :global(.MuiYearCalendar-root .MuiYearCalendar-button[aria-current='date']:not(.Mui-selected)) {
+    border: 1px solid var(--grey-color-light);
+  }
+
+  // Вибраний рік
+  :global(.MuiYearCalendar-root .MuiYearCalendar-button.Mui-selected) {
+    background: var(--brand-color);
+    color: var(--white-color);
+  }
+
+  // Ok & Cancel buttons
+  :global(.MuiButtonBase-root.MuiButton-root) {
+    color: var(--brand-color);
   }
 }

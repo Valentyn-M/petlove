@@ -30,7 +30,7 @@
   @media (max-width: rem($mobileMedium)) {
     line-height: 1.28571;
     width: 100%;
-    @include adaptiveValue('font-size', 18, 14, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('padding', 14, 12, $mobileMedium, $mobileSmall);
+    font-size: 14px;
+    padding: 12px;
   }
 }

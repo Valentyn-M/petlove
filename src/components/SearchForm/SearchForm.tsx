@@ -4,13 +4,14 @@ import s from './SearchForm.module.scss';
 import { svgIcon } from '@/components/App';
 
 export interface SearchFormProps extends ComponentProps<'form'> {
-  children: ReactElement<any>;
+  // children: ReactElement<any>;
+  children: ReactElement<ComponentProps<'input'>>;
   fieldValue: string;
   setFieldValue(value: string): void;
   valueFromStore: string;
   onReset(): void;
   onSubmit(e: FormEvent<HTMLFormElement>): void;
-  smallLight?: boolean;
+  light?: boolean;
   inputClassName?: string;
 }
 
@@ -21,7 +22,7 @@ const SearchForm = ({
   valueFromStore,
   onReset,
   onSubmit,
-  smallLight,
+  light,
   className,
   inputClassName,
   ...rest
@@ -41,7 +42,7 @@ const SearchForm = ({
   });
 
   return (
-    <form className={clsx(s.searchForm, smallLight && s.smallLight, className)} onSubmit={onSubmit} {...rest}>
+    <form className={clsx(s.searchForm, light && s.light, className)} onSubmit={onSubmit} {...rest}>
       {styledInput}
       <button type="button" onClick={onReset} className={clsx(s.btn, s.reset, fieldValue && s.visible)}>
         <svg className={clsx(s.fieldIcon, s.iconCross)}>

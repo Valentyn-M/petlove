@@ -16,21 +16,22 @@
 .formControl.field {
   font-size: 16px;
   line-height: 1.25;
-  // TODO check padding for other fields
-  // padding-left: 14px !important;
-  // padding-right: 14px !important;
   height: 48px;
 
   @media (max-width: rem($mobileMedium)) {
     line-height: 1.28571;
-    @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('height', 48, 42, $mobileMedium, $mobileSmall);
-    // @include adaptiveValue('padding-left', 14, 12, $mobileMedium, $mobileSmall, 1, 0, true);
-    // @include adaptiveValue('padding-right', 14, 12, $mobileMedium, $mobileSmall, 1, 0, true);
+    font-size: 14px;
+    height: 42px;
   }
 
   &.addPetSelect {
     height: 52px;
+
+    @media (max-width: rem($mobileMedium)) {
+      line-height: 1.28571;
+      font-size: 14px;
+      height: 42px;
+    }
   }
 }
 

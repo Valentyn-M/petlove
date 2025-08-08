@@ -124,7 +124,7 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerCase className={s.btn} disabled={isLoadingCurrentUser} onClick={handleClick}>
+        <ButtonMain lowerCase small className={s.btn} disabled={isLoadingCurrentUser} onClick={handleClick}>
           {isLoadingCurrentUser ? (
             btnLabel
           ) : (
@@ -137,7 +137,7 @@ const ModalChildNotice = ({ noticeId, onClose }: ModalChildNoticeProps) => {
           )}
         </ButtonMain>
 
-        <LinkMain href="mailto:mail@petlove.com" lowerCase light className={s.btn}>
+        <LinkMain href="mailto:mail@petlove.com" lowerCase small light className={s.btn}>
           Contact
         </LinkMain>
       </div>

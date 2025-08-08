@@ -85,9 +85,18 @@
 
   // lowerCase
   &.lowerCase {
-    padding: 14px 24px;
     text-transform: unset;
     font-weight: 500;
+  }
+
+  // small
+  &.small {
+    padding: 14px 24px;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('padding-top', 15, 12, $mobileMedium, $mobileSmall);
+      @include adaptiveValue('padding-bottom', 15, 12, $mobileMedium, $mobileSmall);
+    }
   }
 
   // inactive

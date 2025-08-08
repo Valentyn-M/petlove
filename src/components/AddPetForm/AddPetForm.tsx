@@ -207,16 +207,18 @@ const AddPetForm = ({}: AddPetFormProps) => {
                       isFilled={!!values.type}
                       isError={!!errors.type && !!touched.type}
                       specialOption={false}
+                      placeholderStyle={'light'}
+                      variant={'addPet'}
                     />
                     <ErrorMessage className={s.fieldError} name="type" component="span" />
                   </div>
                 </div>
 
                 <div className={s.footer}>
-                  <LinkMain to="/profile" className={clsx(s.link, s.linkBack)} lowerCase grey>
+                  <LinkMain to="/profile" className={clsx(s.link, s.linkBack)} lowerCase small grey>
                     Back
                   </LinkMain>
-                  <ButtonMain className={clsx(s.btn, s.btnSubmit)} lowerCase type="submit">
+                  <ButtonMain className={clsx(s.btn, s.btnSubmit)} lowerCase small type="submit">
                     Submit
                   </ButtonMain>
                 </div>

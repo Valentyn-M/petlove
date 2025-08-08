@@ -123,7 +123,7 @@ const NoticesItem = ({ noticeData, variant = 'default', isBtnFunc = true }: Noti
       <p className={s.price}>${priceFormatted}</p>
 
       <div className={s.footer}>
-        <ButtonMain lowerCase={true} className={clsx(s.btn, s.learnMore)} onClick={handleClickLearnMore}>
+        <ButtonMain lowerCase={true} small className={clsx(s.btn, s.learnMore)} onClick={handleClickLearnMore}>
           Learn more
         </ButtonMain>
 

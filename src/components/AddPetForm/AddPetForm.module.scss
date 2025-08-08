@@ -6,17 +6,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  @include adaptiveValue('padding-top', 60, 30, $pc, $tablet);
-  @include adaptiveValue('padding-bottom', 60, 30, $pc, $tablet);
+  @include adaptiveValue('padding-top', 60, 40, $pc, $mobile);
+  @include adaptiveValue('padding-bottom', 60, 40, $pc, $mobile);
 
   @media (max-width: rem($mobileMedium)) {
     border-radius: 30px;
     @include adaptiveValue('padding-left', 32, 20, $mobileMedium, $mobileSmall);
     @include adaptiveValue('padding-right', 32, 20, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('padding-top', 30, 27, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('padding-bottom', 30, 27, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-top', 40, 28, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('padding-bottom', 40, 28, $mobileMedium, $mobileSmall);
   }
 }
+
+// ==========================================================================================================================
 
 .addPetForm {
   width: 100%;
@@ -30,16 +32,29 @@
   gap: 8px;
   margin-bottom: 40px;
 
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-bottom', 40, 24, $mobileMedium, $mobileSmall);
+  }
+
   .bigTitle {
     font-weight: 700;
     font-size: 32px;
     letter-spacing: -0.03em;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('font-size', 32, 28, $mobileMedium, $mobileSmall);
+    }
   }
 
   .smallTitle {
     font-weight: 700;
     line-height: 1.25;
     color: var(--grey-color-light3);
+
+    @media (max-width: rem($mobileMedium)) {
+      line-height: 1.28571;
+      @include adaptiveValue('font-size', 16, 14, $mobileMedium, $mobileSmall);
+    }
   }
 }
 
@@ -49,6 +64,10 @@
 
 .sexButtonsBlock {
   margin-bottom: -16px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-bottom', -16, 8, $mobileMedium, $mobileSmall);
+  }
 }
 
 .sexButtons {
@@ -66,10 +85,18 @@
   border-radius: 50%;
   transition: background-color 0.3s;
 
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('width', 40, 32, $mobileMedium, $mobileSmall);
+  }
+
   .iconSex {
     width: 24px;
     aspect-ratio: 1;
     transition: fill 0.3s;
+
+    @media (max-width: rem($mobileMedium)) {
+      @include adaptiveValue('width', 24, 20, $mobileMedium, $mobileSmall);
+    }
   }
 }
 
@@ -189,7 +216,8 @@
   margin-bottom: 12px;
 
   @media (max-width: rem($mobileMedium)) {
-    @include adaptiveValue('width', 86, 80, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('width', 86, 68, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-bottom', 12, 16, $mobileMedium, $mobileSmall);
   }
 }
 
@@ -197,6 +225,10 @@
   width: 44px;
   aspect-ratio: 1;
   fill: var(--brand-color);
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('width', 44, 34, $mobileMedium, $mobileSmall);
+  }
 }
 
 .petPhoto {
@@ -208,11 +240,16 @@
 // ==========================================================================================================================
 
 .fieldsBlock {
-  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   gap: 18px;
   width: 100%;
+  margin-bottom: 40px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('gap', 18, 10, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-bottom', 40, 32, $mobileMedium, $mobileSmall);
+  }
 }
 
 .labelPhoto {
@@ -244,6 +281,12 @@
   outline: none;
   transition: all 0.3s ease 0s;
 
+  @media (max-width: rem($mobileMedium)) {
+    padding: 11px;
+    font-size: 14px;
+    line-height: 1.28571;
+  }
+
   &::placeholder {
     color: var(--grey-color);
   }
@@ -266,6 +309,10 @@
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.02em;
+
+    @media (max-width: rem($mobileMedium)) {
+      padding: 8px 9px;
+    }
   }
 }
 
@@ -282,18 +329,13 @@
   color: $errorColor;
 
   @media (max-width: rem($mobileMedium)) {
-    @include adaptiveValue('margin-left', 16, 13, $mobileMedium, $mobileSmall);
-    @include adaptiveValue('margin-right', 16, 13, $mobileMedium, $mobileSmall);
+    margin-left: 12px;
+    margin-right: 12px;
   }
 
   .sexButtonsBlock & {
     margin-left: 0;
     margin-right: 0;
-
-    @media (max-width: rem($mobileMedium)) {
-      @include adaptiveValue('margin-left', 12, 13, $mobileMedium, $mobileSmall);
-      @include adaptiveValue('margin-right', 12, 13, $mobileMedium, $mobileSmall);
-    }
   }
 
   .labelPhoto & {
@@ -301,8 +343,8 @@
     margin-right: 12px;
 
     @media (max-width: rem($mobileMedium)) {
-      @include adaptiveValue('margin-left', 12, 13, $mobileMedium, $mobileSmall);
-      @include adaptiveValue('margin-right', 12, 13, $mobileMedium, $mobileSmall);
+      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 }

@@ -83,7 +83,7 @@ const NoticesFiltersSelect = ({}: NoticesFiltersSelectProps) => {
       onReset={handleReset}
       onSubmit={handleSubmit}
       className={clsx(s.search, menuOpen && s.focused)}
-      smallLight={true}
+      light={true}
     >
       <Select<SelectOptionType>
         ref={selectRef}
@@ -96,12 +96,12 @@ const NoticesFiltersSelect = ({}: NoticesFiltersSelectProps) => {
         value={selectedOption}
         onChange={handleSelectChange}
         // menuIsOpen={true} // for development
+        menuIsOpen={menuOpen}
         // Highlighter
         inputValue={selectedOption ? undefined : fieldValue}
         onInputChange={handleInputChange}
         onFocus={() => setMenuOpen(true)}
         onBlur={() => setMenuOpen(false)}
-        menuIsOpen={menuOpen}
         formatOptionLabel={getFormatOptionLabel(fieldValue)}
         styles={{
           // Main container

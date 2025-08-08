@@ -17,6 +17,8 @@ export interface NoticesFiltersFieldProps {
   isFilled?: boolean;
   isError?: boolean;
   specialOption?: boolean;
+  placeholderStyle?: string;
+  variant?: string;
 }
 
 const NoticesFiltersField = ({
@@ -32,6 +34,8 @@ const NoticesFiltersField = ({
   isFilled = false,
   isError = false,
   specialOption = true,
+  placeholderStyle,
+  variant,
 }: NoticesFiltersFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -92,14 +96,22 @@ const NoticesFiltersField = ({
           height: '100% !important',
           display: 'flex',
           alignItems: 'center',
-          paddingLeft: '0.875rem', // 14px
+          paddingLeft: variant === 'addPet' ? '0.9375rem' : '0.875rem', // 15px (addPet), 14px
+          // 600px
+          '@media (max-width: 37.5rem)': {
+            paddingLeft: '0.75rem', // 12px
+          },
         },
 
         // icon
         '& .MuiSelect-icon': {
-          right: '0.875rem', // 14px
           top: 'calc(50% - 0.5625rem)', // 9px (half of icon height)
           fill: 'var(--main-color)',
+          right: variant === 'addPet' ? '0.9375rem' : '0.875rem', // 15px (addPet), 14px
+          // 600px
+          '@media (max-width: 37.5rem)': {
+            right: '0.75rem', // 12px
+          },
         },
       }}
     >
@@ -118,13 +130,13 @@ const NoticesFiltersField = ({
         input={<OutlinedInput notched={false} />}
         inputProps={{ 'aria-label': 'Filter' }}
         IconComponent={SvgArrowIcon}
-        // Make firdt letter toUpperCase
-        // renderValue={(selected) => selected || fieldPlaceholder}
-        renderValue={(selected) =>
+        renderValue={(selected: string) =>
           selected ? (
             selected.charAt(0).toUpperCase() + selected.slice(1)
-          ) : (
+          ) : placeholderStyle === 'light' ? (
             <span style={{ color: 'var(--grey-color)' }}>{fieldPlaceholder}</span>
+          ) : (
+            fieldPlaceholder
           )
         }
         // list wrapper
@@ -137,8 +149,7 @@ const NoticesFiltersField = ({
               backgroundColor: 'var(--white-color)',
               padding: '0.875rem', // 14px
               paddingRight: '0', // 0
-              maxHeight: '13.5rem', // 216px
-              // marginLeft: '-15px',
+              maxHeight: variant === 'addPet' ? '7.875rem' : '13.5rem', // 126px (addPet), 216px
               // Styles from AddPetForm
               border: isOutline ? '1px solid var(--grey-color-light)' : 'none',
 
@@ -203,6 +214,10 @@ const NoticesFiltersField = ({
                 '&:focus': {
                   backgroundColor: 'transparent',
                   color: 'var(--brand-color)',
+                },
+                // 600px
+                '@media (max-width: 37.5rem)': {
+                  fontSize: '0.875rem', // 14px
                 },
               },
             },

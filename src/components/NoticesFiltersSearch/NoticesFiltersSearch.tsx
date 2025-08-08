@@ -34,7 +34,7 @@ const NoticesFiltersSearch = ({}: NoticesFiltersSearchProps) => {
       onReset={handleReset}
       onSubmit={handleSubmit}
       className={s.search}
-      smallLight={true}
+      light={true}
     >
       <input
         className={s.field}

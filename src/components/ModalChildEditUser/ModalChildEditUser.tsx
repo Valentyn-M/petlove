@@ -166,7 +166,7 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
               </label>
             </div>
 
-            <ButtonMain className={clsx(s.btn, s.btnSubmit)} disabled={isLoading} lowerCase type="submit">
+            <ButtonMain className={clsx(s.btn, s.btnSubmit)} disabled={isLoading} lowerCase small type="submit">
               {isLoading ? 'Saving...' : 'Save'}
             </ButtonMain>
           </Form>
