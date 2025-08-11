@@ -217,6 +217,12 @@ const NoticesFiltersField = ({
                   backgroundColor: 'transparent',
                   color: 'var(--brand-color)',
                 },
+                '&:first-child': {
+                  paddingTop: 0,
+                },
+                '&:last-child': {
+                  paddingBottom: 0,
+                },
                 // 600px
                 '@media (max-width: 37.5rem)': {
                   fontSize: '0.875rem', // 14px

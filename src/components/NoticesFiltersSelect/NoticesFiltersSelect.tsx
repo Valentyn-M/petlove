@@ -213,6 +213,12 @@ const NoticesFiltersSelect = ({}: NoticesFiltersSelectProps) => {
                 color: 'var(--brand-color)',
               },
             },
+            '&:first-child': {
+              paddingTop: 0,
+            },
+            '&:last-child': {
+              paddingBottom: 0,
+            },
           }),
         }}
       />

@@ -1,54 +1,137 @@
-# React + TypeScript + Vite
+# petlove 🐾
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![PetLove Preview](./preview.jpg)
 
-Currently, two official plugins are available:
+## 📋 About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Petlove** is a web application for pet lovers that helps find, care for, and share information about pets. The platform connects pet owners, provides useful news, and allows finding partners for pet care.
 
-## Expanding the ESLint configuration
+### Main Features:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📰 **News** - up-to-date information about the pet world
+- 🔍 **Notice Search** - finding pets by various criteria
+- ❤️ **Favorites** - saving interesting notices
+- 👥 **Partners** - information about veterinary clinics and pet stores
+- 👤 **User Profile** - managing personal data and pets
+- ➕ **Add Pets** - registering your own pets
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Technologies
+
+### Frontend:
+
+- **React 18** - main framework
+- **React Router** - routing
+- **Redux Toolkit** - state management
+- **React Hook Form + Yup** - form handling and validation
+- **React Select** - dropdown lists with search
+- **CSS Modules / Styled Components** - styling
+- **Responsive Design** - adaptive layout
+
+### Additional Tools:
+
+- **Axios** - HTTP requests
+- **React Toastify** - notifications
+- **ESLint + Prettier** - code quality control
+
+## 📱 Responsiveness
+
+The application is fully responsive and supports the following screen sizes:
+
+- 📱 **Mobile**: from 320px (fluid) / from 375px (adaptive)
+- 📱 **Tablet**: from 768px
+- 💻 **Desktop**: from 1280px
+
+## 🎨 Design
+
+**Figma Layout**: [PetLove Design](https://www.figma.com/file/puMNfZVg4YI8UZoJ1QiLLi/Petl%F0%9F%92%9Bve?type=design&node-id=55838-750&mode=design&t=Xg1IwIcKebTl5xGs-0)
+
+## 🔗 API
+
+**Backend Documentation**: [PetLove API](https://petlove.b.goit.study/api-docs/)
+
+## 🚀 Project Structure
+
+```
+src/
+├── components/         # Reusable components
+├── pages/              # Application pages
+│   ├── HomePage/       # Home page
+│   ├── NewsPage/       # News page
+│   ├── NoticesPage/    # Notices page
+│   ├── FriendsPage/    # Partners page
+│   ├── ProfilePage/    # User profile
+│   ├── LoginPage/      # Authorization
+│   ├── RegisterPage/   # Registration
+│   ├── NotFoundPage    # Not found page
+│   └── AddPetPage/     # Add pet page
+├── store/              # Redux store and slices
+├── api/                # API services
+├── hooks/              # Custom hooks
+├── utils/              # Utility functions
+├── assets/             # Static resources
+└── styles/             # Global styles, reset styles, mixins ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🔐 User Functionality
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Unauthorized Users:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- View news, notices, and partners
+- Search and filter notices
+- Registration and authorization
+
+### Authorized Users:
+
+- All functionality of unauthorized users
+- Add notices to favorites
+- View detailed notice information
+- Profile management
+- Add own pets
+- View browsing history
+
+## 🎯 Implementation Features
+
+- **Semantic markup** according to HTML5 standards
+- **Image optimization** for retina displays
+- **SVG sprites** for icons
+- **Server-side pagination** with navigation
+- **Form validation** with detailed error messages
+- **Notification system** for user alerts
+- **Lazy loading** for performance optimization
+- **Error boundaries** for error handling
+
+## 🏁 Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
 ```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the project:
+
+```bash
+npm start
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+## 👨‍💻 Author
+
+**Valentyn Mostovyi** - Frontend Developer
+
+---
+
+**PetLove** - created with ❤️ for pet lovers
