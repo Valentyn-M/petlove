@@ -1,5 +1,6 @@
 import {
   addNoticeToFavorites,
+  addPetToUserPets,
   changeAvatar,
   editUser,
   getCurrentUserInfo,
@@ -9,6 +10,7 @@ import {
   refreshUser,
   registerUser,
   removeNoticeFromFavorites,
+  removePetFromUserPets,
 } from '@/store/auth/operations';
 import { GetFullUserInfoResponse, Notice, Pet, User } from '@/store/types';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
@@ -16,9 +18,9 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 // interface User is moved to the type file "types.ts"
 
 export interface UserPets {
-  noticesViewed: Notice[] | null;
+  noticesViewed: Notice[];
   noticesFavorites: Notice[];
-  pets: Pet[] | null;
+  pets: Pet[];
 }
 
 interface AuthState {
@@ -50,9 +52,9 @@ const initialState: AuthState = {
   isRefreshing: false,
   error: null,
   userPets: {
-    noticesViewed: null,
+    noticesViewed: [],
     noticesFavorites: [],
-    pets: null,
+    pets: [],
   },
 };
 
@@ -60,7 +62,7 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setDefaltAvatar: (state) => {
+    setDefaultAvatar: (state) => {
       state.user.avatar = null;
     },
   },
@@ -86,38 +88,44 @@ const slice = createSlice({
       // REFRESH
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
+        state.error = null;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         setUserDataFromPayload(state, action.payload);
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
+        state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
       })
       // ==========================================================================================================================
       // GET CURRENT USER INFO
       .addCase(getCurrentUserInfo.pending, (state) => {
         state.loadingCurrentUser = true;
+        state.error = null;
       })
       .addCase(getCurrentUserInfo.fulfilled, (state, action) => {
         setUserDataFromPayload(state, action.payload);
         state.loadingCurrentUser = false;
       })
-      .addCase(getCurrentUserInfo.rejected, (state) => {
+      .addCase(getCurrentUserInfo.rejected, (state, action) => {
         state.loadingCurrentUser = false;
+        state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
       })
       // ==========================================================================================================================
       // GET FULL USER INFO
       .addCase(getFullUserInfo.pending, (state) => {
         state.loadingFullUser = true;
+        state.error = null;
       })
       .addCase(getFullUserInfo.fulfilled, (state, action) => {
         setUserDataFromPayload(state, action.payload);
         state.loadingFullUser = false;
         state.error = null;
       })
-      .addCase(getFullUserInfo.rejected, (state) => {
+      .addCase(getFullUserInfo.rejected, (state, action) => {
         state.loadingFullUser = false;
+        state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
       })
       // ==========================================================================================================================
       // EDIT USER
@@ -129,24 +137,39 @@ const slice = createSlice({
       // CHANGE AVATAR
       .addCase(changeAvatar.pending, (state) => {
         state.loadingAvatar = true;
+        state.error = null;
       })
       .addCase(changeAvatar.fulfilled, (state, action) => {
         setUserDataFromPayload(state, action.payload);
         state.loadingAvatar = false;
         state.error = null;
       })
-      .addCase(changeAvatar.rejected, (state) => {
+      .addCase(changeAvatar.rejected, (state, action) => {
         state.loadingAvatar = false;
+        state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
       })
       // ==========================================================================================================================
-      // Add notice to Favorites
+      // ADD NOTICE to Favorites
       .addCase(addNoticeToFavorites.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
       })
 
-      // Remove notice from Favorites
+      // REMOVE NOTICE from Favorites
       .addCase(removeNoticeFromFavorites.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      // ==========================================================================================================================
+      // ADD PET to user pets
+      .addCase(addPetToUserPets.fulfilled, (state, action) => {
+        setUserDataFromPayload(state, action.payload);
+        state.loading = false;
+        state.error = null;
+      })
+      // REMOVE PET from user pets
+      .addCase(removePetFromUserPets.fulfilled, (state, action) => {
+        setUserDataFromPayload(state, action.payload);
         state.loading = false;
         state.error = null;
       })
@@ -160,7 +183,9 @@ const slice = createSlice({
           logoutUser.pending,
           editUser.pending,
           addNoticeToFavorites.pending,
-          removeNoticeFromFavorites.pending
+          removeNoticeFromFavorites.pending,
+          addPetToUserPets.pending,
+          removePetFromUserPets.pending
         ),
         (state) => {
           state.loading = true;
@@ -176,7 +201,9 @@ const slice = createSlice({
           logoutUser.rejected,
           editUser.rejected,
           addNoticeToFavorites.rejected,
-          removeNoticeFromFavorites.rejected
+          removeNoticeFromFavorites.rejected,
+          addPetToUserPets.rejected,
+          removePetFromUserPets.rejected
         ),
         (state, action) => {
           state.loading = false;
@@ -186,7 +213,7 @@ const slice = createSlice({
   },
 });
 
-export const { setDefaltAvatar } = slice.actions;
+export const { setDefaultAvatar } = slice.actions;
 
 export const authReducer = slice.reducer;
 
@@ -196,8 +223,9 @@ export const authReducer = slice.reducer;
 
 // "GetFullUserInfoResponse" has all possible fields
 function setUserDataFromPayload(state: AuthState, payload: Partial<GetFullUserInfoResponse>) {
-  state.user.name = payload.name ?? null;
-  state.user.email = payload.email ?? null;
+  if ('name' in payload) state.user.name = payload.name ?? null;
+  if ('email' in payload) state.user.email = payload.email ?? null;
+
   if ('token' in payload && payload.token) {
     state.token = payload.token;
   }
@@ -216,11 +244,11 @@ function setUserDataFromPayload(state: AuthState, payload: Partial<GetFullUserIn
   }
 
   if ('noticesViewed' in payload) {
-    state.userPets.noticesViewed = payload.noticesViewed ?? null;
+    state.userPets.noticesViewed = payload.noticesViewed ?? [];
   }
 
   if ('pets' in payload) {
-    state.userPets.pets = payload.pets ?? null;
+    state.userPets.pets = payload.pets ?? [];
   }
 
   state.isLoggedIn = true;

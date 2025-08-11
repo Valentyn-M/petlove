@@ -15,7 +15,7 @@ import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import ButtonUpload from '@/components/ButtonUpload/ButtonUpload';
 import { changeAvatar, editUser } from '@/store/auth/operations';
 import { enqueueSnackbar } from 'notistack';
-import { setDefaltAvatar } from '@/store/auth/slice';
+import { setDefaultAvatar } from '@/store/auth/slice';
 
 export interface ModalChildEditUserProps {
   onClose: () => void;
@@ -63,7 +63,7 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
       await dispatch(changeAvatar({ avatar: avatarUrl.trim() })).unwrap();
     } catch (error) {
       enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
-      dispatch(setDefaltAvatar());
+      dispatch(setDefaultAvatar());
     }
   };
 
@@ -105,7 +105,7 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
             alt="User avatar"
             width="86"
             height="86"
-            onError={() => dispatch(setDefaltAvatar())}
+            onError={() => dispatch(setDefaultAvatar())}
           />
         )}
       </div>

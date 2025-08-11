@@ -10,8 +10,8 @@ const MyNoticesViewedPets = ({}: MyNoticesViewedPetsProps) => {
   const viewedNotices = useAppSelector(selectAuthUserPetsNoticesViewed);
 
   return (
-    <div className={s.ьyNoticesViewedPets}>
-      {viewedNotices && viewedNotices.length > 0 ? (
+    <div className={s.myNoticesViewedPets}>
+      {viewedNotices.length > 0 ? (
         <ul className={s.list}>
           {viewedNotices.map((viewedNotice) => (
             <li key={viewedNotice._id} className={s.item}>

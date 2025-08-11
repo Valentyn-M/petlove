@@ -1,19 +1,38 @@
 import { Pet } from '@/store/types';
 import s from './UserPetsItem.module.scss';
 import ButtonFunction from '@/components/ButtonFunction/ButtonFunction';
+import { useAppDispatch } from '@/store/hooks';
+import { enqueueSnackbar } from 'notistack';
+import { useState } from 'react';
+import { removePetFromUserPets } from '@/store/auth/operations';
 
 export interface UserPetsItemProps {
   userPetData: Pet;
 }
 
 const UserPetsItem = ({ userPetData }: UserPetsItemProps) => {
-  const { imgURL, title, name, birthday, sex, species } = userPetData;
+  const { imgURL, title, name, birthday, sex, species, _id } = userPetData;
+
+  const dispatch = useAppDispatch();
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   let birthdayFormatted = 'Unknown';
   if (birthday) {
     const [year, month, day] = birthday.split('-');
     birthdayFormatted = `${day}.${month}.${year}`;
   }
+
+  const handleClick = async (): Promise<void> => {
+    setIsDeleting(true);
+    try {
+      await dispatch(removePetFromUserPets(_id)).unwrap();
+    } catch (error) {
+      enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   return (
     <li className={s.userPetsItem}>
@@ -44,7 +63,7 @@ const UserPetsItem = ({ userPetData }: UserPetsItemProps) => {
         </div>
       </div>
 
-      <ButtonFunction className={s.btn} small iconName="trash" />
+      <ButtonFunction className={s.btn} small iconName="trash" onClick={handleClick} disabled={isDeleting} />
     </li>
   );
 };

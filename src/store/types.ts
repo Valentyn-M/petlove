@@ -107,6 +107,20 @@ export interface UserData {
   avatar?: string;
 }
 
+//---------------------------------------------------
+
+// Add pet
+
+// We send to backend
+export interface UserPet {
+  name: string;
+  title: string;
+  imgURL: string;
+  species: string;
+  birthday: string;
+  sex: string;
+}
+
 // ==========================================================================================================================
 
 // News Slice

@@ -7,6 +7,7 @@ import {
   RegisterCredentials,
   RegisterResponse,
   UserData,
+  UserPet,
 } from '@/store/types';
 import { clearAuthHeader, handleThunkError, setAuthHeader } from '@/store/utils';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -78,6 +79,8 @@ export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, thunkAPI
 export const refreshUser = createAsyncThunk<RefreshUserResponse>('auth/refreshUser', async (_, thunkAPI) => {
   try {
     const response = await goitApi.get('/users/current');
+    // After successful login, add the token to the HTTP header
+    setAuthHeader(response.data.token);
     return response.data;
   } catch (error) {
     return handleThunkError(error, thunkAPI);
@@ -96,6 +99,8 @@ export const getFullUserInfo = createAsyncThunk<GetFullUserInfoResponse>(
   async (_, thunkAPI) => {
     try {
       const response = await goitApi.get('/users/current/full');
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
       return handleThunkError(error, thunkAPI);
@@ -144,6 +149,7 @@ export const changeAvatar = createAsyncThunk<GetFullUserInfoResponse, UserData>(
 );
 
 // ==========================================================================================================================
+// ==========================================================================================================================
 
 // Add a notice to user favorites
 /*
@@ -177,6 +183,9 @@ export const removeNoticeFromFavorites = createAsyncThunk<string[], string>(
   }
 );
 
+// ==========================================================================================================================
+// ==========================================================================================================================
+
 // GET CURRENT USER INFO
 /*
  * GET @ /users/current
@@ -187,9 +196,55 @@ export const getCurrentUserInfo = createAsyncThunk<RefreshUserResponse>(
   async (_, thunkAPI) => {
     try {
       const response = await goitApi.get('/users/current');
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
       return handleThunkError(error, thunkAPI);
     }
   }
 );
+
+// ==========================================================================================================================
+
+// User adds pet
+/*
+ * POST @ /users/current/pets/add
+ * headers: Authorization: Bearer token
+ */
+
+export const addPetToUserPets = createAsyncThunk<GetFullUserInfoResponse, UserPet>(
+  'auth/addPetToUserPets',
+  async (petData, thunkAPI) => {
+    try {
+      const response = await goitApi.post('/users/current/pets/add', petData);
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(response.data.token);
+      return response.data;
+    } catch (error) {
+      return handleThunkError(error, thunkAPI);
+    }
+  }
+);
+
+// Remove a pet from user pets
+/*
+ * DELETE @ /users/current/pets/remove/{id}
+ * headers: Authorization: Bearer token
+ */
+
+export const removePetFromUserPets = createAsyncThunk<GetFullUserInfoResponse, string>(
+  'auth/removePetFromUserPets',
+  async (id, thunkAPI) => {
+    try {
+      const response = await goitApi.delete(`/users/current/pets/remove/${id}`);
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(response.data.token);
+      return response.data;
+    } catch (error) {
+      return handleThunkError(error, thunkAPI);
+    }
+  }
+);
+
+// ==========================================================================================================================

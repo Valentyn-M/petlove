@@ -9,7 +9,6 @@ const UserPetsList = ({}: UserPetsListProps) => {
   const userPetsItems = useAppSelector(selectAuthUserPetsItems);
 
   return (
-    userPetsItems &&
     userPetsItems.length > 1 && (
       <ul className={s.userPetsList}>
         {userPetsItems.map((userPet) => (

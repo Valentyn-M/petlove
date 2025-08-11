@@ -1,7 +1,7 @@
 import { svgIcon } from '@/components/App';
 import s from './AddPetForm.module.scss';
 import { useEffect, useState } from 'react';
-import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import clsx from 'clsx';
 import ButtonUpload from '@/components/ButtonUpload/ButtonUpload';
@@ -14,35 +14,36 @@ import { fetchSpecies } from '@/store/noticesFilters/oprations';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import DatePickerField from '@/components/DatePickerField/DatePickerField';
+import { selectIsLoading } from '@/store/auth/selectors';
+import { addPetToUserPets } from '@/store/auth/operations';
+import { UserPet } from '@/store/types';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 export interface AddPetFormProps {}
 
 const AddPetForm = ({}: AddPetFormProps) => {
   const [petPhoto, setPetPhoto] = useState<string>('');
 
-  // Fetch Species
+  const isLoading = useAppSelector(selectIsLoading);
+
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  // Fetch Species
   useEffect(() => {
     dispatch(fetchSpecies());
   }, [dispatch]);
   const speciesList = useAppSelector(selectNoticesFiltersSpeciesList);
 
-  interface FormValues {
-    sex: string;
-    imgURL: string;
-    title: string;
-    name: string;
-    birthday: string;
-    type: string;
-  }
-
-  const initialValues: FormValues = {
+  const initialValues: UserPet = {
     sex: '',
     imgURL: `${petPhoto}`,
     title: '',
     name: '',
     birthday: '',
-    type: '',
+    species: '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -55,11 +56,16 @@ const AddPetForm = ({}: AddPetFormProps) => {
     birthday: Yup.string()
       .matches(/^\d{4}-\d{2}-\d{2}$/, 'Birthday must be in format YYYY-MM-DD')
       .required('Birthday is required'),
-    type: Yup.string().required('Type of pet is required'),
+    species: Yup.string().required('Type of pet is required'),
   });
 
-  const handleSubmit = (values: FormikValues): void => {
-    console.log(values);
+  const handleSubmit = async (values: UserPet): Promise<void> => {
+    try {
+      await dispatch(addPetToUserPets(values)).unwrap();
+      navigate('/profile');
+    } catch (error) {
+      enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
+    }
   };
 
   return (
@@ -193,24 +199,24 @@ const AddPetForm = ({}: AddPetFormProps) => {
                   <div className={`${s.label}`}>
                     <NoticesFiltersField
                       fieldPlaceholder={'Type of pet'}
-                      fieldName={'type'}
-                      fieldValue={values.type}
+                      fieldName={'species'}
+                      fieldValue={values.species}
                       selectOptions={speciesList}
-                      handleChange={(e) => setFieldValue('type', e.target.value)}
+                      handleChange={(e) => setFieldValue('species', e.target.value)}
                       onBlur={() => {
-                        // після того як селект втратить фокус — Formik позначить поле 'type' як touched та одразу провалідує
-                        setFieldTouched('type', true, true);
+                        // після того як селект втратить фокус — Formik позначить поле 'species' як touched та одразу провалідує
+                        setFieldTouched('species', true, true);
                       }}
                       className={clsx('addPetSelect')}
                       classNameGeneral={clsx('field')}
                       isOutline={true}
-                      isFilled={!!values.type}
-                      isError={!!errors.type && !!touched.type}
+                      isFilled={!!values.species}
+                      isError={!!errors.species && !!touched.species}
                       specialOption={false}
                       placeholderStyle={'light'}
                       variant={'addPet'}
                     />
-                    <ErrorMessage className={s.fieldError} name="type" component="span" />
+                    <ErrorMessage className={s.fieldError} name="species" component="span" />
                   </div>
                 </div>
 
@@ -218,8 +224,8 @@ const AddPetForm = ({}: AddPetFormProps) => {
                   <LinkMain to="/profile" className={clsx(s.link, s.linkBack)} lowerCase small grey>
                     Back
                   </LinkMain>
-                  <ButtonMain className={clsx(s.btn, s.btnSubmit)} lowerCase small type="submit">
-                    Submit
+                  <ButtonMain className={clsx(s.btn, s.btnSubmit)} lowerCase small type="submit" disabled={isLoading}>
+                    {isLoading ? 'Submitting' : 'Submit'}
                   </ButtonMain>
                 </div>
               </Form>
