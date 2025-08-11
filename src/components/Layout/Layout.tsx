@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <header className={clsx(s.header, isHome && s.home)}>
           <AppBar />
         </header>
-        <main>
+        <main className={s.main}>
           <Suspense fallback={null}>{children}</Suspense>
         </main>
       </div>

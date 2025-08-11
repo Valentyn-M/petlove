@@ -141,6 +141,8 @@ const NoticesFiltersField = ({
         }
         // list wrapper
         MenuProps={{
+          // Don't block scrolling
+          disableScrollLock: true,
           PaperProps: {
             sx: {
               marginTop: '0.25rem', // 4px

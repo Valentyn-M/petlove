@@ -1,0 +1,70 @@
+.notFound {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  flex-grow: 1;
+  background-color: var(--brand-color);
+  border-radius: 60px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-top', 32, 16, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-bottom', 32, 20, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('border-radius', 60, 30, $mobileMedium, $mobileSmall);
+  }
+}
+
+.mainBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 300px;
+  color: var(--white-color);
+  margin-bottom: 40px;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('font-size', 300, 120, $mobile, $mobileSmall);
+    @include adaptiveValue('gap', 0, 8, $mobile, $mobileSmall);
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    @include adaptiveValue('font-size', 120, 100, $mobileSmall);
+  }
+}
+
+.imgWrap {
+  width: 280px;
+  aspect-ratio: 1;
+
+  @media (max-width: rem($mobile)) {
+    @include adaptiveValue('width', 280, 109, $mobile, $mobileSmall);
+  }
+
+  @media (max-width: rem($mobileSmall)) {
+    @include adaptiveValue('width', 109, 100, $mobileSmall);
+  }
+}
+
+.text {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.16667;
+  letter-spacing: -0.03em;
+  color: var(--white-color);
+  margin-bottom: 20px;
+
+  @media (max-width: rem($mobile)) {
+    line-height: 1.25;
+    @include adaptiveValue('font-size', 24, 16, $mobile, $mobileSmall);
+  }
+}
+
+.link.linkHome {
+  font-weight: 700;
+  padding-left: 30px;
+  padding-right: 30px;
+}

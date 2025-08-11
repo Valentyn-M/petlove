@@ -30,12 +30,21 @@ const Modal: React.FC<ModalProps> = ({
   padding50To50,
 }) => {
   useEffect(() => {
+    const html = document.documentElement;
     const body = document.body;
 
+    // Determine if there was a vertical scrollbar on the page
+    const scrollbarWidth = window.innerWidth - html.clientWidth;
+
     if (isOpen) {
+      // Reserve the gutter only if it is needed
+      if (scrollbarWidth > 0) {
+        html.classList.add('gutter-stable');
+      }
       body.classList.add('lock');
     } else {
       body.classList.remove('lock');
+      html.classList.remove('gutter-stable');
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -48,6 +57,9 @@ const Modal: React.FC<ModalProps> = ({
 
     return () => {
       body.classList.remove('lock'); // Clean up
+      body.style.top = '';
+      body.style.paddingRight = '';
+      html.classList.remove('gutter-stable');
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);

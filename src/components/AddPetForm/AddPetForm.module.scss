@@ -28,6 +28,7 @@
 
 .title {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 8px;
   margin-bottom: 40px;

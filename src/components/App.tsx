@@ -81,7 +81,6 @@ function App() {
 
           <Route path="/add-pet" element={<PrivateRoute component={<AddPetPage />} redirectTo="/login" />} />
 
-          {/* TODO NotFoundPage */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

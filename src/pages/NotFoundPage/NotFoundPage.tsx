@@ -1,10 +1,15 @@
+import NotFound from '@/components/NotFound/NotFound';
+import { Meta, Title } from 'react-head';
+
 export interface NotFoundPageProps {}
 
 const NotFoundPage = ({}: NotFoundPageProps) => {
   return (
-    <div>
-      <h1>NotFoundPage</h1>
-    </div>
+    <>
+      <Title>Not Found | Petlove</Title>
+      <Meta name="description" content="This page not found" />
+      <NotFound />
+    </>
   );
 };
 

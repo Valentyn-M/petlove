@@ -13,6 +13,13 @@
   overflow: hidden;
 }
 
+html {
+  // Enable gutter reserve only during modal
+  &.gutter-stable {
+    scrollbar-gutter: stable;
+  }
+}
+
 body {
   font-family: $fontFamily;
   font-weight: 500;
