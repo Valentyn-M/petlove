@@ -5,17 +5,6 @@
 $fontFamily: 'Manrope', sans-serif; // Шрифт за замовчуванням
 $fontSize: 16; // Розмір шрифту за замовченням (де 16 - розмір шрифту за замовчуванням з макету)
 
-// Основні кольори
-$mainColor: #262626;
-$bgColor: #f9f9f9;
-$brandColor: #f6b83d;
-$brandColorDark: #f9b020;
-$beigeColor: #fff4df;
-$beigeColorDark: #fbe7c1;
-$whiteColor: #fff;
-$errorColor: #ef2447;
-$correctColor: #08aa83;
-
 // Основні кольори (завжди змінні на ванільному CSS)
 :root {
   --main-color: #262626;
@@ -29,14 +18,20 @@ $correctColor: #08aa83;
   --correct-color: #08aa83;
   --light-color: #f4f4f4;
   --grey-color: rgba(38, 38, 38, 0.5);
+  --grey-color2: rgba(38, 38, 38, 0.8);
   --grey-color-light: rgba(38, 38, 38, 0.15);
   --grey-color-light2: rgba(38, 38, 38, 0.1);
   --grey-color-light3: rgba(43, 43, 42, 0.4);
+  --grey-color-light4: rgba(38, 38, 38, 0.2);
+  --grey-color-light5: rgba(38, 38, 38, 0.05);
+  --grey-color-light6: rgba(38, 38, 38, 0.8);
+  --grey-color-light7: rgba(38, 38, 38, 0.3);
   --pink-color: #f43f5e;
   --pink-color-light: rgba(244, 63, 94, 0.1);
   --blue-color: #54adff;
   --blue-color-light: rgba(84, 173, 255, 0.1);
   --white-color-transparent: rgba(255, 255, 255, 0.1);
+  --white-color-transparent2: rgba(255, 255, 255, 0.4);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

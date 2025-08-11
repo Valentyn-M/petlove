@@ -10,7 +10,7 @@
   }
 
   &.home {
-    color: $whiteColor;
+    color: var(--white-color);
   }
 
   @media (max-width: rem($tablet)) {
@@ -19,7 +19,7 @@
 }
 
 .iconHeart {
-  fill: $brandColor;
+  fill: var(--brand-color);
   width: rem(23);
   height: rem(23);
 
@@ -29,6 +29,6 @@
   }
 
   .home & {
-    fill: $whiteColor;
+    fill: var(--white-color);
   }
 }

@@ -1,12 +1,12 @@
 .button {
   border-radius: 30px;
   padding: 15px 35px;
-  background-color: $brandColor;
+  background-color: var(--brand-color);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  color: $whiteColor;
+  color: var(--white-color);
   transition: all 0.3s ease 0s;
   display: flex;
   align-items: center;
@@ -15,10 +15,10 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: $brandColorDark;
+      background-color: var(--brand-color-dark);
     }
     &:focus {
-      background-color: $brandColorDark;
+      background-color: var(--brand-color-dark);
     }
   }
 
@@ -29,19 +29,19 @@
 
   // outline
   &.outline {
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--white-color-transparent2);
     padding-top: 14px;
     padding-bottom: 14px;
     background-color: transparent;
 
     @media (any-hover: hover) {
       &:hover {
-        background-color: $beigeColor;
-        color: $brandColor;
+        background-color: var(--beige-color);
+        color: var(--brand-color);
       }
       &:focus {
-        background-color: $beigeColor;
-        color: $brandColor;
+        background-color: var(--beige-color);
+        color: var(--brand-color);
       }
     }
 
@@ -52,33 +52,33 @@
   }
 
   &.light {
-    background-color: $beigeColor;
-    color: $brandColor;
+    background-color: var(--beige-color);
+    color: var(--brand-color);
     border: none;
 
     @media (any-hover: hover) {
       &:hover {
-        background-color: $beigeColorDark;
+        background-color: var(--beige-color-dark);
       }
       &:focus {
-        background-color: $beigeColorDark;
+        background-color: var(--beige-color-dark);
       }
     }
   }
 
   // grey
   &.grey {
-    background: rgba(38, 38, 38, 0.05);
-    color: $mainColor;
+    background: var(--grey-color-light5);
+    color: var(--main-color);
 
     @media (any-hover: hover) {
       &:hover {
-        background-color: $brandColorDark;
-        color: $whiteColor;
+        background-color: var(--brand-color-dark);
+        color: var(--white-color);
       }
       &:focus {
-        background-color: $brandColorDark;
-        color: $whiteColor;
+        background-color: var(--brand-color-dark);
+        color: var(--white-color);
       }
     }
   }

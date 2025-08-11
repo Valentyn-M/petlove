@@ -1,6 +1,6 @@
 .registrationBlock {
   border-radius: 60px;
-  background-color: $whiteColor;
+  background-color: var(--white-color);
   padding-left: 32px;
   padding-right: 32px;
   display: flex;
@@ -71,7 +71,7 @@
 
 .field {
   height: 100%;
-  border: 1px solid rgba(38, 38, 38, 0.15);
+  border: 1px solid var(--grey-color-light);
   border-radius: 30px;
   padding-left: 16px;
   padding-right: 16px;
@@ -81,25 +81,25 @@
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  color: $mainColor;
+  color: var(--main-color);
   outline: none;
   transition: all 0.3s ease 0s;
 
   &::placeholder {
-    color: rgba(38, 38, 38, 0.5);
+    color: var(--grey-color);
   }
 
   &:hover,
   &:focus {
-    border-color: $brandColor;
+    border-color: var(--brand-color);
   }
 
   .label.error & {
-    border-color: $errorColor;
+    border-color: var(--error-color);
   }
 
   .label.correct & {
-    border-color: $correctColor;
+    border-color: var(--correct-color);
   }
 }
 
@@ -111,7 +111,7 @@
   font-size: 12px;
   line-height: 1.16667;
   letter-spacing: -0.03em;
-  color: $errorColor;
+  color: var(--error-color);
 }
 
 .togglePassword {
@@ -127,7 +127,7 @@
   .iconEye {
     width: 22px;
     height: 22px;
-    fill: $brandColor;
+    fill: var(--brand-color);
   }
 }
 
@@ -146,7 +146,7 @@
 }
 
 .iconCross {
-  fill: $errorColor;
+  fill: var(--error-color);
 
   .label.error & {
     display: block;
@@ -154,7 +154,7 @@
 }
 
 .iconCheck {
-  fill: $correctColor;
+  fill: var(--correct-color);
 
   .label.correct & {
     display: block;
@@ -184,7 +184,7 @@
   font-size: 14px;
   line-height: 1.42857;
   letter-spacing: -0.03em;
-  color: rgba(38, 38, 38, 0.5);
+  color: var(--grey-color);
   text-align: center;
 
   @media (max-width: rem($mobile)) {
@@ -195,7 +195,7 @@
 .link {
   font-weight: 700;
   text-decoration: underline;
-  color: $brandColor;
+  color: var(--brand-color);
 
   @media (any-hover: hover) {
     &:hover {

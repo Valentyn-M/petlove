@@ -60,7 +60,7 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: $whiteColor;
+  color: var(--white-color);
   font-size: 50px;
 
   @media (min-width: rem($mobileMediumAfter)) {
@@ -75,7 +75,7 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: $whiteColor;
+  color: var(--white-color);
   font-size: 50px;
 
   @media (min-width: rem($mobileMediumAfter)) {
@@ -86,7 +86,7 @@
 .iconHeart {
   width: 44px;
   height: 44px;
-  fill: $brandColor;
+  fill: var(--brand-color);
 
   @media (min-width: rem($mobileMediumAfter)) {
     width: 82px;

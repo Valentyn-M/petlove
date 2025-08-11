@@ -1,10 +1,10 @@
 .wrapper {
   width: 100%;
   min-height: 100%;
-  background-color: $bgColor;
+  background-color: var(--bg-color);
 
   &.home {
-    background-color: $whiteColor;
+    background-color: var(--white-color);
   }
 }
 

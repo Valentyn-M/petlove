@@ -13,11 +13,11 @@
 
   @media (any-hover: hover) and (any-pointer: fine) {
     &:hover {
-      background-color: $beigeColorDark;
+      background-color: var(--beige-color-dark);
     }
   }
   &:focus {
-    background-color: $beigeColorDark;
+    background-color: var(--beige-color-dark);
   }
 
   &.disabled {

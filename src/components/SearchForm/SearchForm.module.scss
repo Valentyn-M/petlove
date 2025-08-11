@@ -11,7 +11,7 @@
 .field {
   height: 100%;
   width: 100%;
-  border: 1px solid rgba(38, 38, 38, 0.15);
+  border: 1px solid var(--grey-color-light);
   background-color: transparent;
   border-radius: 30px;
   padding-left: 14px;
@@ -21,13 +21,13 @@
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  color: $mainColor;
+  color: var(--main-color);
   outline: none;
   transition: all 0.3s ease 0s;
 
   .light & {
-    border-color: $whiteColor;
-    background-color: $whiteColor;
+    border-color: var(--white-color);
+    background-color: var(--white-color);
   }
 
   @media (max-width: rem($mobileMedium)) {
@@ -38,16 +38,16 @@
   }
 
   &::placeholder {
-    color: rgba(38, 38, 38, 0.5);
+    color: var(--grey-color);
 
     .light & {
-      color: $mainColor;
+      color: var(--main-color);
     }
   }
 
   &:hover,
   &:focus {
-    border-color: $brandColor;
+    border-color: var(--brand-color);
   }
 }
 
@@ -81,5 +81,5 @@
 .fieldIcon {
   width: 18px;
   height: 18px;
-  fill: $mainColor;
+  fill: var(--main-color);
 }

@@ -10,7 +10,7 @@
   &.home {
     border-top-left-radius: 60px;
     border-top-right-radius: 60px;
-    background-color: $brandColor;
+    background-color: var(--brand-color);
     padding-top: 16px;
     padding-left: 64px;
     padding-right: 64px;

@@ -1,6 +1,6 @@
 .noticesFilters {
   border-radius: 30px;
-  background: $beigeColor;
+  background: var(--beige-color);
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -21,7 +21,7 @@
 }
 
 .devider {
-  border-top: 1px solid rgba(38, 38, 38, 0.1);
+  border-top: 1px solid var(--grey-color-light2);
 }
 
 .top {

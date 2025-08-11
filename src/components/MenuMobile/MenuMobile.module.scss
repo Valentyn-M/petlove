@@ -5,7 +5,7 @@
   height: 100svh;
   max-width: 100%;
   overflow: auto;
-  background-color: $brandColor;
+  background-color: var(--brand-color);
   transform: translate(100%, 0%);
   transition: transform 0.3s ease 0s;
   z-index: 2;
@@ -22,7 +22,7 @@
   }
 
   &.menuMobileLight {
-    background-color: $whiteColor;
+    background-color: var(--white-color);
   }
 
   &.open {

@@ -2,7 +2,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(38, 38, 38, 0.2);
+  border: 1px solid var(--grey-color-light4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,7 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 1.22222;
-  color: $mainColor;
+  color: var(--main-color);
   background-color: transparent;
   transition: all 0.3s;
 
@@ -24,7 +24,7 @@
   svg {
     width: 24px;
     height: 24px;
-    fill: $mainColor;
+    fill: var(--main-color);
     transition: fill 0.3s;
 
     @media (max-width: rem($mobileMedium)) {
@@ -35,37 +35,37 @@
 
   @media (any-hover: hover) {
     &:not(.disabled):hover {
-      border-color: $brandColor;
-      background-color: $brandColor;
-      color: $whiteColor;
+      border-color: var(--brand-color);
+      background-color: var(--brand-color);
+      color: var(--white-color);
 
       svg {
-        fill: $whiteColor;
+        fill: var(--white-color);
       }
     }
   }
   &:not(.disabled):focus {
-    border: $brandColor;
-    background-color: $brandColor;
-    color: $whiteColor;
+    border: var(--brand-color);
+    background-color: var(--brand-color);
+    color: var(--white-color);
 
     svg {
-      fill: $whiteColor;
+      fill: var(--white-color);
     }
   }
 }
 
 .disabled {
-  border-color: rgba(38, 38, 38, 0.05);
+  border-color: var(--grey-color-light5);
   cursor: not-allowed;
 
   svg {
-    fill: rgba(38, 38, 38, 0.5);
+    fill: var(--grey-color);
   }
 }
 
 .active {
   border: none;
-  background-color: $brandColor;
-  color: $whiteColor;
+  background-color: var(--brand-color);
+  color: var(--white-color);
 }

@@ -85,7 +85,7 @@
 }
 
 .field {
-  border: 1px solid rgba(38, 38, 38, 0.15);
+  border: 1px solid var(--grey-color-light);
   border-radius: 30px;
   padding: 15px;
   width: 100%;
@@ -94,7 +94,7 @@
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  color: $mainColor;
+  color: var(--main-color);
   outline: none;
   transition: all 0.3s ease 0s;
 
@@ -106,12 +106,12 @@
   }
 
   &::placeholder {
-    color: rgba(38, 38, 38, 0.5);
+    color: var(--grey-color);
   }
 
   &:hover,
   &:focus {
-    border-color: $brandColor;
+    border-color: var(--brand-color);
   }
 
   &.filled {
@@ -119,7 +119,7 @@
   }
 
   .label.error & {
-    border-color: $errorColor;
+    border-color: var(--error-color);
   }
 
   &.fieldAvar {
@@ -145,7 +145,7 @@
   font-size: 12px;
   line-height: 1.16667;
   letter-spacing: -0.03em;
-  color: $errorColor;
+  color: var(--error-color);
 
   @media (max-width: rem($mobileMedium)) {
     @include adaptiveValue('margin-left', 16, 13, $mobileMedium, $mobileSmall);

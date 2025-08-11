@@ -21,7 +21,7 @@
     height: 3px;
     border-radius: 5px;
     width: 100%;
-    background-color: $mainColor;
+    background-color: var(--main-color);
     left: 0;
     transition: 0.3s ease-in-out 0s;
   }
@@ -63,13 +63,13 @@
 }
 
 .btnBurger.home span {
-  background-color: $whiteColor;
+  background-color: var(--white-color);
 }
 
 .btnBurger.active span {
-  background-color: $whiteColor;
+  background-color: var(--white-color);
 }
 
 .btnBurger.home.active span {
-  background-color: $mainColor;
+  background-color: var(--main-color);
 }

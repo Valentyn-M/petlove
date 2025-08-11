@@ -1,6 +1,6 @@
 .addPetBlock {
   border-radius: 60px;
-  background-color: $whiteColor;
+  background-color: var(--white-color);
   padding-left: 32px;
   padding-right: 32px;
   display: flex;
@@ -278,7 +278,7 @@
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  color: $mainColor;
+  color: var(--main-color);
   outline: none;
   transition: all 0.3s ease 0s;
 
@@ -327,7 +327,7 @@
   font-size: 12px;
   line-height: 1.16667;
   letter-spacing: -0.03em;
-  color: $errorColor;
+  color: var(--error-color);
 
   @media (max-width: rem($mobileMedium)) {
     margin-left: 12px;

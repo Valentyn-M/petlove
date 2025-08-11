@@ -3,7 +3,7 @@
   padding: 16px;
   display: flex;
   gap: 8px;
-  background-color: $whiteColor;
+  background-color: var(--white-color);
   border-radius: 20px;
   position: absolute;
   left: 10.304054%; /* 61/592 */
@@ -29,7 +29,7 @@
   height: 60px;
   flex-shrink: 0;
   border-radius: 50%;
-  background-color: $beigeColor;
+  background-color: var(--beige-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +46,7 @@
 .name {
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: $brandColor;
+  color: var(--brand-color);
 }
 
 .birthday {
@@ -55,12 +55,12 @@
   letter-spacing: -0.02em;
 
   span {
-    color: rgba(38, 38, 38, 0.5);
+    color: var(--grey-color);
   }
 }
 
 .body {
   font-size: 12px;
   letter-spacing: -0.02em;
-  color: rgba(38, 38, 38, 0.8);
+  color: var(--grey-color2);
 }

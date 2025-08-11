@@ -1,7 +1,7 @@
 .btn {
   border-radius: 30px;
   padding: 14px 20px;
-  border: 1px solid rgba(38, 38, 38, 0.2);
+  border: 1px solid var(--grey-color-light4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 1.22222;
-  color: $mainColor;
+  color: var(--main-color);
   background-color: transparent;
   transition: all 0.3s;
   flex-shrink: 0;

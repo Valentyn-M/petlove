@@ -1,6 +1,6 @@
 .article {
   border-radius: 15px;
-  background-color: $whiteColor;
+  background-color: var(--white-color);
   height: 100%;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -57,11 +57,11 @@
   right: 12px;
   border-radius: 30px;
   padding: 8px;
-  background: $beigeColor;
+  background: var(--beige-color);
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.02em;
-  color: $brandColor;
+  color: var(--brand-color);
 
   @media (max-width: rem($mobileMedium)) {
     line-height: 1.33333;
@@ -101,7 +101,7 @@
 }
 
 .label {
-  color: rgba(38, 38, 38, 0.5);
+  color: var(--grey-color);
 }
 
 .link {

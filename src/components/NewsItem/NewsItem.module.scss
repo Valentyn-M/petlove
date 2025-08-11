@@ -64,14 +64,14 @@
 
 .date {
   letter-spacing: -0.02em;
-  color: rgba(38, 38, 38, 0.5);
+  color: var(--grey-color);
 }
 
 .link {
   line-height: 1.25;
   letter-spacing: -0.02em;
   text-decoration: underline;
-  color: $brandColor;
+  color: var(--brand-color);
 
   @media (any-hover: hover) {
     &:hover {

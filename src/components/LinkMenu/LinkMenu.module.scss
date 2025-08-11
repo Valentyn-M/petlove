@@ -1,5 +1,5 @@
 .link {
-  border: 1px solid rgba(38, 38, 38, 0.15);
+  border: 1px solid var(--grey-color-light);
   border-radius: 30px;
   padding: 14px 20px;
   line-height: 1.25;
@@ -8,11 +8,11 @@
 
   @media (any-hover: hover) {
     &:hover {
-      border-color: $brandColor;
+      border-color: var(--brand-color);
     }
   }
   &:focus {
-    border-color: $brandColor;
+    border-color: var(--brand-color);
   }
 
   @media (max-width: rem($tablet)) {
@@ -27,20 +27,20 @@
 }
 
 .active {
-  border-color: $brandColor;
+  border-color: var(--brand-color);
 }
 
 .link.outline {
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--white-color-transparent2);
   background-color: transparent;
-  color: $whiteColor;
+  color: var(--white-color);
 
   @media (any-hover: hover) {
     &:hover {
-      border-color: $whiteColor;
+      border-color: var(--white-color);
     }
   }
   &:focus {
-    border-color: $whiteColor;
+    border-color: var(--white-color);
   }
 }
