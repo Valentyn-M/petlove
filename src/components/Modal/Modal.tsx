@@ -16,6 +16,7 @@ export interface ModalProps {
   padding60To60?: boolean;
   padding40To50?: boolean;
   padding50To50?: boolean;
+  padding55To55?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -28,6 +29,7 @@ const Modal: React.FC<ModalProps> = ({
   padding60To60,
   padding40To50,
   padding50To50,
+  padding55To55,
 }) => {
   useEffect(() => {
     const html = document.documentElement;
@@ -85,7 +87,8 @@ const Modal: React.FC<ModalProps> = ({
                 padding80To80 && s.padding80To80,
                 padding60To60 && s.padding60To60,
                 padding40To50 && s.padding40To50,
-                padding50To50 && s.padding50To50
+                padding50To50 && s.padding50To50,
+                padding55To55 && s.padding55To55
               )}
               initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
               animate={{

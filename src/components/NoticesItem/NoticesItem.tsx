@@ -16,6 +16,7 @@ import ModalChildNotice from '@/components/ModalChildNotice/ModalChildNotice';
 import clsx from 'clsx';
 import { addNoticeToFavorites, getCurrentUserInfo, removeNoticeFromFavorites } from '@/store/auth/operations';
 import { enqueueSnackbar } from 'notistack';
+import ModalChildNoticeFirstFavorite from '@/components/ModalChildNoticeFirstFavorite/ModalChildNoticeFirstFavorite';
 
 export interface NoticesItemProps {
   noticeData: NoticesItem;
@@ -43,6 +44,9 @@ const NoticesItem = ({ noticeData, variant = 'default', isBtnFunc = true }: Noti
   // Favorite Notice
   const isFavorite = userFavoriteNotices.some((favorite) => favorite._id === _id);
 
+  // Modals
+  const { openModal, closeModal, isModalOpen } = useModal();
+
   const handleClickFavorite = async (): Promise<void> => {
     if (!isLoggedIn) {
       openModal('attention');
@@ -52,6 +56,10 @@ const NoticesItem = ({ noticeData, variant = 'default', isBtnFunc = true }: Noti
     try {
       if (!isFavorite) {
         await dispatch(addNoticeToFavorites(_id)).unwrap();
+
+        if (userFavoriteNotices.length === 0) {
+          openModal('first-favorite');
+        }
       } else {
         await dispatch(removeNoticeFromFavorites(_id)).unwrap();
       }
@@ -61,9 +69,6 @@ const NoticesItem = ({ noticeData, variant = 'default', isBtnFunc = true }: Noti
       enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
     }
   };
-
-  // Modals
-  const { openModal, closeModal, isModalOpen } = useModal();
 
   const handleClickLearnMore = (): void => {
     if (!isLoggedIn) {
@@ -153,6 +158,18 @@ const NoticesItem = ({ noticeData, variant = 'default', isBtnFunc = true }: Noti
       {isModalOpen('notice') && (
         <Modal className={s.modalNotice} isOpen={true} onClose={closeModal} contentLabel="Notice" padding40To50>
           <ModalChildNotice noticeId={_id} onClose={closeModal} />
+        </Modal>
+      )}
+
+      {isModalOpen('first-favorite') && (
+        <Modal
+          className={s.modalNoticeFirstFavorite}
+          padding55To55
+          isOpen={true}
+          onClose={closeModal}
+          contentLabel="Congrats"
+        >
+          <ModalChildNoticeFirstFavorite />
         </Modal>
       )}
     </article>

@@ -1,0 +1,42 @@
+.modalChildNoticeFirstFavorite {
+  text-align: center;
+}
+
+.iconPet {
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.16667;
+  letter-spacing: -0.03em;
+  color: var(--brand-color);
+  margin-bottom: 14px;
+
+  @media (max-width: rem($mobileMedium)) {
+    line-height: 1;
+    @include adaptiveValue('font-size', 24, 20, $mobileMedium, $mobileSmall);
+    @include adaptiveValue('margin-bottom', 14, 20, $mobileMedium, $mobileSmall);
+  }
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+
+  @media (max-width: rem($mobileMedium)) {
+    @include adaptiveValue('margin-bottom', 28, 24, $mobileMedium, $mobileSmall);
+  }
+}
+
+.link.linkProfile {
+  margin: 0 auto;
+
+  @media (min-width: rem($mobileSmallAfter)) {
+    max-width: 250px;
+  }
+}
