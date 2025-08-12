@@ -40,9 +40,18 @@ const LoaderMain = ({ loaderDuration }: LoaderMainProps) => {
       {showLogo ? (
         <div className={s.logo}>
           <span>petl</span>
-          <svg className={s.iconHeart}>
-            <use href={`${svgIcon}#icon-heart`} />
+          <svg
+            className={s.iconHeart}
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="82"
+            height="82"
+            viewBox="0 0 32 32"
+            fill="#f6b83d"
+          >
+            <path d="M15.991 7.561c-2.559-3.022-6.827-3.834-10.033-1.068s-3.658 7.393-1.14 10.665c1.613 2.096 5.743 5.983 8.505 8.506 0.918 0.839 1.376 1.258 1.926 1.426 0.473 0.145 1.012 0.145 1.485 0 0.55-0.168 1.008-0.588 1.926-1.426 2.761-2.524 6.892-6.41 8.505-8.506 2.518-3.272 2.122-7.928-1.14-10.665s-7.474-1.954-10.033 1.068z"></path>
           </svg>
+
           <span>ve</span>
         </div>
       ) : (
