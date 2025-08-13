@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import s from './LoaderMain.module.scss';
-import { svgIcon } from '@/components/App';
 
 export interface LoaderMainProps {
   loaderDuration: number;
