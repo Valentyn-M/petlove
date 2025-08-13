@@ -31,13 +31,14 @@
 
 - **Axios** - HTTP requests
 - **React Toastify** - notifications
+- **Cloudinary integration** - avatar uploads
 - **ESLint + Prettier** - code quality control
 
 ## 📱 Responsiveness
 
 The application is fully responsive and supports the following screen sizes:
 
-- 📱 **Mobile**: from 320px (fluid) / from 375px (adaptive)
+- 📱 **Mobile**: from 320px
 - 📱 **Tablet**: from 768px
 - 💻 **Desktop**: from 1280px
 
