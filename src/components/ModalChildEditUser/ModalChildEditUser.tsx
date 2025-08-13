@@ -8,14 +8,15 @@ import {
   selectUserPhone,
 } from '@/store/auth/selectors';
 import { svgIcon } from '@/components/App';
-import { ErrorMessage, Field, Form, Formik, FormikErrors, FormikValues } from 'formik';
+import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import clsx from 'clsx';
 import ButtonMain from '@/components/ButtonMain/ButtonMain';
 import ButtonUpload from '@/components/ButtonUpload/ButtonUpload';
-import { changeAvatar, editUser } from '@/store/auth/operations';
+import { editUser } from '@/store/auth/operations';
 import { enqueueSnackbar } from 'notistack';
 import { setDefaultAvatar } from '@/store/auth/slice';
+import { useState } from 'react';
 
 export interface ModalChildEditUserProps {
   onClose: () => void;
@@ -37,11 +38,16 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
 
   const dispatch = useAppDispatch();
 
+  // Local state for avatar preview
+  const [avatarPreview, setAvatarPreview] = useState<string>(userAvatar || '');
+  const [avatarError, setAvatarError] = useState<boolean>(false);
+  const [avatarUploading, setAvatarUploading] = useState<boolean>(false);
+
   const initialValues: FormValues = {
-    name: `${userName}` || '',
-    email: `${userEmail}` || '',
-    avatar: `${userAvatar}` || '',
-    phone: `${userPhone}` || '',
+    name: userName || '',
+    email: userEmail || '',
+    avatar: userAvatar || '',
+    phone: userPhone || '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -51,19 +57,71 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
     phone: Yup.string().matches(/^\+38\d{10}$/, 'Phone must be valid'),
   });
 
-  // Change avatar
-  const handleUploadAvatar = async (
-    avatarUrl: string,
-    validateForm: () => Promise<FormikErrors<FormValues>>
-  ): Promise<void> => {
-    const errors = await validateForm();
-    if (errors.avatar) return;
+  // Handle avatar URL change
+  const handleAvatarChange = (value: string, setFieldValue: (field: string, value: string) => void) => {
+    setFieldValue('avatar', value);
 
-    try {
-      await dispatch(changeAvatar({ avatar: avatarUrl.trim() })).unwrap();
-    } catch (error) {
-      enqueueSnackbar(`Error: ${error}`, { variant: 'error' });
+    if (value && /^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/.test(value)) {
+      setAvatarPreview(value);
+      setAvatarError(false);
+    } else if (!value) {
+      setAvatarPreview('');
+      setAvatarError(false);
+    }
+  };
+
+  // Handle avatar image error
+  const handleAvatarError = () => {
+    setAvatarError(true);
+    if (avatarPreview === userAvatar) {
       dispatch(setDefaultAvatar());
+    }
+  };
+
+  const handleFileUpload = async (file: File, setFieldValue: (field: string, value: string) => void) => {
+    setAvatarUploading(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const localPreview = e.target?.result as string;
+        setAvatarPreview(localPreview);
+        setAvatarError(false);
+      };
+      reader.readAsDataURL(file);
+
+      const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL;
+      const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+      if (!CLOUDINARY_URL || !CLOUDINARY_UPLOAD_PRESET) {
+        throw new Error('Cloudinary configuration is missing');
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      const response = await fetch(CLOUDINARY_URL, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Upload failed');
+      }
+
+      const data = await response.json();
+      const cloudinaryUrl = data.secure_url;
+
+      setFieldValue('avatar', cloudinaryUrl);
+      setAvatarPreview(cloudinaryUrl);
+    } catch (error) {
+      enqueueSnackbar(error instanceof Error ? error.message : 'Failed to upload photo', {
+        variant: 'error',
+      });
+      setAvatarError(true);
+    } finally {
+      setAvatarUploading(false);
     }
   };
 
@@ -77,7 +135,7 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
     if (values.avatar) userData.avatar = values.avatar;
 
     if (Object.keys(userData).length === 0) {
-      enqueueSnackbar('No fields to update.', { variant: 'warning' });
+      enqueueSnackbar('No changes to save.', { variant: 'warning' });
       return;
     }
 
@@ -94,27 +152,30 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
       <h3 className={s.title}>Edit information</h3>
 
       <div className={s.avatar}>
-        {!userAvatar ? (
+        {!avatarPreview || avatarError ? (
           <svg className={s.iconUser}>
             <use href={`${svgIcon}#icon-user`} />
           </svg>
         ) : (
           <img
             className={s.userAvatar}
-            src={userAvatar}
+            src={avatarPreview}
             alt="User avatar"
             width="86"
             height="86"
-            onError={() => dispatch(setDefaultAvatar())}
+            onError={handleAvatarError}
           />
         )}
       </div>
 
       <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
-        {({ errors, values, validateForm }) => (
+        {({ errors, values, setFieldValue, touched }) => (
           <Form className={s.form}>
             <div className={s.fieldsBlock}>
-              <label className={`${s.label} ${s.labelAvatar} ${errors.avatar ? s.error : ''}`} htmlFor="avatar">
+              <label
+                className={`${s.label} ${s.labelAvatar} ${errors.avatar && touched.avatar ? s.error : ''}`}
+                htmlFor="avatar"
+              >
                 <div className={s.fieldWrap}>
                   <Field
                     className={clsx(s.field, s.fieldAvar, values.avatar && s.filled)}
@@ -123,13 +184,22 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
                     id="avatar"
                     placeholder="https://"
                     autoComplete="off"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleAvatarChange(e.target.value, setFieldValue)
+                    }
                   />
                   <ErrorMessage className={s.fieldError} name="avatar" component="span" />
                 </div>
-                <ButtonUpload className={s.btnAvatar} onClick={() => handleUploadAvatar(values.avatar, validateForm)} />
+                <ButtonUpload
+                  className={s.btnAvatar}
+                  onFileSelect={(file) => handleFileUpload(file, setFieldValue)}
+                  onInvalidFile={(msg) => enqueueSnackbar(msg, { variant: 'error' })}
+                  loading={avatarUploading}
+                  accept="image/*"
+                />
               </label>
 
-              <label className={`${s.label} ${errors.name ? s.error : ''}`} htmlFor="name">
+              <label className={`${s.label} ${errors.name && touched.name ? s.error : ''}`} htmlFor="name">
                 <Field
                   className={clsx(s.field, values.name && s.filled)}
                   type="text"
@@ -141,10 +211,10 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
                 <ErrorMessage className={s.fieldError} name="name" component="span" />
               </label>
 
-              <label className={`${s.label} ${errors.email ? s.error : ''}`} htmlFor="email">
+              <label className={`${s.label} ${errors.email && touched.email ? s.error : ''}`} htmlFor="email">
                 <Field
                   className={clsx(s.field, values.email && s.filled)}
-                  type="text"
+                  type="email"
                   name="email"
                   id="email"
                   placeholder="name@gmail.com"
@@ -153,10 +223,10 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
                 <ErrorMessage className={s.fieldError} name="email" component="span" />
               </label>
 
-              <label className={`${s.label} ${errors.phone ? s.error : ''}`} htmlFor="phone">
+              <label className={`${s.label} ${errors.phone && touched.phone ? s.error : ''}`} htmlFor="phone">
                 <Field
                   className={clsx(s.field, values.phone && s.filled)}
-                  type="text"
+                  type="tel"
                   name="phone"
                   id="phone"
                   placeholder="+380"
@@ -166,7 +236,13 @@ const ModalChildEditUser = ({ onClose }: ModalChildEditUserProps) => {
               </label>
             </div>
 
-            <ButtonMain className={clsx(s.btn, s.btnSubmit)} disabled={isLoading} lowerCase small type="submit">
+            <ButtonMain
+              className={clsx(s.btn, s.btnSubmit)}
+              disabled={isLoading || avatarUploading}
+              lowerCase
+              small
+              type="submit"
+            >
               {isLoading ? 'Saving...' : 'Save'}
             </ButtonMain>
           </Form>

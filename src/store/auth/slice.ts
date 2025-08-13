@@ -1,7 +1,6 @@
 import {
   addNoticeToFavorites,
   addPetToUserPets,
-  changeAvatar,
   editUser,
   getCurrentUserInfo,
   getFullUserInfo,
@@ -135,19 +134,19 @@ const slice = createSlice({
         state.error = null;
       })
       // CHANGE AVATAR
-      .addCase(changeAvatar.pending, (state) => {
-        state.loadingAvatar = true;
-        state.error = null;
-      })
-      .addCase(changeAvatar.fulfilled, (state, action) => {
-        setUserDataFromPayload(state, action.payload);
-        state.loadingAvatar = false;
-        state.error = null;
-      })
-      .addCase(changeAvatar.rejected, (state, action) => {
-        state.loadingAvatar = false;
-        state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
-      })
+      // .addCase(changeAvatar.pending, (state) => {
+      //   state.loadingAvatar = true;
+      //   state.error = null;
+      // })
+      // .addCase(changeAvatar.fulfilled, (state, action) => {
+      //   setUserDataFromPayload(state, action.payload);
+      //   state.loadingAvatar = false;
+      //   state.error = null;
+      // })
+      // .addCase(changeAvatar.rejected, (state, action) => {
+      //   state.loadingAvatar = false;
+      //   state.error = typeof action.payload === 'string' ? action.payload : 'Unknown error';
+      // })
       // ==========================================================================================================================
       // ADD NOTICE to Favorites
       .addCase(addNoticeToFavorites.fulfilled, (state) => {

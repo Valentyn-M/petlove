@@ -129,24 +129,24 @@ export const editUser = createAsyncThunk<GetFullUserInfoResponse, UserData>(
   }
 );
 
-// Change avatar
-/*
- * PATCH @ /users/current/edit
- * headers: Authorization: Bearer token
- */
-export const changeAvatar = createAsyncThunk<GetFullUserInfoResponse, UserData>(
-  'auth/changeAvatar',
-  async (userData, thunkAPI) => {
-    try {
-      const response = await goitApi.patch('/users/current/edit', userData);
-      // After successful login, add the token to the HTTP header
-      setAuthHeader(response.data.token);
-      return response.data;
-    } catch (error) {
-      return handleThunkError(error, thunkAPI);
-    }
-  }
-);
+// // Change avatar
+// /*
+//  * PATCH @ /users/current/edit
+//  * headers: Authorization: Bearer token
+//  */
+// export const changeAvatar = createAsyncThunk<GetFullUserInfoResponse, UserData>(
+//   'auth/changeAvatar',
+//   async (userData, thunkAPI) => {
+//     try {
+//       const response = await goitApi.patch('/users/current/edit', userData);
+//       // After successful login, add the token to the HTTP header
+//       setAuthHeader(response.data.token);
+//       return response.data;
+//     } catch (error) {
+//       return handleThunkError(error, thunkAPI);
+//     }
+//   }
+// );
 
 // ==========================================================================================================================
 // ==========================================================================================================================

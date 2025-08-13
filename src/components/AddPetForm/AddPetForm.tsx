@@ -24,6 +24,8 @@ export interface AddPetFormProps {}
 
 const AddPetForm = ({}: AddPetFormProps) => {
   const [petPhoto, setPetPhoto] = useState<string>('');
+  const [petPhotoError, setPetPhotoError] = useState<boolean>(false);
+  const [petPhotoUploading, setPetPhotoUploading] = useState<boolean>(false);
 
   const isLoading = useAppSelector(selectIsLoading);
 
@@ -58,6 +60,71 @@ const AddPetForm = ({}: AddPetFormProps) => {
       .required('Birthday is required'),
     species: Yup.string().required('Type of pet is required'),
   });
+
+  // Handle imgURL change
+  const handlePetPhotoChange = (value: string, setFieldValue: (field: string, value: string) => void) => {
+    setFieldValue('imgURL', value);
+
+    if (value && /^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/.test(value)) {
+      setPetPhoto(value);
+      setPetPhotoError(false);
+    } else if (!value) {
+      setPetPhoto('');
+      setPetPhotoError(false);
+    }
+  };
+
+  // Handle Pet Photo error
+  const handlePetPhotoError = () => {
+    setPetPhotoError(true);
+  };
+
+  const handleFileUpload = async (file: File, setFieldValue: (field: string, value: string) => void) => {
+    setPetPhotoUploading(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const localPreview = e.target?.result as string;
+        setPetPhoto(localPreview);
+        setPetPhotoError(false);
+      };
+      reader.readAsDataURL(file);
+
+      const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL;
+      const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+      if (!CLOUDINARY_URL || !CLOUDINARY_UPLOAD_PRESET) {
+        throw new Error('Cloudinary configuration is missing');
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      const response = await fetch(CLOUDINARY_URL, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Upload failed');
+      }
+
+      const data = await response.json();
+      const cloudinaryUrl = data.secure_url;
+
+      setFieldValue('imgURL', cloudinaryUrl);
+      setPetPhoto(cloudinaryUrl);
+    } catch (error) {
+      enqueueSnackbar(error instanceof Error ? error.message : 'Failed to upload photo', {
+        variant: 'error',
+      });
+      setPetPhotoError(true);
+    } finally {
+      setPetPhotoUploading(false);
+    }
+  };
 
   const handleSubmit = async (values: UserPet): Promise<void> => {
     try {
@@ -124,12 +191,19 @@ const AddPetForm = ({}: AddPetFormProps) => {
 
                 {/* Photo */}
                 <div className={s.photo}>
-                  {!petPhoto || errors.imgURL ? (
+                  {!petPhoto || petPhotoError ? (
                     <svg className={s.iconPet}>
                       <use href={`${svgIcon}#icon-cat-footprint`} />
                     </svg>
                   ) : (
-                    <img className={s.petPhoto} src={petPhoto} alt="Pet photography" width="86" height="86" />
+                    <img
+                      className={s.petPhoto}
+                      src={petPhoto}
+                      alt="Pet photography"
+                      width="86"
+                      height="86"
+                      onError={handlePetPhotoError}
+                    />
                   )}
                 </div>
 
@@ -147,10 +221,19 @@ const AddPetForm = ({}: AddPetFormProps) => {
                         id="imgURL"
                         placeholder="Enter URL"
                         autoComplete="off"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          handlePetPhotoChange(e.target.value, setFieldValue)
+                        }
                       />
                       <ErrorMessage className={s.fieldError} name="imgURL" component="span" />
                     </div>
-                    <ButtonUpload className={s.btnPhoto} onClick={() => setPetPhoto(values.imgURL.trim())} />
+                    <ButtonUpload
+                      className={s.btnPhoto}
+                      onFileSelect={(file) => handleFileUpload(file, setFieldValue)}
+                      onInvalidFile={(msg) => enqueueSnackbar(msg, { variant: 'error' })}
+                      loading={petPhotoUploading}
+                      accept="image/*"
+                    />
                   </label>
 
                   {/* Title */}
@@ -224,7 +307,13 @@ const AddPetForm = ({}: AddPetFormProps) => {
                   <LinkMain to="/profile" className={clsx(s.link, s.linkBack)} lowerCase small grey>
                     Back
                   </LinkMain>
-                  <ButtonMain className={clsx(s.btn, s.btnSubmit)} lowerCase small type="submit" disabled={isLoading}>
+                  <ButtonMain
+                    className={clsx(s.btn, s.btnSubmit)}
+                    lowerCase
+                    small
+                    type="submit"
+                    disabled={isLoading || petPhotoUploading}
+                  >
                     {isLoading ? 'Submitting' : 'Submit'}
                   </ButtonMain>
                 </div>
